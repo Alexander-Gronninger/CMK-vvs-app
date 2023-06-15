@@ -5,6 +5,26 @@ import AssignmentContext from "../context/AssignmentContext";
 const Table = () => {
   const { assignmentData } = useContext(AssignmentContext);
 
+  /* Calculating the average airspeed */
+
+  const calculateAirspeedSum = (data) => {
+    const sum = data.reduce((accumulator, currentValue, index) => {
+      if (currentValue.KVvalue !== undefined && index > 0) {
+        const result =
+          (Number(currentValue.KVvalue) / Number(data[0].desiredOpening)) *
+          Number(currentValue.KVsize);
+        return accumulator + result;
+      }
+      return accumulator;
+    }, 0);
+
+    return sum;
+  };
+
+  const airspeedSum = calculateAirspeedSum(assignmentData);
+  console.log(airspeedSum);
+  let averageSpeed = airspeedSum / (assignmentData.length - 1);
+
   const tableCss = "text-center border-[1px] border-black";
   return (
     <table>
@@ -35,7 +55,7 @@ const Table = () => {
         <tr>
           <td className={tableCss}>Gennemsnit</td>
           <td className={tableCss} colspan="2">
-            AVERAGE
+            {averageSpeed}
           </td>
         </tr>
       </tbody>
