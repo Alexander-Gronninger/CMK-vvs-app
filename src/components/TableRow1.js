@@ -1,0 +1,56 @@
+/* This table is for student view 1 */
+
+import { useContext } from "react";
+import { useState } from "react";
+import AssignmentContext from "../context/AssignmentContext";
+
+const TableRow1 = ({ tableCss, index }) => {
+  const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
+
+  /* Handling changing of the KV size, between 1-10 */
+  const [tableInput, setTableInput] =
+    useState(assignmentData[index + 1] && assignmentData[index + 1].KVsize) ||
+    "";
+
+  const handleTableInputChange = (e) => {
+    if (e.target.value > 10 || e.target.value < 0) {
+      return;
+    }
+    setTableInput(e.target.value);
+    setAssignmentData((prevData) => {
+      let newData = [...prevData];
+      if (newData[index + 1]) {
+        newData[index + 1].KVsize = Number(e.target.value);
+      }
+      return newData;
+    });
+  };
+
+  /* Calculating the airspeed */
+  let airSpeed =
+    (Number(assignmentData[index + 1].KVvalue) /
+      Number(assignmentData[0].desiredOpening)) *
+    Number(assignmentData[index + 1].KVsize);
+
+  return (
+    <tr>
+      <td className={tableCss}>
+        <label htmlFor={"TableRow1_" + (index + 1)}>KV{index + 1}</label>
+      </td>
+      <td className={tableCss}>
+        <input
+          type="number"
+          id={"TableRow1_" + (index + 1)}
+          className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
+          value={tableInput}
+          onChange={handleTableInputChange}
+        />
+      </td>
+      <td className={tableCss} colspan="2">
+        {airSpeed}
+      </td>
+    </tr>
+  );
+};
+
+export default TableRow1;
