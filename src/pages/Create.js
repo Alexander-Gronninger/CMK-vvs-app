@@ -73,7 +73,10 @@ const Create = () => {
       </div>
 
       <div className="border-gray-600 border-2 max-w-[80%] p-4">
-        <h2>Indtsat lufthastighed på de enkelte kontrolventiler [m/s]. </h2>
+        <h2>
+          Indtsat lufthastighed på de enkelte kontrolventiler [m/s], når
+          kontrolventiler = 5 mm.
+        </h2>
         {/* The amount of inputs needs to be the amount of KVinputs in the assignmentData array. Those are the only ones that change */}
         {[...Array(assignmentData.length - 1)].map((_, index) => (
           <CreateInput
@@ -85,7 +88,7 @@ const Create = () => {
       </div>
       <p className="my-4 mx-4">
         Gennemsnitlig lufthast. [m/s]) med KV på 5 mm:&nbsp;
-        {averageMS.toFixed(2)} [m/s]
+        {parseFloat(averageMS.toFixed(2))} [m/s]
       </p>
       <div className="flex my-4 max-w-fit">
         <label htmlFor="desiredMS">Ønsket lufthastighed:</label>
@@ -101,16 +104,16 @@ const Create = () => {
         </div>
       </div>
       <div className="my-4 max-w-fit">
-        <label htmlFor="desiredMS">Åbning på hovedspjæld (1-10 mm):</label>
+        <label htmlFor="desiredOpening">Åbning på hovedspjæld (1-10 mm):</label>
         <div className="flex bg-gray-200 max-w-[100px] mb-6">
           <input
             type="number"
-            id="desiredMS"
+            id="desiredOpening"
             className="max-w-content min-w-[10px] text-right bg-gray-200"
             value={desiredOpening}
             onChange={handleDesiredOpening}
           />
-          <p className="leading-6">&nbsp;[m/s]</p>
+          <p className="leading-6">&nbsp;[mm]</p>
         </div>
       </div>
     </main>

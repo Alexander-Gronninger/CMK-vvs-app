@@ -24,7 +24,7 @@ const Table = () => {
         <tr>
           <td className={tableCss}></td>
           <td className={tableCss}>[1-10]</td>
-          <td className={tableCss} colspan="2">
+          <td className={tableCss} colSpan="2">
             [m/s]
           </td>
         </tr>
@@ -39,7 +39,7 @@ const Table = () => {
         ))}
         <tr>
           <td className={tableCss}>Gennemsnit</td>
-          <td className={tableCss} colspan="2">
+          <td className={tableCss} colSpan="2">
             {averageAirspeed}
           </td>
         </tr>

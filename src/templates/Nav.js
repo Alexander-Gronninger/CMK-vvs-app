@@ -14,7 +14,7 @@ const Nav = () => {
           className="text-white border-2 border-white rounded-2xl p-2"
           to="/assignment"
         >
-          Lav opgave
+          Udfør opgave
         </Link>
       </nav>
       <Outlet />
