@@ -42,7 +42,7 @@ const TableRow1 = ({ tableCss, index }) => {
           type="number"
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
-          value={parseFloat(tableInput.toFixed(2))}
+          value={tableInput}
           onChange={handleTableInputChange}
         />
       </td>
