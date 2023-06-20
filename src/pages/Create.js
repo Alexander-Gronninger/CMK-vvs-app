@@ -42,6 +42,10 @@ const Create = () => {
     useState(assignmentData[0] && assignmentData[0].desiredOpening) || "";
 
   const handleDesiredOpening = (e) => {
+    if (e.target.value < 0 || e.target.value > 10) {
+      return;
+    }
+
     setDesiredOpening(e.target.value);
     setAssignmentData((prevData) => {
       let newData = [...prevData];
@@ -60,6 +64,7 @@ const Create = () => {
   return (
     <main>
       <h1>Indjustering af ventilationsanlæg efter proportionalmetoden</h1>
+      <p>Lærerside</p>
       <label htmlFor="totalPD">Indtast total PD (Lufttryk[Pa])</label>
       <div className="flex bg-gray-200 max-w-fit mb-6">
         <input
@@ -88,7 +93,7 @@ const Create = () => {
       </div>
       <p className="my-4 mx-4">
         Gennemsnitlig lufthast. [m/s]) med KV på 5 mm:&nbsp;
-        {parseFloat(averageMS.toFixed(1))} [m/s]
+        {parseFloat(averageMS).toFixed(1)} [m/s]
       </p>
       <div className="flex my-4 max-w-fit">
         <label htmlFor="desiredMS">Ønsket lufthastighed:</label>
@@ -97,7 +102,7 @@ const Create = () => {
             type="number"
             id="desiredMS"
             className="max-w-content min-w-[10px] text-right bg-gray-200"
-            value={desiredMS}
+            value={parseFloat(desiredMS).toFixed(1)}
             onChange={handleDesiredMS}
           />
           <p className="leading-6">&nbsp;[m/s]</p>
@@ -110,7 +115,7 @@ const Create = () => {
             type="number"
             id="desiredOpening"
             className="max-w-content min-w-[10px] text-right bg-gray-200"
-            value={desiredOpening}
+            value={parseFloat(desiredOpening).toFixed(0)}
             onChange={handleDesiredOpening}
           />
           <p className="leading-6">&nbsp;[mm]</p>

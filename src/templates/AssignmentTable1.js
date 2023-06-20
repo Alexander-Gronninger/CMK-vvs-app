@@ -40,7 +40,7 @@ const AssignmentTable1 = () => {
         {/* <tr>
           <td className={tableCss}>Gennemsnit</td>
           <td className={tableCss} colSpan="2">
-            {parseFloat(averageAirspeed.toFixed(1))}
+            {(averageAirspeed.toFixed(1))}
           </td>
         </tr> */}
       </tbody>

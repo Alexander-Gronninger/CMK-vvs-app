@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import AssignmentTableRow2 from "../components/AssignmentTableRow2";
 import AssignmentContext from "../context/AssignmentContext";
 import CalcAdjustedKVsize from "../functions/CalcAdjustedKVsize";
 import CalcLargestAdjustedKVsize from "../functions/CalcLargestAdjustedKVsize";
+import AutoCalculationTableRowV2 from "../components/AutoCalculationTableRowV2";
 
 const AssignmentTable2 = () => {
   const { assignmentData } = useContext(AssignmentContext);
@@ -48,13 +48,14 @@ const AssignmentTable2 = () => {
           </tr>
           {/* The amount of inputs needs to be the amount of KVinputs in the assignmentData array. Those are the only ones that change */}
           {[...Array(assignmentData.length - 1)].map((_, index) => (
-            <AssignmentTableRow2
+            <AutoCalculationTableRowV2
               key={"CreationInput" + (index + 1)}
               index={index}
               isLast={false}
               tableCss={tableCss}
               newOpening={newOpening}
-            ></AssignmentTableRow2>
+              calculationData={assignmentData}
+            ></AutoCalculationTableRowV2>
           ))}
         </tbody>
       </table>
@@ -63,7 +64,7 @@ const AssignmentTable2 = () => {
         til ønsket resultat
       </p>
       <p>Gl åbning på hovedspjæld: {assignmentData[0].desiredOpening}mm</p>
-      <p>Ny beregnet åbning: {parseFloat(newOpening).toFixed(1)}mm</p>
+      <p>Ny beregnet åbning: {newOpening.toFixed(1)}mm</p>
     </>
   );
 };

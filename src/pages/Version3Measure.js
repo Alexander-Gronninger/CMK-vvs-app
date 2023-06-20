@@ -36,10 +36,15 @@ const Version3Measure = () => {
     if (!isValidInput) {
       return console.log("only numbers are allowed");
     }
+
+    /* prevents value being empty and resulting in displaying NaN */
+    if (inputPercentage.length < 2) {
+      setDesiredOpening(0);
+      return;
+    }
+
     const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
     const decimalValue = parseFloat(percentage) / 100;
-    console.log("inputPercent: " + inputPercentage);
-    console.log("decimal: " + decimalValue);
 
     /* Updating the inputs state, and updating the context to reflect the new value */
     setDesiredOpening(decimalValue);
@@ -66,8 +71,6 @@ const Version3Measure = () => {
     <>
       <h2>Målinger på tavlen</h2>
 
-      <p>AVERAGE SPEED PLACEHOLDER</p>
-
       <p>1) Sæt alle kontrolventiler (KV) = 5 mm.</p>
       <p>2) Mål lufthastighed (LH) på de enkelte KV'er:</p>
 
@@ -86,7 +89,7 @@ const Version3Measure = () => {
         </table>
         <p>
           {"Gennemsnitlig lufthastighed beregnet: " +
-            parseFloat(averageMS.toFixed(1)) +
+            averageMS.toFixed(1) +
             "[m/s]"}
         </p>
 

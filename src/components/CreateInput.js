@@ -28,7 +28,7 @@ const CreateInput = ({ index, isLast }) => {
         type="number"
         id={"KV" + (index + 1)}
         className="max-w-[100px] bg-gray-100"
-        value={input}
+        value={parseFloat(input).toFixed(1)}
         onChange={handleChange}
         placeholder="null"
       />

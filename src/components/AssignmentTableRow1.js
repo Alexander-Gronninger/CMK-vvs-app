@@ -47,7 +47,7 @@ const AssignmentTableRow1 = ({ tableCss, index }) => {
         />
       </td>
       <td className={tableCss} colSpan="2">
-        {parseFloat(airSpeed.toFixed(1))}
+        {airSpeed.toFixed(1)}
       </td>
     </tr>
   );
