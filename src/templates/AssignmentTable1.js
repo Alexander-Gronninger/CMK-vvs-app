@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import TableRow1 from "../components/TableRow1";
+import AssignmentTableRow1 from "../components/AssignmentTableRow1";
 import AssignmentContext from "../context/AssignmentContext";
 import CalculateAverageAirspeed from "../functions/CalcAverageAirspeed";
 
-const Table = () => {
+const AssignmentTable1 = () => {
   const { assignmentData } = useContext(AssignmentContext);
 
   /* Calculating the average airspeed */
@@ -30,22 +30,22 @@ const Table = () => {
         </tr>
         {/* The amount of inputs needs to be the amount of KVinputs in the assignmentData array. Those are the only ones that change */}
         {[...Array(assignmentData.length - 1)].map((_, index) => (
-          <TableRow1
+          <AssignmentTableRow1
             key={"CreationInput" + (index + 1)}
             index={index}
             isLast={false}
             tableCss={tableCss}
-          ></TableRow1>
+          ></AssignmentTableRow1>
         ))}
-        <tr>
+        {/* <tr>
           <td className={tableCss}>Gennemsnit</td>
           <td className={tableCss} colSpan="2">
-            {averageAirspeed}
+            {parseFloat(averageAirspeed.toFixed(1))}
           </td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
   );
 };
 
-export default Table;
+export default AssignmentTable1;

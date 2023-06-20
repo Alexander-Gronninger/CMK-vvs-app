@@ -88,7 +88,7 @@ const Create = () => {
       </div>
       <p className="my-4 mx-4">
         Gennemsnitlig lufthast. [m/s]) med KV på 5 mm:&nbsp;
-        {parseFloat(averageMS.toFixed(2))} [m/s]
+        {parseFloat(averageMS.toFixed(1))} [m/s]
       </p>
       <div className="flex my-4 max-w-fit">
         <label htmlFor="desiredMS">Ønsket lufthastighed:</label>

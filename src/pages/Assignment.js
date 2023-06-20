@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import Table from "../templates/Table";
+import AssignmentTable1 from "../templates/AssignmentTable1";
 import AssignmentContext from "../context/AssignmentContext";
-import Table2 from "../templates/Table2";
+import AssignmentTable2 from "../templates/AssignmentTable2";
 
 const Assignment = () => {
   const { assignmentData } = useContext(AssignmentContext);
@@ -23,12 +23,12 @@ const Assignment = () => {
         <h1>Elevside {page2 ? 2 : 1}</h1>
         <p>
           {page2
-            ? "Automatiske indstilling af ventiler"
+            ? "Vejledende indstilling af kontrolventiler"
             : "Indstil kontrolventiler [KV] så de står på " +
               assignmentData[0].desiredOpening +
               "mm"}
         </p>
-        {page2 ? <Table2 /> : <Table />}
+        {page2 ? <AssignmentTable2 /> : <AssignmentTable1 />}
       </main>
     </>
   );

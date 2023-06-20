@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import TableRow2 from "../components/TableRow2";
+import AssignmentTableRow2 from "../components/AssignmentTableRow2";
 import AssignmentContext from "../context/AssignmentContext";
 import CalcAdjustedKVsize from "../functions/CalcAdjustedKVsize";
 import CalcLargestAdjustedKVsize from "../functions/CalcLargestAdjustedKVsize";
 
-const Table2 = () => {
+const AssignmentTable2 = () => {
   const { assignmentData } = useContext(AssignmentContext);
 
   const tableCss = "text-center border-[1px] border-black";
@@ -48,13 +48,13 @@ const Table2 = () => {
           </tr>
           {/* The amount of inputs needs to be the amount of KVinputs in the assignmentData array. Those are the only ones that change */}
           {[...Array(assignmentData.length - 1)].map((_, index) => (
-            <TableRow2
+            <AssignmentTableRow2
               key={"CreationInput" + (index + 1)}
               index={index}
               isLast={false}
               tableCss={tableCss}
               newOpening={newOpening}
-            ></TableRow2>
+            ></AssignmentTableRow2>
           ))}
         </tbody>
       </table>
@@ -68,4 +68,4 @@ const Table2 = () => {
   );
 };
 
-export default Table2;
+export default AssignmentTable2;

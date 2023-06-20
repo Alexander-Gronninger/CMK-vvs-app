@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import AssignmentContext from "../context/AssignmentContext";
 
-const TableRow1 = ({ tableCss, index }) => {
+const AssignmentTableRow1 = ({ tableCss, index }) => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
 
   /* Handling changing of the KV size, between 1-10 */
@@ -47,10 +47,10 @@ const TableRow1 = ({ tableCss, index }) => {
         />
       </td>
       <td className={tableCss} colSpan="2">
-        {parseFloat(airSpeed.toFixed(2))}
+        {parseFloat(airSpeed.toFixed(1))}
       </td>
     </tr>
   );
 };
 
-export default TableRow1;
+export default AssignmentTableRow1;

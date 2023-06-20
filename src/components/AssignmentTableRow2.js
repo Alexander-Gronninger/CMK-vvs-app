@@ -5,7 +5,7 @@ import AssignmentContext from "../context/AssignmentContext";
 import CalcLargestAdjustedKVsize from "../functions/CalcLargestAdjustedKVsize";
 import CalcAdjustedKVsize from "../functions/CalcAdjustedKVsize";
 
-const TableRow2 = ({ tableCss, index, newOpening }) => {
+const AssignmentTableRow2 = ({ tableCss, index, newOpening }) => {
   const { assignmentData } = useContext(AssignmentContext);
 
   /* getting data for print data calculation */
@@ -35,4 +35,4 @@ const TableRow2 = ({ tableCss, index, newOpening }) => {
   );
 };
 
-export default TableRow2;
+export default AssignmentTableRow2;
