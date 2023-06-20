@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import Version3Context from "../context/Version3Context";
 
 const MeasureRow = ({ tableCss, index }) => {
-  const { Version3Data, setVersion3Data } = useContext(Version3Context);
+  const { version3Data, setVersion3Data } = useContext(Version3Context);
 
   const [tableInput, setTableInput] =
-    useState(Version3Data[index + 1] && Version3Data[index + 1].KVsize) || "";
+    useState(version3Data[index + 1] && version3Data[index + 1].KVvalue) || "";
 
   const handleTableInputChange = (e) => {
     if (e.target.value > 10 || e.target.value < 0) {
@@ -35,6 +35,7 @@ const MeasureRow = ({ tableCss, index }) => {
           onChange={handleTableInputChange}
         />
       </td>
+      <td className={tableCss}>[m/s]</td>
     </tr>
   );
 };

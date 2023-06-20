@@ -21,7 +21,7 @@ const ContextProvider = ({ children }) => {
     {
       totalPD: 120,
       desiredMS: 7,
-      desiredOpeningPercent: 50,
+      desiredOpeningPercent: 0.5,
     },
     { KVvalue: 3, KVsize: 2 },
     { KVvalue: 6.1, KVsize: 6 },
