@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import AssignmentTableRow1 from "../components/AssignmentTableRow1";
 import AssignmentContext from "../context/AssignmentContext";
-import CalculateAverageAirspeed from "../functions/CalcAverageAirspeed";
+/* import CalculateAverageAirspeed from "../functions/CalcAverageAirspeed"; */
 
 const AssignmentTable1 = () => {
   const { assignmentData } = useContext(AssignmentContext);
 
   /* Calculating the average airspeed */
 
-  const averageAirspeed = CalculateAverageAirspeed(assignmentData);
+  /* const averageAirspeed = CalculateAverageAirspeed(assignmentData); */
 
   const tableCss = "text-center border-[1px] border-black";
   return (

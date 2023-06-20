@@ -16,6 +16,12 @@ const Nav = () => {
         >
           Udfør opgave
         </Link>
+        <Link
+          className="text-white border-2 border-white rounded-2xl p-2"
+          to="/v3/measurement"
+        >
+          Version 3
+        </Link>
       </nav>
       <Outlet />
     </>

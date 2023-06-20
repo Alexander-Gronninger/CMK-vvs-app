@@ -5,6 +5,9 @@ import Create from "./pages/Create";
 import Assignment from "./pages/Assignment";
 import Nav from "./templates/Nav";
 import ContextProvider from "./context/ContextProvider";
+import Version3 from "./pages/Version3";
+import Version3Measure from "./pages/Version3Measure";
+import Version3Suggested from "./pages/Version3Suggested";
 
 function App() {
   return (
@@ -14,6 +17,18 @@ function App() {
         <Route path="/*" element={<Nav />} key="Nav">
           <Route path="create" element={<Create />} key="Create" />
           <Route path="assignment" element={<Assignment />} key="Assignment" />
+          <Route path="v3/*" element={<Version3 />} key="Version3">
+            <Route
+              path="measurement"
+              element={<Version3Measure />}
+              key="Version3Measure"
+            />
+            <Route
+              path="suggested"
+              element={<Version3Suggested />}
+              key="Version3Suggested"
+            />
+          </Route>
         </Route>
       </Routes>
     </ContextProvider>
