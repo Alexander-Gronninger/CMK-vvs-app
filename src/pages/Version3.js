@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom";
-import Version3Measure from "./Version3Measure";
 
 const Version3 = () => {
   return (
