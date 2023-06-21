@@ -8,6 +8,8 @@ import ContextProvider from "./context/ContextProvider";
 import Version3 from "./pages/Version3";
 import Version3Measure from "./pages/Version3Measure";
 import Version3Suggested from "./pages/Version3Suggested";
+import ExportSettings from "./pages/ExportSettings";
+import Ref from "./pages/Ref";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />} key="Welcome" />
         <Route path="/*" element={<Nav />} key="Nav">
+          <Route path="export" element={<ExportSettings />} key="Export" />
+          <Route path="ref" element={<Ref />} key="Ref" />
           <Route path="create" element={<Create />} key="Create" />
           <Route path="assignment" element={<Assignment />} key="Assignment" />
           <Route path="v3/*" element={<Version3 />} key="Version3">
