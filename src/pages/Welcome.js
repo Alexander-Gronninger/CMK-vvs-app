@@ -15,6 +15,9 @@ const Welcome = () => {
         <Link className="" to="/Assignment">
           Åben en opgave
         </Link>
+        <Link className="" to="/v3/measurement">
+          Version 3
+        </Link>
       </div>
     </main>
   );
