@@ -8,7 +8,7 @@ const MeasureRow = ({ tableCss, index }) => {
     useState(version3Data[index + 1] && version3Data[index + 1].KVvalue) || "";
 
   const handleTableInputChange = (e) => {
-    if (e.target.value > 10 || e.target.value < 0) {
+    if (e.target.value < 0) {
       return;
     }
     setTableInput(e.target.value);
