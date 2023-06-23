@@ -13,7 +13,7 @@ const Version2Nav = () => {
           Udfør opgave
         </Link>
       </nav>
-      <main className="my-2 mx-6">
+      <main className="my-2 mx-4">
         <Outlet />
       </main>
     </>

@@ -4,6 +4,7 @@ import Version3Context from "../context/Version3Context";
 import CalcAdjustedKVsize from "../functions/CalcAdjustedKVsize";
 import CalcLargestAdjustedKVsize from "../functions/CalcLargestAdjustedKVsize";
 import SiteDescription from "../components/SiteDescription";
+import H1 from "../components/H1";
 
 const Version3Suggested = () => {
   const { version3Data } = useContext(Version3Context);
@@ -24,20 +25,29 @@ const Version3Suggested = () => {
   const newAirSpeed =
     (oldAirSpeed / (version3Data[0].desiredOpeningPercent * 10)) * newOpening;
 
+  const paragraphCss = "my-2 max-w-[300px] m-auto";
+
   return (
     <>
       <SiteDescription />
-      <h2>Vejledende indstilling af KV'er</h2>
-      <p>5) Indstil KV'erne som angivet nedenfor</p>
-      <p>6) Mål igen LH på alle KV'er.</p>
-      <p>Er LH ca. {oldAirSpeed.toFixed(1)} på alle KV?</p>
-      <p>7) Indstil hovedspjæld til {(newOpening * 10).toFixed(0)}%</p>
-      <p>Er LH ca. {newAirSpeed.toFixed(1)} på alle KV?</p>
+      <H1>Vejledende indstilling af KV'er</H1>
+      <p className={paragraphCss}>5) Indstil KV'erne som angivet nedenfor</p>
+      <p className={paragraphCss}>6) Mål igen LH på alle KV'er.</p>
+      <p className={paragraphCss}>
+        Er LH ca. {oldAirSpeed.toFixed(1)} på alle KV?
+      </p>
+      <p className={paragraphCss}>
+        7) Indstil hovedspjæld til {(newOpening * 10).toFixed(0)}%
+      </p>
+      <p className={paragraphCss}>
+        Er LH ca. {newAirSpeed.toFixed(1)} på alle KV?
+      </p>
       <AutoCalculationTableV3
         calculationData={version3Data}
         oldAirSpeed={oldAirSpeed}
         newAirSpeed={newAirSpeed}
         newOpening={newOpening}
+        paragraphCss={paragraphCss}
       />
     </>
   );

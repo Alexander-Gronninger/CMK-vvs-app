@@ -3,6 +3,7 @@ import Version3Context from "../context/Version3Context";
 import MeasureRow from "../components/MeasureRow";
 import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
+import H1 from "../components/H1";
 
 const Version3Measure = () => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
@@ -23,8 +24,6 @@ const Version3Measure = () => {
       return newData;
     });
   };
-
-  const tableCss = "text-center border-[1px] border-black";
 
   const [desiredOpening, setDesiredOpening] =
     useState(version3Data[0] && version3Data[0].desiredOpeningPercent) || "";
@@ -68,13 +67,18 @@ const Version3Measure = () => {
 
   let averageMS = Number(CalcSum(version3Data) / (version3Data.length - 1));
 
+  const tableCss = "text-center border-[1px] border-black";
+  const paragraphCss = "my-2";
+
   return (
     <>
       <SiteDescription />
-      <h2>Målinger på tavlen</h2>
+      <H1>Målninger på tavlen</H1>
 
-      <p>1) Sæt alle kontrolventiler (KV) = 5 mm.</p>
-      <p>2) Mål lufthastighed (LH) på de enkelte KV'er:</p>
+      <p className={paragraphCss}>1) Sæt alle kontrolventiler (KV) = 5 mm.</p>
+      <p className={paragraphCss}>
+        2) Mål lufthastighed (LH) på de enkelte KV'er:
+      </p>
 
       <div>
         <table>
@@ -89,39 +93,34 @@ const Version3Measure = () => {
             ))}
           </tbody>
         </table>
-        <p>
+        <p className={paragraphCss}>
           {"Gennemsnitlig lufthastighed beregnet: " +
             averageMS.toFixed(1) +
             "[m/s]"}
         </p>
 
-        <div className="flex my-4 max-w-fit">
-          <label htmlFor="desiredMS">3) Ønsket lufthastighed?</label>
-          <div className="flex bg-gray-200 max-w-[100px] mb-6">
-            <input
-              type="number"
-              id="desiredMS"
-              className="max-w-content min-w-[10px] text-right bg-gray-200"
-              value={desiredMS}
-              onChange={handleDesiredMS}
-            />
-            <p className="leading-6">&nbsp;[m/s]</p>
-          </div>
+        <div className=" my-2 max-w-fit ml-0 overflow-hidden">
+          <label htmlFor="desiredMS">3) Ønsket lufthastighed?&nbsp;</label>
+          <input
+            type="text"
+            id="desiredMS"
+            className="max-w-[70px] min-w-[10px] text-center bg-gray-200"
+            value={desiredMS + " [m/s]"}
+            onChange={handleDesiredMS}
+          />
         </div>
-        <div className="flex my-4 max-w-fit">
+        <div className=" my-2 max-w-fit ml-0">
           <label htmlFor="desiredOpening">
-            4) Åbning på hovedspjæld (0-100%)?
+            4) Åbning på hovedspjæld (0-100%)?&nbsp;
           </label>
-          <div className="flex bg-gray-200 max-w-[100px] mb-6">
-            <input
-              key="desiredOpeningInput"
-              type="text"
-              id="desiredOpening"
-              className="max-w-content min-w-[10px] text-right bg-gray-200"
-              value={decimalToPercentage(desiredOpening)}
-              onChange={handleDesiredOpening}
-            />
-          </div>
+          <input
+            key="desiredOpeningInput"
+            type="text"
+            id="desiredOpening"
+            className="max-w-[50px] min-w-[10px] text-center bg-gray-200"
+            value={decimalToPercentage(desiredOpening)}
+            onChange={handleDesiredOpening}
+          />
         </div>
       </div>
     </>

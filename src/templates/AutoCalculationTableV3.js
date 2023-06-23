@@ -5,18 +5,20 @@ const AutoCalculationTableV3 = ({
   oldAirSpeed,
   newAirSpeed,
   newOpening,
+  paragraphCss,
 }) => {
   const tableCss = "text-center border-[1px] border-black";
+  const tableHeaderCss = " font-semibold mx-2";
 
   return (
     <>
       <table>
         <thead>
           <tr>
-            <th className={tableCss}> </th>
-            <th className={tableCss}>Indst.</th>
-            <th className={tableCss}>Lufthast.</th>
-            <th className={tableCss}>Ny lufthast.</th>
+            <th className={tableCss + tableHeaderCss}> </th>
+            <th className={tableCss + tableHeaderCss}>Indst.</th>
+            <th className={tableCss + tableHeaderCss}>Lufthast.</th>
+            <th className={tableCss + tableHeaderCss}>Ny lufthast.</th>
           </tr>
         </thead>
         <tbody>
@@ -41,8 +43,10 @@ const AutoCalculationTableV3 = ({
           ))}
         </tbody>
       </table>
-      <p>Vejledende indstilling af hovedspjæld</p>
-      <p>Ny beregnet åbning: {(newOpening * 10).toFixed(0)}%</p>
+      <p className={paragraphCss}>Vejledende indstilling af hovedspjæld</p>
+      <p className={paragraphCss}>
+        Ny beregnet åbning: {(newOpening * 10).toFixed(0)}%
+      </p>
     </>
   );
 };

@@ -3,6 +3,7 @@ import AssignmentTable1 from "../templates/AssignmentTable1";
 import AssignmentContext from "../context/AssignmentContext";
 import AssignmentTable2 from "../templates/AssignmentTable2";
 import SiteDescription from "../components/SiteDescription";
+import H1 from "../components/H1";
 
 const Version2Assignment = () => {
   const { assignmentData } = useContext(AssignmentContext);
@@ -13,9 +14,7 @@ const Version2Assignment = () => {
     <>
       <>
         <SiteDescription />
-        <h1 className="text-center my-4 font-semibold">
-          Elevside {page2 ? "2 - Vejledning" : "1 - Indstilling"}
-        </h1>
+        <H1>Elevside {page2 ? "2 - Vejledning" : "1 - Indstilling"}</H1>
         <div className="flex justify-around m-4">
           <button
             className="p-2 rounded-xl border-secondaryBG border-2"

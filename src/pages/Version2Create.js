@@ -4,6 +4,7 @@ import { useContext } from "react";
 import AssignmentContext from "../context/AssignmentContext";
 import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
+import H1 from "../components/H1";
 
 const Version2Create = () => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
@@ -65,7 +66,7 @@ const Version2Create = () => {
   return (
     <>
       <SiteDescription />
-      <h1 className="text-center my-4 font-semibold">Lærerside</h1>
+      <H1>Lærerside</H1>
       <div className="flex max-w-fit mb-6">
         <label htmlFor="totalPD">Indtast total PD (Lufttryk[Pa])&nbsp;</label>
         <input

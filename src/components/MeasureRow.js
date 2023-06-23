@@ -24,18 +24,22 @@ const MeasureRow = ({ tableCss, index }) => {
   return (
     <tr>
       <td className={tableCss}>
-        <label htmlFor={"TableRow1_" + (index + 1)}>KV{index + 1}</label>
+        <label htmlFor={"TableRow1_" + (index + 1)}>
+          <p className="mx-2">KV{index + 1}</p>
+        </label>
       </td>
       <td className={tableCss}>
         <input
           type="number"
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
-          value={tableInput}
+          value={tableInput.toFixed(1)}
           onChange={handleTableInputChange}
         />
       </td>
-      <td className={tableCss}>[m/s]</td>
+      <td className={tableCss}>
+        <p className="mx-2">[m/s]</p>
+      </td>
     </tr>
   );
 };

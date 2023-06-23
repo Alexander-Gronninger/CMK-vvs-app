@@ -1,23 +1,19 @@
 import { Link, Outlet } from "react-router-dom";
 
 const Version3Nav = () => {
+  const css = "text-primaryText p-[2px] px-2 m-0 leading-6 text-base";
   return (
     <>
-      <nav className="bg-black p-6 flex space-between">
-        <Link
-          className="text-white border-2 border-white rounded-2xl p-2"
-          to="/v3/measurement"
-        >
-          Skab opgave
+      <nav className="bg-secondaryBG p-2 flex px-4">
+        <Link className={css} to="/v3/measurement">
+          Indtast
         </Link>
-        <Link
-          className="text-white border-2 border-white rounded-2xl p-2"
-          to="/v3/suggested"
-        >
-          Udfør opgave
+        <p className={css}>|</p>
+        <Link className={css} to="/v3/suggested">
+          Vejl. Inds.
         </Link>
       </nav>
-      <main>
+      <main className="my-2 mx-4">
         <Outlet />
       </main>
     </>
