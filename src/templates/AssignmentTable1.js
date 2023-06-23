@@ -12,12 +12,12 @@ const AssignmentTable1 = () => {
 
   const tableCss = "text-center border-[1px] border-black";
   return (
-    <table>
+    <table className="">
       <thead>
         <tr>
           <th className={tableCss}> </th>
-          <th className={tableCss}>Indst.</th>
-          <th className={tableCss}>Lufthastighed</th>
+          <th className={tableCss + " font-semibold"}>Indst.</th>
+          <th className={tableCss + " font-semibold"}>Lufthastighed</th>
         </tr>
       </thead>
       <tbody>

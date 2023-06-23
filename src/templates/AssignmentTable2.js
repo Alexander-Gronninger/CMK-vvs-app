@@ -7,7 +7,7 @@ import AutoCalculationTableRowV2 from "../components/AutoCalculationTableRowV2";
 const AssignmentTable2 = () => {
   const { assignmentData } = useContext(AssignmentContext);
 
-  const tableCss = "text-center border-[1px] border-black";
+  const tableCss = "text-center border-[1px] border-black m-2";
 
   /* Calculates new opening based on KV1 data */
 
@@ -33,15 +33,23 @@ const AssignmentTable2 = () => {
       <table>
         <thead>
           <tr>
-            <th className={tableCss}> </th>
-            <th className={tableCss}>Indst.</th>
-            <th className={tableCss}>Lufthast.</th>
-            <th className={tableCss}>Ny lufthast.</th>
+            <th className={tableCss}>
+              <p className="w-[50px]"></p>
+            </th>
+            <th className={tableCss}>
+              <p className="m-2 font-semibold">Indst.</p>
+            </th>
+            <th className={tableCss}>
+              <p className="m-2 font-semibold">Lufthast.</p>
+            </th>
+            <th className={tableCss}>
+              <p className="m-2 font-semibold">Ny lufthast.</p>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className={tableCss}></td>
+            <td className={tableCss + " w-[30px]"}></td>
             <td className={tableCss}>[1-10]</td>
             <td className={tableCss}>[m/s]</td>
             <td className={tableCss}>[m/s]</td>
@@ -59,12 +67,16 @@ const AssignmentTable2 = () => {
           ))}
         </tbody>
       </table>
-      <p>
-        Hvis der ønskes større eller mindre lufthastighed justeres hovedspjældet
-        til ønsket resultat
-      </p>
-      <p>Gl åbning på hovedspjæld: {assignmentData[0].desiredOpening}mm</p>
-      <p>Ny beregnet åbning: {newOpening.toFixed(1)}mm</p>
+      <div className="max-w-[300px] m-4">
+        <p className="my-2">
+          Hvis der ønskes større eller mindre lufthastighed justeres
+          hovedspjældet til ønsket resultat.
+        </p>
+        <p className="my-2">
+          Gl åbning på hovedspjæld: {assignmentData[0].desiredOpening}mm
+        </p>
+        <p className="my-2">Ny beregnet åbning: {newOpening.toFixed(1)}mm</p>
+      </div>
     </>
   );
 };

@@ -3,6 +3,7 @@ import AutoCalculationTableV3 from "../templates/AutoCalculationTableV3";
 import Version3Context from "../context/Version3Context";
 import CalcAdjustedKVsize from "../functions/CalcAdjustedKVsize";
 import CalcLargestAdjustedKVsize from "../functions/CalcLargestAdjustedKVsize";
+import SiteDescription from "../components/SiteDescription";
 
 const Version3Suggested = () => {
   const { version3Data } = useContext(Version3Context);
@@ -25,6 +26,7 @@ const Version3Suggested = () => {
 
   return (
     <>
+      <SiteDescription />
       <h2>Vejledende indstilling af KV'er</h2>
       <p>5) Indstil KV'erne som angivet nedenfor</p>
       <p>6) Mål igen LH på alle KV'er.</p>

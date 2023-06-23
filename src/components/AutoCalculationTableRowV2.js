@@ -29,7 +29,7 @@ const AutoCalculationTableRow = ({
 
   return (
     <tr>
-      <td className={tableCss + " w-[100px]"}>KV{index + 1}</td>
+      <td className={tableCss + " w-[30px]"}>KV{index + 1}</td>
       <td className={tableCss}>{KVsetting.toFixed(0)}</td>
       <td className={tableCss}>{oldAirSpeed.toFixed(1)}</td>
       <td className={tableCss}>{newAirSpeed.toFixed(1)}</td>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Version3Context from "../context/Version3Context";
 import MeasureRow from "../components/MeasureRow";
 import CalcSum from "../functions/CalcSum";
+import SiteDescription from "../components/SiteDescription";
 
 const Version3Measure = () => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
@@ -69,6 +70,7 @@ const Version3Measure = () => {
 
   return (
     <>
+      <SiteDescription />
       <h2>Målinger på tavlen</h2>
 
       <p>1) Sæt alle kontrolventiler (KV) = 5 mm.</p>

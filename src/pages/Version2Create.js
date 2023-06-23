@@ -3,8 +3,9 @@ import CreateInput from "../components/CreateInput";
 import { useContext } from "react";
 import AssignmentContext from "../context/AssignmentContext";
 import CalcSum from "../functions/CalcSum";
+import SiteDescription from "../components/SiteDescription";
 
-const Create = () => {
+const Version2Create = () => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
 
   // ------------------------------------- //
@@ -62,23 +63,23 @@ const Create = () => {
   let averageMS = Number(CalcSum(assignmentData) / (assignmentData.length - 1));
 
   return (
-    <main>
-      <h1>Indjustering af ventilationsanlæg efter proportionalmetoden</h1>
-      <p>Lærerside</p>
-      <label htmlFor="totalPD">Indtast total PD (Lufttryk[Pa])</label>
-      <div className="flex bg-gray-200 max-w-fit mb-6">
+    <>
+      <SiteDescription />
+      <h1 className="text-center my-4 font-semibold">Lærerside</h1>
+      <div className="flex max-w-fit mb-6">
+        <label htmlFor="totalPD">Indtast total PD (Lufttryk[Pa])&nbsp;</label>
         <input
           type="number"
           id="totalPD"
-          className="max-w-content min-w-[10px] text-right bg-gray-200"
+          className="w-16 text-center border-[1px] border-secondaryBG rounded"
           value={totalPD}
           onChange={handleTotalPD}
         />
         <p className="leading-6">&nbsp;[Pa]</p>
       </div>
 
-      <div className="border-gray-600 border-2 max-w-[80%] p-4">
-        <h2>
+      <div className="border-secondaryBG rounded border-2 m-4 p-4">
+        <h2 className="font-medium m-2">
           Indtsat lufthastighed på de enkelte kontrolventiler [m/s], når
           kontrolventiler = 5 mm.
         </h2>
@@ -95,34 +96,30 @@ const Create = () => {
         Gennemsnitlig lufthast. [m/s]) med KV på 5 mm:&nbsp;
         {parseFloat(averageMS).toFixed(1)} [m/s]
       </p>
-      <div className="flex my-4 max-w-fit">
-        <label htmlFor="desiredMS">Ønsket lufthastighed:</label>
-        <div className="flex bg-gray-200 max-w-[100px] mb-6">
-          <input
-            type="number"
-            id="desiredMS"
-            className="max-w-content min-w-[10px] text-right bg-gray-200"
-            value={parseFloat(desiredMS).toFixed(1)}
-            onChange={handleDesiredMS}
-          />
-          <p className="leading-6">&nbsp;[m/s]</p>
-        </div>
+      <div className="flex my-2 max-w-fit">
+        <label htmlFor="desiredMS">Ønsket lufthastighed:&nbsp;</label>
+        <input
+          type="text"
+          id="desiredMS"
+          className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
+          value={parseFloat(desiredMS).toFixed(1) + " [m/s]"}
+          onChange={handleDesiredMS}
+        />
       </div>
-      <div className="my-4 max-w-fit">
-        <label htmlFor="desiredOpening">Åbning på hovedspjæld (1-10 mm):</label>
-        <div className="flex bg-gray-200 max-w-[100px] mb-6">
-          <input
-            type="number"
-            id="desiredOpening"
-            className="max-w-content min-w-[10px] text-right bg-gray-200"
-            value={parseFloat(desiredOpening).toFixed(0)}
-            onChange={handleDesiredOpening}
-          />
-          <p className="leading-6">&nbsp;[mm]</p>
-        </div>
+      <div className="my-2 max-w-fit flex flex-col items-center">
+        <label htmlFor="desiredOpening">
+          Åbning på hovedspjæld (1-10 mm):&nbsp;
+        </label>
+        <input
+          type="text"
+          id="desiredOpening"
+          className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
+          value={parseFloat(desiredOpening).toFixed(0) + " [mm]"}
+          onChange={handleDesiredOpening}
+        />
       </div>
-    </main>
+    </>
   );
 };
 
-export default Create;
+export default Version2Create;

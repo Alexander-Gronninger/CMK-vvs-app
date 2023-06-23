@@ -35,7 +35,9 @@ const AssignmentTableRow1 = ({ tableCss, index }) => {
   return (
     <tr>
       <td className={tableCss}>
-        <label htmlFor={"TableRow1_" + (index + 1)}>KV{index + 1}</label>
+        <label className="m-2" htmlFor={"TableRow1_" + (index + 1)}>
+          KV{index + 1}
+        </label>
       </td>
       <td className={tableCss}>
         <input
