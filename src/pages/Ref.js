@@ -25,7 +25,7 @@ const Ref = () => {
     setVersion3Data(decodedData);
   }
 
-  navigate("/");
+  navigate("/v3/measurement");
 
   return (
     <>

@@ -4,6 +4,7 @@ import MeasureRow from "../components/MeasureRow";
 import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
+import { Link } from "react-router-dom";
 
 const Version3Measure = () => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
@@ -15,11 +16,12 @@ const Version3Measure = () => {
     useState(version3Data[0] && version3Data[0].desiredMS) || "";
 
   const handleDesiredMS = (e) => {
-    setDesiredMS(e.target.value);
+    const sanitizedInput = e.target.value.replace(/\s*\[m\/s\]$/, "");
+    setDesiredMS(sanitizedInput);
     setVersion3Data((prevData) => {
       let newData = [...prevData];
       if (newData[0]) {
-        newData[0].desiredMS = Number(e.target.value);
+        newData[0].desiredMS = Number(sanitizedInput);
       }
       return newData;
     });
@@ -122,6 +124,12 @@ const Version3Measure = () => {
             onChange={handleDesiredOpening}
           />
         </div>
+        <Link
+          className="block m-auto w-fit border-2 border-solid border-secondaryBG rounded p-1"
+          to="/v3/share"
+        >
+          Generer QR / Link
+        </Link>
       </div>
     </>
   );

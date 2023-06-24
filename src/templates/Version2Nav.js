@@ -12,6 +12,13 @@ const Version2Nav = () => {
         <Link className={css} to="/v2/assignment">
           Udfør opgave
         </Link>
+
+        {/* pushes the last element to the end of the container */}
+        <div className="flex-grow"></div>
+
+        <Link className={css} to="/">
+          Vælg version
+        </Link>
       </nav>
       <main className="my-2 mx-4">
         <Outlet />

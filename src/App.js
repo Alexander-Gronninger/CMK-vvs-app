@@ -41,7 +41,9 @@ function App() {
             element={<Version3Suggested />}
             key="Version3Suggested"
           />
+          <Route path="share" element={<ExportSettings />} key="Version3" />
         </Route>
+        <Route path="/ref" element={<Ref />} key="Ref" />
       </Routes>
     </ContextProvider>
   );

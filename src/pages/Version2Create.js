@@ -30,11 +30,12 @@ const Version2Create = () => {
     useState(assignmentData[0] && assignmentData[0].desiredMS) || "";
 
   const handleDesiredMS = (e) => {
-    setDesiredMS(e.target.value);
+    const sanitizedInput = e.target.value.replace(/\s*\[m\/s\]$/, "");
+    setDesiredMS(sanitizedInput);
     setAssignmentData((prevData) => {
       let newData = [...prevData];
       if (newData[0]) {
-        newData[0].desiredMS = Number(e.target.value);
+        newData[0].desiredMS = Number(sanitizedInput);
       }
       return newData;
     });
@@ -44,22 +45,20 @@ const Version2Create = () => {
     useState(assignmentData[0] && assignmentData[0].desiredOpening) || "";
 
   const handleDesiredOpening = (e) => {
-    if (e.target.value < 0 || e.target.value > 10) {
+    const sanitizedInput = e.target.value.replace(/\s*\[mm\]$/, "");
+    if (sanitizedInput < 0 || sanitizedInput > 10) {
       return;
     }
 
-    setDesiredOpening(e.target.value);
+    setDesiredOpening(sanitizedInput);
     setAssignmentData((prevData) => {
       let newData = [...prevData];
       if (newData[0]) {
-        newData[0].desiredOpening = Number(e.target.value);
+        newData[0].desiredOpening = Number(sanitizedInput);
       }
       return newData;
     });
   };
-
-  // ------------------------------------- //
-  // Outside functions
 
   let averageMS = Number(CalcSum(assignmentData) / (assignmentData.length - 1));
 
