@@ -1,21 +1,24 @@
 import { useContext, useState } from "react";
 import Version3Context from "../context/Version3Context";
+import InputSelect from "../functions/InputSelect";
 
 const MeasureRow = ({ tableCss, index }) => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
 
   const [tableInput, setTableInput] =
-    useState(version3Data[index + 1] && version3Data[index + 1].KVvalue) || "";
+    useState(
+      version3Data[index + 1] && version3Data[index + 1].KVvalue.toFixed(1)
+    ) || "";
 
-  const handleTableInputChange = (e) => {
+  const handleTableInputBlur = (e) => {
     if (e.target.value < 0) {
       return;
     }
-    setTableInput(e.target.value);
+    setTableInput(Number(e.target.value).toFixed(1));
     setVersion3Data((prevData) => {
       let newData = [...prevData];
       if (newData[index + 1]) {
-        newData[index + 1].KVsize = Number(e.target.value);
+        newData[index + 1].KVsize = Number(e.target.value).toFixed(1);
       }
       return newData;
     });
@@ -33,8 +36,12 @@ const MeasureRow = ({ tableCss, index }) => {
           type="number"
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
-          value={tableInput.toFixed(1)}
-          onChange={handleTableInputChange}
+          value={tableInput}
+          onChange={(e) => {
+            setTableInput(e.target.value);
+          }}
+          onBlur={handleTableInputBlur}
+          onClick={InputSelect}
         />
       </td>
       <td className={tableCss}>
