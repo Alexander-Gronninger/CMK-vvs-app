@@ -3,6 +3,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import AssignmentContext from "../context/AssignmentContext";
+import InputSelect from "../functions/InputSelect";
 
 const AssignmentTableRow1 = ({ tableCss, index }) => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
@@ -13,14 +14,16 @@ const AssignmentTableRow1 = ({ tableCss, index }) => {
     "";
 
   const handleTableInputChange = (e) => {
-    if (e.target.value > 10 || e.target.value < 0) {
+    const inputValue = parseInt(e.target.value);
+
+    if (isNaN(inputValue) || inputValue < 1 || inputValue > 10) {
       return;
     }
-    setTableInput(e.target.value);
+    setTableInput(inputValue);
     setAssignmentData((prevData) => {
       let newData = [...prevData];
       if (newData[index + 1]) {
-        newData[index + 1].KVsize = Number(e.target.value);
+        newData[index + 1].KVsize = Number(inputValue);
       }
       return newData;
     });
@@ -45,6 +48,7 @@ const AssignmentTableRow1 = ({ tableCss, index }) => {
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
           value={tableInput}
+          onClick={InputSelect}
           onChange={handleTableInputChange}
         />
       </td>

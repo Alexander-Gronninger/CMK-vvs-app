@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import AssignmentContext from "../context/AssignmentContext";
+import InputSelect from "../functions/InputSelect";
 
 const CreateInput = ({ index, isLast }) => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
@@ -8,7 +9,27 @@ const CreateInput = ({ index, isLast }) => {
     useState(assignmentData[index + 1] && assignmentData[index + 1].KVvalue) ||
     "";
 
+  const [isSelected, setIsSelected] = useState(false);
+
   const handleChange = (e) => {
+    const isValidInput = /^[\d.,]*$/.test(e.target.value);
+    if (!isValidInput) {
+      return console.log("only numbersare allowed");
+    }
+    if (e.target.value.length === 0) {
+      setInput(0);
+      return;
+    }
+    setIsSelected(true);
+    setInput(e.target.value);
+  };
+
+  const handleBlur = (e) => {
+    const isValidInput = /^[\d.%,]*$/.test(e.target.value);
+    if (!isValidInput) {
+      return console.log("only numbers are allowed");
+    }
+    setIsSelected(false);
     setInput(e.target.value);
     setAssignmentData((prevData) => {
       let newData = [...prevData];
@@ -25,12 +46,13 @@ const CreateInput = ({ index, isLast }) => {
         KV{index + 1}:&nbsp;
       </label>
       <input
-        type="number"
+        type="text"
         id={"KV" + (index + 1)}
         className="max-w-[60px] text-center border-[1px] border-secondaryBG rounded"
-        value={parseFloat(input).toFixed(1)}
+        value={isSelected ? input : parseFloat(input).toFixed(1)}
+        onBlur={handleBlur}
         onChange={handleChange}
-        placeholder="null"
+        onClick={InputSelect}
       />
       <p>{isLast && "R"}</p>
     </div>

@@ -49,7 +49,13 @@ const ExportSettings = () => {
     printWindow.document.write('<img src="' + qrCodeImage.src + '" />');
     printWindow.document.write("</body></html>");
     printWindow.document.close();
-    printWindow.print();
+
+    printWindow.onload = () => {
+      printWindow.print();
+      setTimeout(() => {
+        printWindow.close();
+      }, 50);
+    };
   }
 
   return (
@@ -72,7 +78,7 @@ const ExportSettings = () => {
         Klik for at teste linket
       </Link>
       <p>QR kode: skan med en anden telefon for at åbne linket</p>
-      <div class="bg-white p-4 w-fit h-fit m-auto">
+      <div className="bg-white p-4 w-fit h-fit m-auto">
         <QRCodeCanvas
           id="QR-code"
           size={256}
@@ -81,13 +87,13 @@ const ExportSettings = () => {
         />
       </div>
       <button
-        class="m-auto block border-2 border-solid border-secondaryBG rounded p-2 my-4"
+        className="m-auto block border-2 border-solid border-secondaryBG rounded p-2 my-4"
         onClick={() => SaveElementAsImage("QR-code", "VVSQR.png")}
       >
         Download QR billede
       </button>
       <button
-        class="m-auto block border-2 border-solid border-secondaryBG rounded p-2 my-4"
+        className="m-auto block border-2 border-solid border-secondaryBG rounded p-2 my-4"
         onClick={handlePrint}
       >
         Print QR kode

@@ -5,6 +5,7 @@ import AssignmentContext from "../context/AssignmentContext";
 import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
+import InputSelect from "../functions/InputSelect";
 
 const Version2Create = () => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
@@ -29,7 +30,23 @@ const Version2Create = () => {
   const [desiredMS, setDesiredMS] =
     useState(assignmentData[0] && assignmentData[0].desiredMS) || "";
 
-  const handleDesiredMS = (e) => {
+  const [inputMSSelected, setInputMSSelected] = useState(false);
+
+  const handleDesiredMSChange = (e) => {
+    const isValidInput = /^[\d.,]*$/.test(e.target.value);
+    if (!isValidInput) {
+      return console.log("only numbersare allowed");
+    }
+    if (e.target.value.length === 0) {
+      setDesiredMS(0);
+      return;
+    }
+    setInputMSSelected(true);
+    setDesiredMS(e.target.value);
+  };
+
+  const handleDesiredMSBlur = (e) => {
+    setInputMSSelected(false);
     const sanitizedInput = e.target.value.replace(/\s*\[m\/s\]$/, "");
     setDesiredMS(sanitizedInput);
     setAssignmentData((prevData) => {
@@ -41,10 +58,28 @@ const Version2Create = () => {
     });
   };
 
+  /* Desired opening code */
+
   const [desiredOpening, setDesiredOpening] =
     useState(assignmentData[0] && assignmentData[0].desiredOpening) || "";
 
-  const handleDesiredOpening = (e) => {
+  const [inputOpeningSelected, setInputOpeningSelected] = useState();
+
+  const handleDesiredOpeningChange = (e) => {
+    const isValidInput = /^[\d.,]*$/.test(e.target.value);
+    if (!isValidInput) {
+      return console.log("only numbersare allowed");
+    }
+    if (e.target.value.length === 0) {
+      setDesiredOpening(0);
+      return;
+    }
+    setInputOpeningSelected(true);
+    setDesiredOpening(e.target.value);
+  };
+
+  const handleDesiredOpeningBlur = (e) => {
+    setInputOpeningSelected(false);
     const sanitizedInput = e.target.value.replace(/\s*\[mm\]$/, "");
     if (sanitizedInput < 0 || sanitizedInput > 10) {
       return;
@@ -74,6 +109,7 @@ const Version2Create = () => {
           className="w-16 text-center border-[1px] border-secondaryBG rounded"
           value={totalPD}
           onChange={handleTotalPD}
+          onClick={InputSelect}
         />
         <p className="leading-6">&nbsp;[Pa]</p>
       </div>
@@ -102,8 +138,14 @@ const Version2Create = () => {
           type="text"
           id="desiredMS"
           className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
-          value={parseFloat(desiredMS).toFixed(1) + " [m/s]"}
-          onChange={handleDesiredMS}
+          value={
+            inputMSSelected
+              ? desiredMS
+              : parseFloat(desiredMS).toFixed(1) + " [m/s]"
+          }
+          onClick={InputSelect}
+          onBlur={handleDesiredMSBlur}
+          onChange={handleDesiredMSChange}
         />
       </div>
       <div className="my-2 max-w-fit flex flex-col items-center">
@@ -114,8 +156,14 @@ const Version2Create = () => {
           type="text"
           id="desiredOpening"
           className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
-          value={parseFloat(desiredOpening).toFixed(0) + " [mm]"}
-          onChange={handleDesiredOpening}
+          value={
+            inputOpeningSelected
+              ? desiredOpening
+              : parseFloat(desiredOpening).toFixed(1) + " [mm]"
+          }
+          onClick={InputSelect}
+          onBlur={handleDesiredOpeningBlur}
+          onChange={handleDesiredOpeningChange}
         />
       </div>
     </>

@@ -5,6 +5,7 @@ import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { Link } from "react-router-dom";
+import InputSelect from "../functions/InputSelect";
 
 const Version3Measure = () => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
@@ -14,8 +15,23 @@ const Version3Measure = () => {
 
   const [desiredMS, setDesiredMS] =
     useState(version3Data[0] && version3Data[0].desiredMS) || "";
+  const [isMSSelected, setIsMSSelected] = useState(false);
 
-  const handleDesiredMS = (e) => {
+  const handleDesiredMSChange = (e) => {
+    const isValidInput = /^[\d]*%?$/.test(e.target.value);
+    if (!isValidInput) {
+      return console.log("only numbers are allowed");
+    }
+    if (e.target.value.length === 0) {
+      setDesiredMS(0);
+      return;
+    }
+    setIsMSSelected(true);
+    setDesiredMS(e.target.value);
+  };
+
+  const handleDesiredMSBlur = (e) => {
+    setIsMSSelected(false);
     const sanitizedInput = e.target.value.replace(/\s*\[m\/s\]$/, "");
     setDesiredMS(sanitizedInput);
     setVersion3Data((prevData) => {
@@ -27,10 +43,33 @@ const Version3Measure = () => {
     });
   };
 
+  /* Opening input stuff */
   const [desiredOpening, setDesiredOpening] =
     useState(version3Data[0] && version3Data[0].desiredOpeningPercent) || "";
 
-  const handleDesiredOpening = (e) => {
+  /* the input needs to display different when it is blurred */
+  const [isPercentSelected, setIsPercentSelected] = useState(false);
+
+  const handleDesiredOpeningChange = (e) => {
+    /* allows numbers and % for the input */
+    const isValidInput = /^[\d.%,]*$/.test(e.target.value);
+    if (
+      !isValidInput ||
+      Number(e.target.value) > 100 ||
+      Number(e.target.value) < 0
+    ) {
+      return console.log("only numbers between 0 and 100 are allowed");
+    }
+    if (e.target.value.length === 0) {
+      setDesiredOpening(0);
+      return;
+    }
+    setIsPercentSelected(true);
+    setDesiredOpening(e.target.value);
+  };
+
+  const handleDesiredOpeningBlur = (e) => {
+    setIsPercentSelected(false);
     /* Getting the new input, limiting it to between 0-100 and converting to decimal value */
     const inputPercentage = e.target.value;
     /* allows numbers and % for the input */
@@ -107,8 +146,10 @@ const Version3Measure = () => {
             type="text"
             id="desiredMS"
             className="max-w-[70px] min-w-[10px] text-center bg-gray-200"
-            value={desiredMS + " [m/s]"}
-            onChange={handleDesiredMS}
+            value={isMSSelected ? desiredMS : desiredMS + " [m/s]"}
+            onBlur={handleDesiredMSBlur}
+            onChange={handleDesiredMSChange}
+            onClick={InputSelect}
           />
         </div>
         <div className=" my-2 max-w-fit ml-0">
@@ -120,8 +161,14 @@ const Version3Measure = () => {
             type="text"
             id="desiredOpening"
             className="max-w-[50px] min-w-[10px] text-center bg-gray-200"
-            value={decimalToPercentage(desiredOpening)}
-            onChange={handleDesiredOpening}
+            value={
+              isPercentSelected
+                ? desiredOpening
+                : decimalToPercentage(desiredOpening)
+            }
+            onBlur={handleDesiredOpeningBlur}
+            onChange={handleDesiredOpeningChange}
+            onClick={InputSelect}
           />
         </div>
         <Link
