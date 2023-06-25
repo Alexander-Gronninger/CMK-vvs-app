@@ -143,7 +143,7 @@ const Version3Measure = () => {
         <div className=" my-2 max-w-fit ml-0 overflow-hidden">
           <label htmlFor="desiredMS">3) Ønsket lufthastighed?&nbsp;</label>
           <input
-            inputMode="numeric"
+            inputMode="decimal"
             type="text"
             id="desiredMS"
             className="max-w-[70px] min-w-[10px] text-center bg-gray-200"
@@ -158,7 +158,7 @@ const Version3Measure = () => {
             4) Åbning på hovedspjæld (0-100%)?&nbsp;
           </label>
           <input
-            inputMode="numeric"
+            inputMode="decimal"
             key="desiredOpeningInput"
             type="text"
             id="desiredOpening"
