@@ -33,6 +33,7 @@ const MeasureRow = ({ tableCss, index }) => {
       </td>
       <td className={tableCss}>
         <input
+          inputMode="numeric"
           type="number"
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"

@@ -46,6 +46,7 @@ const CreateInput = ({ index, isLast }) => {
         KV{index + 1}:&nbsp;
       </label>
       <input
+        inputMode="numeric"
         type="text"
         id={"KV" + (index + 1)}
         className="max-w-[60px] text-center border-[1px] border-secondaryBG rounded"

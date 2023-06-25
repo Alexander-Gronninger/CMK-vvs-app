@@ -44,6 +44,8 @@ const AssignmentTableRow1 = ({ tableCss, index }) => {
       </td>
       <td className={tableCss}>
         <input
+          inputMode="numeric"
+          pattern="[0-9]*"
           type="number"
           id={"TableRow1_" + (index + 1)}
           className="max-w-content min-w-[10px] max-w-[50px] text-center bg-gray-200"
