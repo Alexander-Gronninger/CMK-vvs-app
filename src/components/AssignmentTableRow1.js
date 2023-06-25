@@ -4,9 +4,12 @@ import { useContext } from "react";
 import { useState } from "react";
 import AssignmentContext from "../context/AssignmentContext";
 import InputSelect from "../functions/InputSelect";
+import useEnterBlur from "../hooks/useEnterBlur";
 
 const AssignmentTableRow1 = ({ tableCss, index }) => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
+
+  useEnterBlur();
 
   /* Handling changing of the KV size, between 1-10 */
   const [tableInput, setTableInput] =

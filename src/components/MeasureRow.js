@@ -1,9 +1,12 @@
 import { useContext, useState } from "react";
 import Version3Context from "../context/Version3Context";
 import InputSelect from "../functions/InputSelect";
+import useEnterBlur from "../hooks/useEnterBlur";
 
 const MeasureRow = ({ tableCss, index }) => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
+
+  useEnterBlur();
 
   const [tableInput, setTableInput] =
     useState(

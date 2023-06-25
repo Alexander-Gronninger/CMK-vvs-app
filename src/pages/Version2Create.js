@@ -6,9 +6,12 @@ import CalcSum from "../functions/CalcSum";
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import InputSelect from "../functions/InputSelect";
+import useEnterBlur from "../hooks/useEnterBlur";
 
 const Version2Create = () => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
+
+  useEnterBlur();
 
   // ------------------------------------- //
   // Handling various inputs
