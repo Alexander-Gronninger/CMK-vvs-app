@@ -17,11 +17,10 @@ const MeasureRow = ({ tableCss, index }) => {
     if (e.target.value < 0) {
       return;
     }
-    setTableInput(Number(e.target.value).toFixed(1));
     setVersion3Data((prevData) => {
       let newData = [...prevData];
       if (newData[index + 1]) {
-        newData[index + 1].KVsize = Number(e.target.value).toFixed(1);
+        newData[index + 1].KVvalue = parseFloat(e.target.value);
       }
       return newData;
     });

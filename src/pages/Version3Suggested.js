@@ -9,6 +9,8 @@ import H1 from "../components/H1";
 const Version3Suggested = () => {
   const { version3Data } = useContext(Version3Context);
 
+  console.log(version3Data);
+
   const adjustedKVsize = CalcAdjustedKVsize(version3Data);
   const largestAdjustedKVsize = CalcLargestAdjustedKVsize(version3Data);
 
