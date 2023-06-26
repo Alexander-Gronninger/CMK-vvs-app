@@ -39,7 +39,7 @@ const AutoCalculationTableV3 = ({
               oldAirSpeed={oldAirSpeed}
               newAirSpeed={newAirSpeed}
               newOpening={newOpening}
-            ></AutoCalculationTableRowV3>
+            />
           ))}
         </tbody>
       </table>

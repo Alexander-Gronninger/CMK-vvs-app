@@ -6,9 +6,12 @@ import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { Link } from "react-router-dom";
 import InputSelect from "../functions/InputSelect";
+import useEnterBlur from "../hooks/useEnterBlur";
 
 const Version3Measure = () => {
   const { version3Data, setVersion3Data } = useContext(Version3Context);
+
+  useEnterBlur();
 
   // ------------------------------------- //
   // Handling various inputs

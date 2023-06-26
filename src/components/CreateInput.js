@@ -2,9 +2,13 @@ import { useContext } from "react";
 import { useState } from "react";
 import AssignmentContext from "../context/AssignmentContext";
 import InputSelect from "../functions/InputSelect";
+import useEnterBlur from "../hooks/useEnterBlur";
 
 const CreateInput = ({ index, isLast }) => {
   const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
+
+  useEnterBlur();
+
   const [input, setInput] =
     useState(assignmentData[index + 1] && assignmentData[index + 1].KVvalue) ||
     "";
