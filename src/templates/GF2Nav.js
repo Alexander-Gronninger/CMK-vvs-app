@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 
-const Version2Nav = () => {
+const GF2Nav = () => {
   const css = "text-primaryText p-[2px] px-2 m-0 leading-6 text-base";
   return (
     <>
@@ -27,4 +27,4 @@ const Version2Nav = () => {
   );
 };
 
-export default Version2Nav;
+export default GF2Nav;

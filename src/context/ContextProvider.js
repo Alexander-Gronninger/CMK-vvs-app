@@ -14,7 +14,6 @@ const ContextProvider = ({ children }) => {
     { KVvalue: 8, KVsize: 9 },
     { KVvalue: 6, KVsize: 7 },
     { KVvalue: 9, KVsize: 6 },
-    { KVvalue: 2.7, KVsize: 3 },
   ]);
 
   const [version3Data, setVersion3Data] = useState([
