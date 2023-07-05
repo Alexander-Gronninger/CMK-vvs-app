@@ -1,13 +1,15 @@
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { useContext } from "react";
-import AssignmentContext from "../context/AssignmentContext";
-import GF2RowInput from "../components/GF2RowInput";
+import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
+import GF2Context from "../context/GF2Context";
+import GF2TeacherTable from "../templates/GF2TeacherTable";
+import CalcNewQV2 from "../functions/CalcNewQV2";
 
 const GF2Version = () => {
-  const { assignmentData } = useContext(AssignmentContext);
+  const { GF2Data } = useContext(GF2Context);
 
-  /* Css rules used by this components <th> elements, and GF2RowInputs(child component) <td> elements */
+  /* Css rules used by this components <th> elements, GF2KVValueInput(child component) and GF2TeacherTable(child component) <th> and <td> elements */
   const tableCss =
     "text-center border-[1px] border-black m-2 font-normal max-w-[50px]";
 
@@ -54,12 +56,13 @@ const GF2Version = () => {
           </thead>
           <tbody>
             <tr>
-              {[...Array(assignmentData.length - 1)].map((_, index) => {
+              {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
-                  <GF2RowInput
+                  <GF2StudentKVValueInput
                     tableCss={tableCss}
                     index={index}
                     key={"KV" + index}
+                    id="KV"
                   />
                 );
               })}
@@ -70,7 +73,7 @@ const GF2Version = () => {
           {/* image which the dots are rendered on top of */}
           <img
             className="row-start-1 row-end-5 col-start-1 col-end-8 flex"
-            src="../images/GF2Vents.png"
+            src="../images/Injustring-m-grafik.png"
             alt=""
           />
 
@@ -90,17 +93,28 @@ const GF2Version = () => {
             <div className={dot}></div>
           </div>
         </div>
-        <p className="m-auto w-fit my-4">Hovedspæld 30%</p>
-        <div>
-          <p>Beregnet Qv</p>
-          <div className="flex">
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-          </div>
-        </div>
+        <p className="m-auto w-fit my-4">
+          Hovedspæld {GF2Data[0].MainOpening * 100}%
+        </p>
+        <table className="my-4">
+          <thead>
+            <th className={tableCss + " font-semibold"} colSpan="5">
+              Beregnet Qv
+            </th>
+          </thead>
+          <tbody>
+            {/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */}
+            {[...Array(GF2Data.length - 1)].map((_, index) => {
+              return (
+                <td className={tableCss} key={"NewQV" + index}>
+                  {CalcNewQV2(index).toFixed(2)}
+                </td>
+              );
+            })}
+          </tbody>
+        </table>
+
+        <GF2TeacherTable tableCss={tableCss} />
       </>
     </>
   );

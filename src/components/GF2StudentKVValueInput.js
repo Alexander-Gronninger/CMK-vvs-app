@@ -1,24 +1,27 @@
 import { useContext, useState } from "react";
 import useEnterBlur from "../hooks/useEnterBlur";
-import AssignmentContext from "../context/AssignmentContext";
 import InputSelect from "../functions/InputSelect";
+import GF2Context from "../context/GF2Context";
 
-const GF2RowInput = ({ index, tableCss }) => {
-  const inputCss = "max-w-[40px] m-1";
+/* 
+This component handles changing the GF2 versions KVValue from GF2Context
+*/
 
-  const { assignmentData, setAssignmentData } = useContext(AssignmentContext);
+const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
+  const { GF2Data, setGF2Data } = useContext(GF2Context);
+
+  /* Blurs the input when user presses enter or done on iphone */
   useEnterBlur();
 
   /* Sets the start value to the value saved in context, or empty string */
   const [input, setInput] =
-    useState(assignmentData[index + 1] && assignmentData[index + 1].KVvalue) ||
-    "";
+    useState(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening) || "";
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
     const isValidInput = /^[\d.,]*$/.test(e.target.value);
-    if (!isValidInput) {
-      return console.log("only numbersare allowed");
+    if (!isValidInput || e.target.value < 1 || e.target.value > 11) {
+      return console.log("only numbers between 1 and 10 are allowed");
     }
     if (e.target.value.length === 0) {
       setInput(0);
@@ -30,14 +33,14 @@ const GF2RowInput = ({ index, tableCss }) => {
   /* handleBlur updates the input state and the respective context value */
   const handleBlur = (e) => {
     const isValidInput = /^[\d.%,]*$/.test(e.target.value);
-    if (!isValidInput) {
-      return console.log("only numbers are allowed");
+    if (!isValidInput || e.target.value < 1 || e.target.value > 11) {
+      return console.log("only numbers between 1 and 10 are allowed");
     }
     setInput(e.target.value);
-    setAssignmentData((prevData) => {
+    setGF2Data((prevData) => {
       let newData = [...prevData];
       if (newData[index + 1]) {
-        newData[index + 1].KVvalue = Number(e.target.value);
+        newData[index + 1].StudentKVOpening = Number(e.target.value);
       }
       return newData;
     });
@@ -45,12 +48,13 @@ const GF2RowInput = ({ index, tableCss }) => {
 
   return (
     <>
+      {/* TableCss comes from parent component and is used to determine table styles in multiple documents */}
       <td className={tableCss}>
         <input
-          className={inputCss}
+          className="max-w-[30px] m-1 text-center bg-gray-200"
           key={"KVInput" + index}
           /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
-          id={"KV" + (index + 1)}
+          id={id + (index + 1)}
           type="number"
           value={input}
           /* handleBlur updates the input state and the respective context value */
@@ -65,4 +69,4 @@ const GF2RowInput = ({ index, tableCss }) => {
   );
 };
 
-export default GF2RowInput;
+export default GF2StudentKVValueInput;
