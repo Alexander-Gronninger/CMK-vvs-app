@@ -6,29 +6,19 @@ import Version3Measure from "./pages/Version3Measure";
 import Version3Suggested from "./pages/Version3Suggested";
 import ExportSettings from "./pages/ExportSettings";
 import Ref from "./pages/Ref";
-import Version2Create from "./pages/Version2Create";
-import Version2Assignment from "./pages/Version2Assignment";
-import Version2Nav from "./templates/Version2Nav";
 import Version3Nav from "./templates/Version3Nav";
+import GF2Version from "./pages/GF2Version";
+import GF2Nav from "./templates/GF2Nav";
 
 function App() {
   return (
     <ContextProvider>
       <Routes>
         <Route path="/" element={<Welcome />} key="Welcome" />
-        <Route path="/v2/*" element={<Version2Nav />} key="Nav">
+        <Route path="/GF2/*" element={<GF2Nav />} key="GF2Nav">
           <Route path="export" element={<ExportSettings />} key="Export" />
           <Route path="ref" element={<Ref />} key="Ref" />
-          <Route
-            path="create"
-            element={<Version2Create />}
-            key="Version2Create"
-          />
-          <Route
-            path="assignment"
-            element={<Version2Assignment />}
-            key="Assignment"
-          />
+          <Route path="" element={<GF2Version />} key="GF2Version" />
         </Route>
         <Route path="v3/*" element={<Version3Nav />} key="Version3">
           <Route

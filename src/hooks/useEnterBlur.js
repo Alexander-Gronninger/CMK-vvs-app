@@ -5,7 +5,11 @@ import { useEffect } from "react";
 const useEnterBlur = () => {
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === "Enter" || event.key === "Done") {
+      if (
+        event.key === "Enter" ||
+        event.key === "Done" ||
+        event.keyCode === 13
+      ) {
         const focusedInput = document.activeElement;
         if (focusedInput.tagName === "INPUT") {
           focusedInput.blur();
