@@ -5,13 +5,13 @@ const GF2Nav = () => {
   return (
     <>
       <nav className="bg-secondaryBG p-2 flex px-4">
-        <Link className={css} to="/v2/create">
+        {/* <Link className={css} to="/v2/create">
           Skab opgave
         </Link>
         <p className={css}>|</p>
         <Link className={css} to="/v2/assignment">
           Udfør opgave
-        </Link>
+        </Link> */}
 
         {/* pushes the last element to the end of the container */}
         <div className="flex-grow"></div>

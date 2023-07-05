@@ -14,7 +14,7 @@ const Welcome = () => {
           className="border-2 border-black rounded-lg p-2 text-center"
           to="/GF2"
         >
-          Version 2<br /> GF2
+          GF2 Version
         </Link>
         <Link
           className="border-2 border-black rounded-lg p-2 text-center"
