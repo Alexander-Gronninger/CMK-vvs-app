@@ -20,7 +20,7 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
     const isValidInput = /^[\d.,]*$/.test(e.target.value);
-    if (!isValidInput || e.target.value < 1 || e.target.value > 11) {
+    if (!isValidInput || e.target.value < 1 || e.target.value > 10) {
       return console.log("only numbers between 1 and 10 are allowed");
     }
     if (e.target.value.length === 0) {
@@ -33,7 +33,7 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
   /* handleBlur updates the input state and the respective context value */
   const handleBlur = (e) => {
     const isValidInput = /^[\d.%,]*$/.test(e.target.value);
-    if (!isValidInput || e.target.value < 1 || e.target.value > 11) {
+    if (!isValidInput || e.target.value < 1 || e.target.value > 10) {
       return console.log("only numbers between 1 and 10 are allowed");
     }
     setInput(e.target.value);

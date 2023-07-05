@@ -5,6 +5,7 @@ import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
 import GF2Context from "../context/GF2Context";
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2";
+import GF2MotionDot from "../functions/GF2MotionDot";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -12,9 +13,6 @@ const GF2Version = () => {
   /* Css rules used by this components <th> elements, GF2KVValueInput(child component) and GF2TeacherTable(child component) <th> and <td> elements */
   const tableCss =
     "text-center border-[1px] border-black m-2 font-normal max-w-[50px]";
-
-  const tunnelCss = "row-start-1 row-end-5 w-10 h-full flex";
-  const dot = "bg-black rounded-full h-2 w-2 m-auto";
 
   return (
     <>
@@ -72,25 +70,12 @@ const GF2Version = () => {
         <div className="grid gap-x-[20px] justify-around">
           {/* image which the dots are rendered on top of */}
           <img
-            className="row-start-1 row-end-5 col-start-1 col-end-8 flex"
+            className="row-start-1 row-end-1 col-start-1 col-end-1 flex"
             src="../images/Injustring-m-grafik.png"
             alt=""
           />
-
-          <div className={tunnelCss + " col-start-2"}>
-            <div className={dot}></div>
-          </div>
-          <div className={tunnelCss + " col-start-3"}>
-            <div className={dot}></div>
-          </div>
-          <div className={tunnelCss + " col-start-4"}>
-            <div className={dot}></div>
-          </div>
-          <div className={tunnelCss + " col-start-5"}>
-            <div className={dot}></div>
-          </div>
-          <div className={tunnelCss + " col-start-6"}>
-            <div className={dot}></div>
+          <div className="row-start-1 row-end-1 col-start-1 col-end-1 flex mt-6 h-[140px] gap-x-2 items-end">
+            <GF2MotionDot />
           </div>
         </div>
         <p className="m-auto w-fit my-4">
@@ -98,19 +83,23 @@ const GF2Version = () => {
         </p>
         <table className="my-4">
           <thead>
-            <th className={tableCss + " font-semibold"} colSpan="5">
-              Beregnet Qv
-            </th>
+            <tr>
+              <th className={tableCss + " font-semibold"} colSpan="5">
+                Beregnet Qv
+              </th>
+            </tr>
           </thead>
           <tbody>
-            {/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */}
-            {[...Array(GF2Data.length - 1)].map((_, index) => {
-              return (
-                <td className={tableCss} key={"NewQV" + index}>
-                  {CalcNewQV2(index).toFixed(2)}
-                </td>
-              );
-            })}
+            <tr>
+              {/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */}
+              {[...Array(GF2Data.length - 1)].map((_, index) => {
+                return (
+                  <td className={tableCss} key={"NewQV" + index}>
+                    {CalcNewQV2(index).toFixed(2)}
+                  </td>
+                );
+              })}
+            </tr>
           </tbody>
         </table>
 

@@ -10,7 +10,7 @@ import CalcNewQVSum from "./CalcNewQVSum";
 const CalcNewQV2 = (index) => {
   const { GF2Data } = useContext(GF2Context);
   let sum =
-    (CalcNewQV(index) / CalcQVSumTimesMainOpening(GF2Data)) * CalcNewQVSum();
+    (CalcNewQV(index) * CalcQVSumTimesMainOpening(GF2Data)) / CalcNewQVSum();
 
   return sum;
 };
