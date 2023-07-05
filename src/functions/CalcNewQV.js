@@ -1,4 +1,4 @@
-/* ((QV * MainOpening) / TeacherKVOpening) * StudentKVOpening */
+/* StudentKVOpening * QV_KVTeacherRatio */
 /* Accepts a single param, index, to determine which of the "valves" is being calculated */
 
 import { useContext } from "react";
@@ -7,12 +7,14 @@ import CalcQVTimesMainOpening from "./CalcQVTimesMainOpening";
 
 const CalcNewQV = (index) => {
   const { GF2Data } = useContext(GF2Context);
-  let sum =
-    (CalcQVTimesMainOpening(GF2Data[index + 1]?.QV) /
-      GF2Data[index + 1]?.TeacherKVOpening) *
-    GF2Data[index + 1]?.StudentKVOpening;
 
-  return sum;
+  const QV_KVTeacherRatio =
+    CalcQVTimesMainOpening(GF2Data[index + 1]?.QV) /
+    GF2Data[index + 1]?.TeacherKVOpening;
+
+  let NewQV = GF2Data[index + 1]?.StudentKVOpening * QV_KVTeacherRatio;
+
+  return NewQV;
 };
 
 export default CalcNewQV;

@@ -13,35 +13,39 @@ const GF2QVInput = ({ index, tableCss, id }) => {
   /* Blurs the input when user presses enter or done on iphone */
   useEnterBlur();
 
+  /* Only allows numbers and comma */
+  const isValidInput = (string) => {
+    return /^[\d.,]*$/.test(string);
+  };
+
   /* Sets the start value to the value saved in context, or empty string */
   const [input, setInput] =
     useState(GF2Data[index + 1] && GF2Data[index + 1].QV) || "";
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
-    const isValidInput = /^[\d.,]*$/.test(e.target.value);
-    if (!isValidInput) {
-      return console.log("only numbersare allowed");
+    /* Guard clause making sure input is a number */
+    if (!isValidInput(e.target.value)) {
+      return console.log("only numbers are allowed");
     }
+
+    /* Guard clause making sure if user accidentally leaves input empty, it does not remain so */
     if (e.target.value.length === 0) {
       setInput(0);
       return;
     }
+
     setInput(e.target.value);
   };
 
   /* handleBlur updates the input state and the respective context value */
   const handleBlur = (e) => {
-    const isValidInput = /^[\d.%,]*$/.test(e.target.value);
-    if (!isValidInput) {
-      return console.log("only numbers are allowed");
-    }
     setInput(e.target.value);
+
+    /* Updates context to reflect user input */
     setGF2Data((prevData) => {
       let newData = [...prevData];
-      if (newData[index + 1]) {
-        newData[index + 1].QV = Number(e.target.value);
-      }
+      newData[index + 1].QV = Number(e.target.value);
       return newData;
     });
   };

@@ -7,14 +7,14 @@ import CalcNewQV from "./CalcNewQV";
 const CalcNewQVSum = () => {
   const { GF2Data } = useContext(GF2Context);
 
-  let sum = 0;
+  let NewQVSum = 0;
   for (let index = 0; index < GF2Data.length - 1; index++) {
     let NewQV = CalcNewQV(index);
 
-    sum += NewQV;
+    NewQVSum += NewQV;
   }
 
-  return sum;
+  return NewQVSum;
 };
 
 export default CalcNewQVSum;

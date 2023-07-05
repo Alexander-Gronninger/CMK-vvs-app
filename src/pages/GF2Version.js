@@ -5,7 +5,7 @@ import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
 import GF2Context from "../context/GF2Context";
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2";
-import GF2MotionDot from "../functions/GF2MotionDot";
+import GF2MotionDot from "../components/GF2MotionDot";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -17,11 +17,15 @@ const GF2Version = () => {
   return (
     <>
       <>
+        {/* Multiple versions development, same description on every page */}
         <SiteDescription />
+
+        {/* Simply a H1 with some CSS rules applied */}
         <H1>
           Indstil ventiler [1-10 mm] så boldene
           <br /> ligger mellem de to stiplede linjer
         </H1>
+
         <table>
           <thead>
             <tr>
@@ -54,8 +58,10 @@ const GF2Version = () => {
           </thead>
           <tbody>
             <tr>
+              {/* GF2Data has 1 object with standard values, the rest are valve objects, so its length-1 === amount of valves */}
               {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
+                  /* This component has an input, and all the code needed to handle it, it handles student KVValue */
                   <GF2StudentKVValueInput
                     tableCss={tableCss}
                     index={index}
@@ -67,6 +73,8 @@ const GF2Version = () => {
             </tr>
           </tbody>
         </table>
+
+        {/* Graphical section showing how close the student is to getting all valves airspeed(NewQV2) to be equal */}
         <div className="grid gap-x-[20px] justify-around">
           {/* image which the dots are rendered on top of */}
           <img
@@ -75,16 +83,22 @@ const GF2Version = () => {
             alt=""
           />
           <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid mt-6 h-[140px] gap-x-2 items-end">
+            {/* The component handling the dots, their positioning and animation */}
             <GF2MotionDot />
+            {/* The range students are meant to get the dots within */}
             <div className="row-start-1 row-end-2 h-full w-full col-start-1 col-end-6">
               <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
               <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
             </div>
           </div>
         </div>
+
+        {/* MainOpening, is a value between 0-1 */}
         <p className="m-auto w-fit my-4 ">
           Hovedspæld {GF2Data[0].MainOpening * 100}%
         </p>
+
+        {/* Table showing the calculated airspeed based on student KV input and other data */}
         <table className="my-4">
           <thead>
             <tr>
@@ -93,9 +107,10 @@ const GF2Version = () => {
               </th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
-              {/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */}
+              {/* NewQV2: (NewQV * CalcQVSumTimesMainOpening) / NewQVSum */}
               {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
                   <td className={tableCss} key={"NewQV" + index}>
@@ -107,6 +122,7 @@ const GF2Version = () => {
           </tbody>
         </table>
 
+        {/* This template has all the stuff for teachers to enter */}
         <GF2TeacherTable tableCss={tableCss} />
       </>
     </>

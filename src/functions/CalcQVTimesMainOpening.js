@@ -6,9 +6,9 @@ import GF2Context from "../context/GF2Context";
 
 const CalcQVTimesMainOpening = (data) => {
   const { GF2Data } = useContext(GF2Context);
-  let sum = data * GF2Data[0].MainOpening;
+  let QVTimesMainOpening = data * GF2Data[0].MainOpening;
 
-  return sum;
+  return QVTimesMainOpening;
 };
 
 export default CalcQVTimesMainOpening;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import GF2Context from "../context/GF2Context";
-import CalcNewQV2 from "./CalcNewQV2";
+import CalcNewQV2 from "../functions/CalcNewQV2";
 
 function GF2MotionDot() {
   const { GF2Data } = useContext(GF2Context);
@@ -20,7 +20,6 @@ function GF2MotionDot() {
   const containerHeight = 140; // Set the desired height of the container div
 
   const [position, setPosition] = useState([]);
-  console.log(position);
   useEffect(() => {
     const positions = values.map((value) => {
       const y = ((value - minY) / (maxY - minY)) * containerHeight;
@@ -37,6 +36,8 @@ function GF2MotionDot() {
       return -yAdjust;
     });
     setPosition(positions);
+    /* useEffect wants values, but doing so results in an infinite loop */
+    // eslint-disable-next-line
   }, [GF2Data, minY, maxY, minYAdjust, maxYAdjust, containerHeight]);
 
   return (

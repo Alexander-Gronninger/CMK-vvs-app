@@ -1,4 +1,4 @@
-/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */
+/* NewQV2: (NewQV * CalcQVSumTimesMainOpening) / NewQVSum */
 /* Accepts a single param, index, to determine which of the "valves" is being calculated */
 
 import { useContext } from "react";
@@ -9,10 +9,10 @@ import CalcNewQVSum from "./CalcNewQVSum";
 
 const CalcNewQV2 = (index) => {
   const { GF2Data } = useContext(GF2Context);
-  let sum =
+  let NewQV2 =
     (CalcNewQV(index) * CalcQVSumTimesMainOpening(GF2Data)) / CalcNewQVSum();
 
-  return sum;
+  return NewQV2;
 };
 
 export default CalcNewQV2;

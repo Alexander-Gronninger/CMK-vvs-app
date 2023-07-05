@@ -14,12 +14,16 @@ import GF2MainOpening from "../components/GF2MainOpening";
 const GF2TeacherTable = ({ tableCss }) => {
   const { GF2Data } = useContext(GF2Context);
   /* 
-  This is what the array being worked with looks like, it is found it ../context/ContextProvider.js
+  This is what the array being worked with looks like, it is found in ../context/ContextProvider.js
 
-  MainOpening: main vent opening
-  QV: Initial airspeed
-  TeacherKVOpening: This is the opening as put by the teacher in the beginning, it does get changed by the students
-  NewKVOpening: This is the opening as put by the students, its change affects the final airspeed
+  {
+    MainOpening: main vent opening
+  },
+  {
+    QV: Initial airspeed
+    TeacherKVOpening: This is the opening as put by the teacher in the beginning, it does get changed by the students
+    NewKVOpening: This is the opening as put by the students, its change affects the final airspeed
+  }
   [
     {
       MainOpening: 0.3,
@@ -43,6 +47,7 @@ const GF2TeacherTable = ({ tableCss }) => {
           <th className={tableCss}>Sum</th>
         </tr>
       </thead>
+
       <tbody>
         <tr>
           <td className={tableCss + " max-w-fit font-semibold"} colSpan="2">

@@ -3,6 +3,13 @@ import GF2Context from "./GF2Context";
 import Version3Context from "./Version3Context";
 
 const ContextProvider = ({ children }) => {
+  /* 
+  The first object holds set data, every additional  object represents a valve/pipe
+  Everything is set up to dynamically render based on GF2Data.length - 1
+  So adding more valve/pipe objects will not require additional code
+  However the UI may break
+   */
+
   const [GF2Data, setGF2Data] = useState([
     {
       MainOpening: 0.3,
