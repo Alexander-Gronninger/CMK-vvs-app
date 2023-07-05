@@ -74,11 +74,15 @@ const GF2Version = () => {
             src="../images/Injustring-m-grafik.png"
             alt=""
           />
-          <div className="row-start-1 row-end-1 col-start-1 col-end-1 flex mt-6 h-[140px] gap-x-2 items-end">
+          <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid mt-6 h-[140px] gap-x-2 items-end">
             <GF2MotionDot />
+            <div className="row-start-1 row-end-2 h-full w-full col-start-1 col-end-6">
+              <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
+              <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
+            </div>
           </div>
         </div>
-        <p className="m-auto w-fit my-4">
+        <p className="m-auto w-fit my-4 ">
           Hovedspæld {GF2Data[0].MainOpening * 100}%
         </p>
         <table className="my-4">
