@@ -6,7 +6,7 @@ import CalcNewQV2 from "../functions/CalcNewQV2";
 function GF2MotionDot() {
   const { GF2Data } = useContext(GF2Context);
 
-  const tunnelCss = "w-10 h-fit row-start-1 row-end-2";
+  const tunnelCss = "w-4 h-fit row-start-2 row-end-3";
   const dot = "bg-black rounded-full h-2 w-2 m-auto relative justify-self-end";
 
   const values = Array.from({ length: GF2Data.length - 1 }, (_, index) =>
@@ -17,7 +17,7 @@ function GF2MotionDot() {
   const maxY = 16; // maximum vertical value
   const minYAdjust = 0; // Minimum Y position
   const maxYAdjust = 120; // Maximum Y position
-  const containerHeight = 140; // Set the desired height of the container div
+  const containerHeight = 150; // Set the desired height of the container div
 
   const [position, setPosition] = useState([]);
   useEffect(() => {
@@ -45,7 +45,9 @@ function GF2MotionDot() {
       {values.map((_, index) => (
         <div
           key={"dot" + index}
-          className={tunnelCss + " col-start-" + (index + 1)}
+          className={
+            tunnelCss + " col-start-" + (index + 1) + " col-end-" + (index + 2)
+          }
         >
           <motion.div
             key={index}

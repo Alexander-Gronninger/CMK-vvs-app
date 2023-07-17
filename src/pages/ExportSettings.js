@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import Version3Context from "../context/Version3Context";
 import { Link } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import SaveElementAsImage from "../components/SaveElementAsImage";
+import GF2Context from "../context/GF2Context";
+import { toast } from "react-toastify";
 
 const ExportSettings = () => {
   const [linkCreation, setLinkCreation] = useState();
-  const { version3Data } = useContext(Version3Context);
+  const { GF2Data } = useContext(GF2Context);
 
   const currentSiteLink = window.location.href.replace(
     window.location.pathname,
-    "/ref"
+    "/GF2/ref"
   );
 
   /* Creating link */
@@ -20,20 +21,19 @@ const ExportSettings = () => {
   };
 
   useEffect(() => {
-    const link = `${currentSiteLink}${encodeDataArray(version3Data)}`;
+    const link = `${currentSiteLink}${encodeDataArray(GF2Data)}`;
     setLinkCreation(link);
-  }, [currentSiteLink, version3Data]);
+  }, [currentSiteLink, GF2Data]);
 
   const handleCopyLink = () => {
     navigator.clipboard
       .writeText(linkCreation)
       .then(() => {
-        alert("Link copied to clipboard!");
-        /* Fix with better notification message, toastify */
+        toast.success("Link kopieret!");
       })
       .catch((error) => {
-        console.error("Failed to copy link:", error);
-        /* Fix with better notification message, toastify */
+        toast.error("Link kan ikke kopieres! Tjek konsollen");
+        console.log(error);
       });
   };
 
@@ -61,7 +61,7 @@ const ExportSettings = () => {
   return (
     <>
       <h1 className="text-center font-semibold">
-        Test side til at dele indstillinger i v3, via link og eller QR kode
+        Del indstillinger via link eller QR kode
       </h1>
       <button
         className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 my-4"
@@ -69,8 +69,6 @@ const ExportSettings = () => {
       >
         Kopier linket
       </button>
-      <p className="text-center">Kopier manuelt</p>
-      <p className="whitespace-nowrap overflow-scroll">{linkCreation}</p>
       <Link
         className="mx-auto w-fit block border-2 border-solid border-secondaryBG rounded p-2 my-4"
         to={linkCreation}
@@ -88,7 +86,7 @@ const ExportSettings = () => {
       </div>
       <button
         className="m-auto block border-2 border-solid border-secondaryBG rounded p-2 my-4"
-        onClick={() => SaveElementAsImage("QR-code", "VVSQR.png")}
+        onClick={() => SaveElementAsImage("QR-code", "VVS-QR.png")}
       >
         Download QR billede
       </button>

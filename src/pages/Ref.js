@@ -1,9 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Version3Context from "../context/Version3Context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import LoadingDots from "../components/LoadingDots";
 
 const Ref = () => {
-  const { version3Data, setVersion3Data } = useContext(Version3Context);
+  const { setVersion3Data } = useContext(Version3Context);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,21 +19,31 @@ const Ref = () => {
   const searchParams = new URLSearchParams(location.search);
   const encodedData = searchParams.get("data");
 
-  if (encodedData) {
-    const decodedData = decodeDataArray(encodedData);
-    console.log("updating...");
-    console.log(version3Data);
+  useEffect(() => {
+    if (encodedData) {
+      const decodedData = decodeDataArray(encodedData);
 
-    setVersion3Data(decodedData);
-  }
+      setVersion3Data(decodedData);
+    }
 
-  navigate("/v3/measurement");
+    toast.success("Data importeret", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    setTimeout(() => navigate("/GF2/"), 500);
+  }, [encodedData, navigate, setVersion3Data]);
 
   return (
     <>
-      {/* <button onClick={() => DataFromURL()}>
-        Click to fetch data from link
-      </button> */}
+      <LoadingDots />
+      <img src="../images/spinner.gif" alt="loading" />
     </>
   );
 };

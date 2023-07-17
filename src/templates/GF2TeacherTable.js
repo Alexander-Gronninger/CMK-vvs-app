@@ -37,11 +37,11 @@ const GF2TeacherTable = ({ tableCss }) => {
   */
 
   return (
-    <table className="w-full">
+    <table className="w-[288px]">
       <thead>
         <tr>
           {/* has max-w-fit to overrule the tableCss' max-w-[50px] */}
-          <th className={tableCss + " max-w-fit"} colSpan="7">
+          <th className={tableCss} colSpan="7">
             Mellemregning: Lærer indtaster hvide felter
           </th>
           <th className={tableCss}>Sum</th>
