@@ -7,6 +7,7 @@ import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2";
 import GF2MotionDot from "../components/GF2MotionDot";
 import ValveRotation from "../components/ValveRotation";
+import { Link } from "react-router-dom";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -21,7 +22,7 @@ const GF2Version = () => {
         {/* Multiple versions development, same description on every page */}
         <SiteDescription />
 
-        {/* Simply a H1 with some CSS rules applied */}
+        {/* H1 with some CSS rules applied */}
         <H1>
           Indstil ventiler [1-10 mm] så boldene
           <br /> ligger mellem de to stiplede linjer
@@ -76,20 +77,20 @@ const GF2Version = () => {
         </table>
 
         {/* Graphical section showing how close the student is to getting all valves airspeed(NewQV2) to be equal */}
-        <div className="grid gap-x-[20px] justify-around">
+        <div className="grid gap-x-[20px] justify-around p-2">
           {/* image which the dots are rendered on top of */}
           <img
-            className="row-start-1 row-end-1 col-start-1 col-end-1 flex"
-            src="../images/Injustring-m-grafik.png"
+            className="row-start-1 row-end-1 col-start-1 col-end-1 flex max-w-[200px]"
+            src="../images/glasrør.png"
             alt=""
           />
-          <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid mt-6 h-[140px] gap-x-2 items-end">
+          <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[150px] items-end w-full gap-6">
             {/* The component handling the dots, their positioning and animation */}
             <GF2MotionDot />
             {/* The range students are meant to get the dots within */}
-            <div className="row-start-1 row-end-2 h-full w-full col-start-1 col-end-6">
-              <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
-              <div className="border-b-[2px] w-full border-dotted border-black mt-9"></div>
+            <div className="row-start-1 row-end-2 h-full w-full col-start-1 col-end-6 flex flex-col">
+              <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
+              <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
             </div>
           </div>
         </div>
@@ -122,6 +123,10 @@ const GF2Version = () => {
             </tr>
           </tbody>
         </table>
+
+        <div className="m-auto my-2 w-fit h-fit p-2 border-secondaryBG border-2 rounded">
+          <Link to="/GF2/export">QR / Link</Link>
+        </div>
 
         {/* This template has all the stuff for teachers to enter */}
         <GF2TeacherTable tableCss={tableCss} />

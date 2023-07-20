@@ -107,7 +107,7 @@ const Version2Create = () => {
       <div className="flex max-w-fit mb-6">
         <label htmlFor="totalPD">Indtast total PD (Lufttryk[Pa])&nbsp;</label>
         <input
-          inputMode="numeric"
+          inputMode="decimal"
           type="number"
           id="totalPD"
           className="w-16 text-center border-[1px] border-secondaryBG rounded"
@@ -139,7 +139,7 @@ const Version2Create = () => {
       <div className="flex my-2 max-w-fit">
         <label htmlFor="desiredMS">Ønsket lufthastighed:&nbsp;</label>
         <input
-          inputMode="numeric"
+          inputMode="decimal"
           type="text"
           id="desiredMS"
           className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
@@ -158,7 +158,7 @@ const Version2Create = () => {
           Åbning på hovedspjæld (1-10 mm):&nbsp;
         </label>
         <input
-          inputMode="numeric"
+          inputMode="decimal"
           type="text"
           id="desiredOpening"
           className="max-w-[100px] text-center border-[1px] border-secondaryBG rounded"
