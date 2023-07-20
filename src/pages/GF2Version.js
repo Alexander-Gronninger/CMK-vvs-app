@@ -6,6 +6,7 @@ import GF2Context from "../context/GF2Context";
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2";
 import GF2MotionDot from "../components/GF2MotionDot";
+import ValveRotation from "../components/ValveRotation";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -124,6 +125,9 @@ const GF2Version = () => {
 
         {/* This template has all the stuff for teachers to enter */}
         <GF2TeacherTable tableCss={tableCss} />
+        <div className="h-[100px]"></div>
+        <ValveRotation />
+        <div className="h-[1000px]"></div>
       </>
     </>
   );
