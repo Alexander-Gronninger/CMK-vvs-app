@@ -127,7 +127,7 @@ const ValveRotation = ({
   return (
     <>
       <div
-        className="rounded-full border-black shadow-[0px_0px_10px_2px] shadow-black"
+        className="rounded-full border-black shadow-[0px_0px_10px_2px] shadow-black grid"
         style={{
           transform: `rotate(${rotation}deg)`,
           width: `${imageSize}`,
@@ -139,10 +139,11 @@ const ValveRotation = ({
         onMouseUp={handleMouseUp}
         key={"ValveRotation" + index}
       >
+        <div className="border-2 border-black border-full col-start-1 col-end-2 row-start-1 row-end-2 max-w-[10px] max-h-2 z-20 mt-[2px]"></div>
         <img
           src="../images/Pencil-Circle.png"
           alt=""
-          className={`w-${imageSize} h-${imageSize}  m-0`}
+          className={`w-${imageSize} h-${imageSize} m-0 col-start-1 col-end-2 row-start-1 row-end-2`}
         />
       </div>
     </>
