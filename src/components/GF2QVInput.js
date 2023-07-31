@@ -59,7 +59,7 @@ const GF2QVInput = ({ index, tableCss, id }) => {
           key={"KVInput" + index}
           /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
           id={id + (index + 1)}
-          type="number"
+          type="numeric"
           value={input}
           /* handleBlur updates the input state and the respective context value */
           onBlur={handleBlur}

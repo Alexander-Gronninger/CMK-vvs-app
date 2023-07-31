@@ -1,5 +1,9 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
 import GF2Context from "../context/GF2Context";
+
+/* 
+The value: opening state is set from parent component, this allows for this component to be used for both KV opening and "main opening" changes.
+*/
 
 const ValveRotation = ({
   size,
@@ -30,19 +34,20 @@ const ValveRotation = ({
     (opening - fullRotations - minOpening) * degreesPerOpening
   );
 
-  /* The opening can be simultaneously updated from 2 places, GF2StudentKVValueInput and ValveRotation */
-  /* This ensure these components values are updated whenever the other updates StudentKVOpening */
-  useEffect(() => {
-    setRotation((opening - fullRotations - minOpening) * degreesPerOpening);
-    setPrevAngle((opening - fullRotations - minOpening) * degreesPerOpening);
-  }, [opening, fullRotations]);
-
   /* image size */
   const imageSize = (size && size) || "50px";
 
+  /* When user mouseDown on the div, update the state that tracks if user is holding down their mouse */
   const handleMouseDown = (event) => {
     event.preventDefault();
     setIsMouseDown(true);
+
+    /* Updated various sub-states in case opening has been modified from a different component */
+    setFullRotations(
+      Math.floor(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening - 1)
+    );
+    setRotation((opening - fullRotations - minOpening) * degreesPerOpening);
+    setPrevAngle((opening - fullRotations - minOpening) * degreesPerOpening);
   };
 
   const handleMouseUp = () => {
@@ -57,7 +62,7 @@ const ValveRotation = ({
 
     // Calculate the number of full rotations completed
     /* If user is going towards angle of 0, rotations is at 0, and the mouse is moving down, hit minimum limit */
-    if (prevAngle <= 25 && angle >= 300 && fullRotations === 0) {
+    if (prevAngle <= 30 && angle >= 330 && fullRotations === 0) {
       console.log("MINIMUM TEST");
       setOpening(0);
       setIsMouseDown(false);
@@ -65,8 +70,8 @@ const ValveRotation = ({
     }
     /* If user is going towards angle of 360, rotations is at max and mouse is moving up, hit max limit */
     if (
-      prevAngle >= 300 &&
-      angle <= 25 &&
+      prevAngle >= 330 &&
+      angle <= 30 &&
       fullRotations === maxOpening - minOpening - 1
     ) {
       console.log("MAXIMUM TEST");
@@ -76,15 +81,15 @@ const ValveRotation = ({
     }
 
     /* If user is going towards angle of 0, rotations is at >0, and the mouse is moving down, decrease by 1 */
-    if (prevAngle <= 25 && angle >= 300 && fullRotations >= 0) {
+    if (prevAngle <= 30 && angle >= 330 && fullRotations >= 0) {
       console.log("Decreasing fullRotations by 1");
       setFullRotations(fullRotations - 1);
     }
     /* If user is going towards angle of 360, rotations is not at max and mouse is moving up, increase by 1 */
     if (
-      prevAngle >= 300 &&
-      angle <= 25 &&
-      fullRotations <= maxOpening - minOpening
+      prevAngle >= 330 &&
+      angle <= 30 &&
+      fullRotations <= maxOpening - minOpening - 1
     ) {
       console.log("Increasing fullRotations by 1");
       setFullRotations(fullRotations + 1);

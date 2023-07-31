@@ -11,8 +11,6 @@ const GF2StudentKV = ({ tableCss, index }) => {
   const [value, setValue] =
     useState(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening) || "";
 
-  console.log(value);
-
   useEffect(() => {
     updateStudentKV();
 
@@ -22,7 +20,6 @@ const GF2StudentKV = ({ tableCss, index }) => {
 
   function updateStudentKV() {
     setGF2Data((prevData) => {
-      console.log(prevData);
       let newData = [...prevData];
       newData[index + 1].StudentKVOpening = Number(value);
       return newData;
