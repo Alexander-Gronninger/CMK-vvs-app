@@ -8,6 +8,7 @@ import CalcNewQV2 from "../functions/CalcNewQV2";
 import GF2MotionDot from "../components/GF2MotionDot";
 import ValveRotation from "../components/ValveRotation";
 import { Link } from "react-router-dom";
+import GF2MainOpening from "../components/GF2MainOpening";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -64,12 +65,20 @@ const GF2Version = () => {
               {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
                   /* This component has an input, and all the code needed to handle it, it handles student KVValue */
-                  <GF2StudentKVValueInput
-                    tableCss={tableCss}
-                    index={index}
-                    key={"KV" + index}
-                    id="KV"
-                  />
+                  <td className={tableCss}>
+                    <GF2StudentKVValueInput
+                      tableCss={tableCss}
+                      index={index}
+                      key={"KV" + index}
+                      id="KV"
+                    />
+                    {/* This component has a rotatable image which can be used to adjust KVValue */}
+                    <ValveRotation
+                      key={"Valve" + index}
+                      size="35px"
+                      index={index}
+                    />
+                  </td>
                 );
               })}
             </tr>
@@ -90,14 +99,15 @@ const GF2Version = () => {
             {/* The range students are meant to get the dots within */}
             <div className="row-start-1 row-end-2 h-full w-full col-start-1 col-end-6 flex flex-col">
               <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
-              <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
+              <div className="border-b-[2px] w-full border-dotted border-black mt-8 h-0"></div>
             </div>
           </div>
         </div>
 
         {/* MainOpening, is a value between 0-1 */}
         <p className="m-auto w-fit my-4 ">
-          Hovedspæld {GF2Data[0].MainOpening * 100}%
+          Hovedspæld:&nbsp;
+          <GF2MainOpening />
         </p>
 
         {/* Table showing the calculated airspeed based on student KV input and other data */}
@@ -131,9 +141,10 @@ const GF2Version = () => {
         {/* This template has all the stuff for teachers to enter */}
         <GF2TeacherTable tableCss={tableCss} />
         <div className="h-[100px]"></div>
-        <ValveRotation />
         <div className="h-[1000px]"></div>
       </>
+
+      <ValveRotation size="50px" />
     </>
   );
 };

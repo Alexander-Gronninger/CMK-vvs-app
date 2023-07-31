@@ -70,25 +70,6 @@ const GF2TeacherTable = ({ tableCss }) => {
 
         <tr>
           <td className={tableCss + " max-w-fit"} colSpan="2">
-            Qv * Hovedspjæld
-          </td>
-
-          {/* QV*MainOpening: Uses a function that takes QV and times it with MainOpening */}
-          {[...Array(GF2Data.length - 1)].map((_, index) => {
-            return (
-              <td className={tableCss} key={"QV*MainOpening" + index}>
-                {CalcQVTimesMainOpening(GF2Data[index + 1].QV).toFixed(2)}
-              </td>
-            );
-          })}
-
-          <td className={tableCss}>
-            {CalcQVSumTimesMainOpening(GF2Data).toFixed(2)}
-          </td>
-        </tr>
-
-        <tr>
-          <td className={tableCss + " max-w-fit"} colSpan="2">
             Indtast ventilåbning
           </td>
 
@@ -104,68 +85,6 @@ const GF2TeacherTable = ({ tableCss }) => {
             );
           })}
 
-          <td className={tableCss}></td>
-        </tr>
-
-        <tr>
-          <td className={tableCss + " max-w-fit"} colSpan="2">
-            Forhold Qv/Ventil
-          </td>
-
-          {/* QV/KV Relation: (QV * MainOpening) / TeacherKVOpening  */}
-          {[...Array(GF2Data.length - 1)].map((_, index) => {
-            return (
-              <td className={tableCss} key={"QV/KV" + index}>
-                {(
-                  CalcQVTimesMainOpening(GF2Data[index + 1].QV) /
-                  GF2Data[index + 1].TeacherKVOpening
-                ).toFixed(1)}
-              </td>
-            );
-          })}
-
-          <td className={tableCss}></td>
-        </tr>
-
-        <tr>
-          <td className={tableCss + " max-w-fit"} colSpan="2">
-            Ny Qv
-          </td>
-          {/* New QV: ((QV * MainOpening) / TeacherKVOpening) * StudentKVOpening */}
-          {[...Array(GF2Data.length - 1)].map((_, index) => {
-            return (
-              <td className={tableCss} key={"NewQV" + index}>
-                {CalcNewQV(index).toFixed(2)}
-              </td>
-            );
-          })}
-          <td className={tableCss}>{CalcNewQVSum().toFixed(2)}</td>
-        </tr>
-        <tr>
-          <td className={tableCss + " max-w-fit"} colSpan="2">
-            Ny Qv2
-          </td>
-          {/* New QV2: (NewQV / CalcQVSumTimesMainOpening) * NewQVSum */}
-          {[...Array(GF2Data.length - 1)].map((_, index) => {
-            return (
-              <td className={tableCss} key={"NewQV" + index}>
-                {CalcNewQV2(index).toFixed(2)}
-              </td>
-            );
-          })}
-          <td className={tableCss}>{CalcNewQV2Sum().toFixed(2)}</td>
-        </tr>
-        <tr>
-          <td className={tableCss + " max-w-fit"} colSpan="2">
-            Hovedspjæld
-          </td>
-          <td className={tableCss}>
-            <GF2MainOpening />
-          </td>
-          <td className={tableCss}>åbnet</td>
-          <td className={tableCss}>{(1 - GF2Data[0].MainOpening) * 100}%</td>
-          <td className={tableCss}>lukket</td>
-          <td className={tableCss}></td>
           <td className={tableCss}></td>
         </tr>
       </tbody>

@@ -59,7 +59,7 @@ const GF2TeacherKVValueInput = ({ index, tableCss, id }) => {
       {/* TableCss comes from parent component and is used to determine table styles in multiple documents */}
       <td className={tableCss}>
         <input
-          className="max-w-[30px] m-1 text-center bg-gray-200"
+          className="max-w-[30px] m-0 p-0 h-[51px] text-center bg-gray-200"
           key={"KVInput" + index}
           /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
           id={id + (index + 1)}

@@ -16,7 +16,7 @@ function GF2MotionDot() {
   const minY = 0; // minimum vertical value
   const maxY = 16; // maximum vertical value
   const minYAdjust = 0; // Minimum Y position
-  const maxYAdjust = 120; // Maximum Y position
+  const maxYAdjust = 140; // Maximum Y position
   const containerHeight = 150; // Set the desired height of the container div
 
   const [position, setPosition] = useState([]);

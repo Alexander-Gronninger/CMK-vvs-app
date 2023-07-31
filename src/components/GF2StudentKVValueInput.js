@@ -57,7 +57,7 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
   return (
     <>
       {/* TableCss comes from parent component and is used to determine table styles in multiple documents */}
-      <td className={tableCss}>
+      <div>
         <input
           className="max-w-[30px] m-1 text-center bg-gray-200"
           key={"KVInput" + index}
@@ -72,7 +72,7 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
           /* Selects the input, so typing will replace the value */
           onClick={InputSelect}
         />
-      </td>
+      </div>
     </>
   );
 };
