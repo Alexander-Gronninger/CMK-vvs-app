@@ -3,13 +3,6 @@ import GF2Context from "../context/GF2Context";
 import GF2TeacherKVValueInput from "../components/GF2TeacherKVValueInput";
 import GF2QVInput from "../components/GF2QVInput";
 import CalcQVSum from "../functions/CalcQVSum";
-import CalcQVTimesMainOpening from "../functions/CalcQVTimesMainOpening";
-import CalcQVSumTimesMainOpening from "../functions/CalcQVSumTimesMainOpening";
-import CalcNewQV from "../functions/CalcNewQV";
-import CalcNewQVSum from "../functions/CalcNewQVSum";
-import CalcNewQV2 from "../functions/CalcNewQV2";
-import CalcNewQV2Sum from "../functions/CalcNewQV2Sum";
-import GF2MainOpening from "../components/GF2MainOpening";
 
 const GF2TeacherTable = ({ tableCss }) => {
   const { GF2Data } = useContext(GF2Context);

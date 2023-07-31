@@ -39,7 +39,6 @@ function GF2MotionDot() {
     /* useEffect wants values, but doing so results in an infinite loop */
     // eslint-disable-next-line
   }, [GF2Data, minY, maxY, minYAdjust, maxYAdjust, containerHeight]);
-  console.log(GF2Data);
 
   return (
     <>

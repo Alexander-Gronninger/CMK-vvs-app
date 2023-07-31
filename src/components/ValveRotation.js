@@ -34,6 +34,7 @@ const ValveRotation = ({
     (opening - fullRotations - minOpening) * degreesPerOpening
   );
 
+  console.log(fullRotations);
   /* image size */
   const imageSize = (size && size) || "50px";
 
@@ -64,7 +65,7 @@ const ValveRotation = ({
     /* If user is going towards angle of 0, rotations is at 0, and the mouse is moving down, hit minimum limit */
     if (prevAngle <= 30 && angle >= 330 && fullRotations === 0) {
       console.log("MINIMUM TEST");
-      setOpening(0);
+      setOpening(1);
       setIsMouseDown(false);
       return;
     }
