@@ -1,14 +1,13 @@
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { useContext } from "react";
-import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
 import GF2Context from "../context/GF2Context";
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2";
 import GF2MotionDot from "../components/GF2MotionDot";
-import ValveRotation from "../components/ValveRotation";
 import { Link } from "react-router-dom";
 import GF2MainOpening from "../components/GF2MainOpening";
+import GF2StudentKV from "../templates/GF2StudentKV";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -64,20 +63,8 @@ const GF2Version = () => {
               {/* GF2Data has 1 object with standard values, the rest are valve objects, so its length-1 === amount of valves */}
               {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
-                  /* This component has an input, and all the code needed to handle it, it handles student KVValue */
                   <td className={tableCss}>
-                    <GF2StudentKVValueInput
-                      tableCss={tableCss}
-                      index={index}
-                      key={"KV" + index}
-                      id="KV"
-                    />
-                    {/* This component has a rotatable image which can be used to adjust KVValue */}
-                    <ValveRotation
-                      key={"Valve" + index}
-                      size="35px"
-                      index={index}
-                    />
+                    <GF2StudentKV tableCss={tableCss} index={index} />
                   </td>
                 );
               })}
@@ -140,11 +127,7 @@ const GF2Version = () => {
 
         {/* This template has all the stuff for teachers to enter */}
         <GF2TeacherTable tableCss={tableCss} />
-        <div className="h-[100px]"></div>
-        <div className="h-[1000px]"></div>
       </>
-
-      <ValveRotation size="50px" />
     </>
   );
 };

@@ -1,18 +1,41 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
+import GF2Context from "../context/GF2Context";
 
-const ValveRotation = ({ size, index }) => {
-  const imageRef = useRef(null);
-  const [rotation, setRotation] = useState(0);
-  const [prevAngle, setPrevAngle] = useState(0);
-  const [opening, setOpening] = useState(1);
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const [fullRotations, setFullRotations] = useState(0);
+const ValveRotation = ({
+  size,
+  index,
+  value: opening,
+  setValue: setOpening,
+}) => {
+  /* The context where data is stored, it is used many places so context instead of prop drilling */
+  const { GF2Data } = useContext(GF2Context);
 
   /* Minimum and maximum opening allowed (1-10 mm) */
   const minOpening = 1;
   const maxOpening = 10;
   /* The amount of degrees that 1 in opening corresponds to */
   const degreesPerOpening = 360;
+
+  /* References the div which contains the image */
+  const imageRef = useRef(null);
+
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [fullRotations, setFullRotations] = useState(
+    Math.floor(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening - 1)
+  );
+  const [rotation, setRotation] = useState(
+    (opening - fullRotations - minOpening) * degreesPerOpening
+  );
+  const [prevAngle, setPrevAngle] = useState(
+    (opening - fullRotations - minOpening) * degreesPerOpening
+  );
+
+  /* The opening can be simultaneously updated from 2 places, GF2StudentKVValueInput and ValveRotation */
+  /* This ensure these components values are updated whenever the other updates StudentKVOpening */
+  useEffect(() => {
+    setRotation((opening - fullRotations - minOpening) * degreesPerOpening);
+    setPrevAngle((opening - fullRotations - minOpening) * degreesPerOpening);
+  }, [opening, fullRotations]);
 
   /* image size */
   const imageSize = (size && size) || "50px";
@@ -44,9 +67,9 @@ const ValveRotation = ({ size, index }) => {
     if (
       prevAngle >= 300 &&
       angle <= 25 &&
-      fullRotations === maxOpening - minOpening
+      fullRotations === maxOpening - minOpening - 1
     ) {
-      console.log("MAXUMUM TEST");
+      console.log("MAXIMUM TEST");
       setOpening(maxOpening);
       setIsMouseDown(false);
       return;
@@ -69,7 +92,7 @@ const ValveRotation = ({ size, index }) => {
 
     setRotation(angle);
 
-    // Calculate new Opening value, minus fullRotations,
+    // Calculate new Opening value,
     setOpening(
       (fullRotations + minOpening + angle / degreesPerOpening).toFixed(2)
     );

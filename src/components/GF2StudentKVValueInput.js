@@ -1,15 +1,11 @@
-import { useContext, useState } from "react";
 import useEnterBlur from "../hooks/useEnterBlur";
 import InputSelect from "../functions/InputSelect";
-import GF2Context from "../context/GF2Context";
 
 /* 
 This component handles changing the GF2 versions KVValue from GF2Context
 */
 
-const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
-  const { GF2Data, setGF2Data } = useContext(GF2Context);
-
+const GF2StudentKVValueInput = ({ index, id, value, setValue }) => {
   /* Blurs the input when user presses enter or done */
   useEnterBlur();
 
@@ -18,9 +14,11 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
     return /^[\d.,]*$/.test(string);
   };
 
-  /* Sets the start value to the value saved in context, or empty string */
-  const [input, setInput] =
-    useState(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening) || "";
+  /* The opening can be simultaneously updated from 2 places, GF2StudentKVValueInput and ValveRotation */
+  /* This ensure these components values are updated whenever the other updates StudentKVOpening */
+  /*   useEffect(() => {
+    setValue((GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening) || "");
+  }, [GF2Data, index, setValue]); */
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
@@ -35,23 +33,16 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
 
     /* Guard clause making sure if user accidentally leaves input empty, it does not remain so */
     if (e.target.value.length === 0) {
-      setInput(0);
+      setValue(0);
       return;
     }
 
-    setInput(e.target.value);
+    setValue(e.target.value);
   };
 
   /* handleBlur updates the input state and the respective context value */
   const handleBlur = (e) => {
-    setInput(e.target.value);
-
-    /* Updates context to reflect users new input */
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      newData[index + 1].StudentKVOpening = Number(e.target.value);
-      return newData;
-    });
+    setValue(e.target.value);
   };
 
   return (
@@ -63,8 +54,8 @@ const GF2StudentKVValueInput = ({ index, tableCss, id }) => {
           key={"KVInput" + index}
           /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
           id={id + (index + 1)}
-          type="number"
-          value={input}
+          type="numeric"
+          value={value}
           /* handleBlur updates the input state and the respective context value */
           onBlur={handleBlur}
           /* handleChange updates the input state, but not the context */
