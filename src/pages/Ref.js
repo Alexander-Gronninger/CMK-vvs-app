@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Version3Context from "../context/Version3Context";
 import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import LoadingDots from "../components/LoadingDots";
+import GF2Context from "../context/GF2Context";
 
 const Ref = () => {
-  const { setVersion3Data } = useContext(Version3Context);
+  const { setGF2Data } = useContext(GF2Context);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Ref = () => {
     if (encodedData) {
       const decodedData = decodeDataArray(encodedData);
 
-      setVersion3Data(decodedData);
+      setGF2Data(decodedData);
     }
 
     toast.success("Data importeret", {
@@ -38,7 +38,7 @@ const Ref = () => {
     });
 
     setTimeout(() => navigate("/GF2/"), 500);
-  }, [encodedData, navigate, setVersion3Data]);
+  }, [encodedData, navigate, setGF2Data]);
 
   return (
     <>
