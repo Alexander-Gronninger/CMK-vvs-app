@@ -61,13 +61,16 @@ const GF2Version = () => {
           <tbody>
             <tr>
               {/* GF2Data has 1 object with standard values, the rest are valve objects, so its length-1 === amount of valves */}
-              {[...Array(GF2Data.length - 1)].map((_, index) => {
+              {/* {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
                   <td className={tableCss}>
                     <GF2StudentKV tableCss={tableCss} index={index} />
                   </td>
                 );
-              })}
+              })} */}
+              <td className={tableCss}>
+                <GF2StudentKV tableCss={tableCss} index={1} />
+              </td>
             </tr>
           </tbody>
         </table>

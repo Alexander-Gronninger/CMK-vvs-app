@@ -14,11 +14,11 @@ const ContextProvider = ({ children }) => {
     {
       MainOpening: 0.3,
     },
-    { QV: 30.4, TeacherKVOpening: 5, StudentKVOpening: 8 },
-    { QV: 35.5, TeacherKVOpening: 5, StudentKVOpening: 7 },
-    { QV: 39.3, TeacherKVOpening: 5, StudentKVOpening: 6 },
-    { QV: 31.2, TeacherKVOpening: 5, StudentKVOpening: 8 },
-    { QV: 41.2, TeacherKVOpening: 5, StudentKVOpening: 6 },
+    { QV: 30.4, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
+    { QV: 35.5, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
+    { QV: 39.3, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
+    { QV: 31.2, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
+    { QV: 41.2, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
   ]);
 
   const [version3Data, setVersion3Data] = useState([
