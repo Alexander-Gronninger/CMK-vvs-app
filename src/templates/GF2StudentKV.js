@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
-import ValveRotation from "../components/ValveRotation";
 import GF2Context from "../context/GF2Context";
+import InputButtonIncrease from "../components/InputButtonIncrease";
+import InputButtonDecrease from "../components/InputButtonDecrease";
 
-const GF2StudentKV = ({ tableCss, index }) => {
+const GF2StudentKV = ({ index }) => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
   /* Value is the KVs opening */
-  /* Sets the start value to the value saved in context, or empty string */
-  const [value, setValue] =
-    useState(GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening) || "";
+  /* Sets the start value to the value saved in context, or an empty string */
+  const [value, setValue] = useState(
+    GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening
+  );
 
   useEffect(() => {
     updateStudentKV();
-
-    /* Putting updateStudentKV in dependency array will create an infinite loop */
     // eslint-disable-next-line
   }, [value]);
 
@@ -26,25 +26,50 @@ const GF2StudentKV = ({ tableCss, index }) => {
     });
   }
 
+  /*   let updateInterval; */
+
+  const increaseValue = () => {
+    // Increase the value by 0.1, or set it to 10 if it's already greater than or equal to 10
+    setValue(value < 10 ? parseFloat((value + 0.1).toFixed(2)) : 10);
+    console.log("increased");
+  };
+
+  const decreaseValue = () => {
+    // Decrease the value by 0.1, or set it to 1 if it's already less than or equal to 1
+    setValue(value > 1 ? parseFloat((value - 0.1).toFixed(2)) : 1);
+    console.log("decreased");
+  };
+
+  /*   const handleMouseDownOnIncreaseBtn = () => {
+    updateInterval = setInterval(increaseValue, 100);
+  };
+
+  const handleMouseDownOnDecreaseBtn = () => {
+    updateInterval = setInterval(decreaseValue, 100);
+  };
+
+  const handleMouseUpOnBtns = () => {
+    clearInterval(updateInterval);
+  }; */
+
   return (
     <>
-      {/* This component has a rotatable image which can be used to adjust KVValue */}
-      <ValveRotation
-        key={"KVRotation" + index}
-        id={"KVRotation" + index}
-        size="35px"
-        index={index}
-        value={value}
-        setValue={setValue}
+      <InputButtonIncrease
+        onClickFunction={increaseValue}
+        /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */
+        /* onMouseUpFunction={handleMouseUpOnBtns} */
       />
-      {/* This component has an input, and all the code needed to handle it, it handles student KVValue */}
       <GF2StudentKVValueInput
         key={"KVInput" + index}
         id={"KVInput" + index}
-        tableCss={tableCss}
-        index={index}
+        index={index + " p-0 m-0"}
         value={value}
         setValue={setValue}
+      />
+      <InputButtonDecrease
+        onClickFunction={decreaseValue}
+        /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */
+        /* onMouseUpFunction={handleMouseUpOnBtns} */
       />
     </>
   );

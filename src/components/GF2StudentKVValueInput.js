@@ -33,7 +33,7 @@ const GF2StudentKVValueInput = ({ index, id, value, setValue }) => {
 
     /* Guard clause making sure if user accidentally leaves input empty, it does not remain so */
     if (e.target.value.length === 0) {
-      setValue(0);
+      setValue(1);
       return;
     }
 
@@ -48,22 +48,20 @@ const GF2StudentKVValueInput = ({ index, id, value, setValue }) => {
   return (
     <>
       {/* TableCss comes from parent component and is used to determine table styles in multiple documents */}
-      <div>
-        <input
-          className="max-w-[30px] m-1 text-center bg-gray-200"
-          key={"KVInput" + index}
-          /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
-          id={id + (index + 1)}
-          type="numeric"
-          value={value}
-          /* handleBlur updates the input state and the respective context value */
-          onBlur={handleBlur}
-          /* handleChange updates the input state, but not the context */
-          onChange={handleChange}
-          /* Selects the input, so typing will replace the value */
-          onClick={InputSelect}
-        />
-      </div>
+      <input
+        className="w-10 h-8 m-0 text-center bg-gray-200"
+        key={"KVInput" + index}
+        /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
+        id={id + (index + 1)}
+        type="numeric"
+        value={value}
+        /* handleBlur updates the input state and the respective context value */
+        onBlur={handleBlur}
+        /* handleChange updates the input state, but not the context */
+        onChange={handleChange}
+        /* Selects the input, so typing will replace the value */
+        onClick={InputSelect}
+      />
     </>
   );
 };

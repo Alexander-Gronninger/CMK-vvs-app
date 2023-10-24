@@ -8,6 +8,8 @@ module.exports = {
         secondaryBG: "#55595d",
         primaryText: "#ddd",
         secondaryText: "#55595d",
+        increaseKV: "#8DCA82",
+        decreaseKV: "#839AC2",
       },
     },
   },

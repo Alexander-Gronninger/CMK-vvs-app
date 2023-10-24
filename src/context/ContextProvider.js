@@ -12,13 +12,15 @@ const ContextProvider = ({ children }) => {
 
   const [GF2Data, setGF2Data] = useState([
     {
-      MainOpening: 0.3,
+      MainOpening: 0.75,
+      DesiredAirspeed: 12,
+      AllKV: 5,
     },
-    { QV: 30.4, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
-    { QV: 35.5, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
-    { QV: 39.3, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
-    { QV: 31.2, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
-    { QV: 41.2, TeacherKVOpening: 5, StudentKVOpening: 0.5 },
+    { QV: 30.4, TeacherKVOpening: 5, StudentKVOpening: 6.2, QVKVRelation: 3 },
+    { QV: 35.5, TeacherKVOpening: 5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
+    { QV: 39.3, TeacherKVOpening: 5, StudentKVOpening: 3.7, QVKVRelation: 5 },
+    { QV: 31.2, TeacherKVOpening: 5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
+    { QV: 41.2, TeacherKVOpening: 5, StudentKVOpening: 5.1, QVKVRelation: 3.6 },
   ]);
 
   const [version3Data, setVersion3Data] = useState([

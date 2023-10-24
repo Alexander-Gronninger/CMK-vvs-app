@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import InputSelect from "../functions/InputSelect";
 import useEnterBlur from "../hooks/useEnterBlur";
 import GF2Context from "../context/GF2Context";
+import InputButtonIncrease from "./InputButtonIncrease";
+import InputButtonDecrease from "./InputButtonDecrease";
 
 const GF2MainOpening = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
@@ -74,20 +76,71 @@ const GF2MainOpening = () => {
       : percentage + "%";
   };
 
-  return (
-    <input
-      inputMode="numeric"
-      key="desiredOpeningInput"
-      type="text"
-      id="desiredOpening"
-      className="max-w-[40px] min-w-[10px] text-center bg-gray-200"
-      value={
-        isPercentSelected ? desiredOpening : decimalToPercentage(desiredOpening)
+  /* Functions passed to InputButtonIncrease & InputButtonDecrease */
+  /* Handles incremental increase & decrease respectively of mainOpening */
+
+  const increaseMainOpening = () => {
+    setDesiredOpening(
+      desiredOpening < 1 ? parseFloat((desiredOpening + 0.05).toFixed(2)) : 1
+    );
+
+    const inputPercentage = desiredOpening;
+
+    const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
+    const decimalValue = parseFloat(percentage) / 100;
+
+    setGF2Data((prevData) => {
+      let newData = [...prevData];
+      if (newData[0]) {
+        newData[0].MainOpening = Number(decimalValue);
       }
-      onBlur={handleDesiredOpeningBlur}
-      onChange={handleDesiredOpeningChange}
-      onClick={InputSelect}
-    />
+      return newData;
+    });
+  };
+
+  const decreaseMainOpening = () => {
+    setDesiredOpening(
+      desiredOpening > 0.05
+        ? parseFloat((desiredOpening - 0.05).toFixed(2))
+        : 0.05
+    );
+
+    const inputPercentage = desiredOpening;
+
+    const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
+    const decimalValue = parseFloat(percentage) / 100;
+
+    setGF2Data((prevData) => {
+      let newData = [...prevData];
+      if (newData[0]) {
+        newData[0].MainOpening = Number(decimalValue);
+      }
+      return newData;
+    });
+  };
+
+  return (
+    <>
+      <div className="flex flex-col">
+        <InputButtonIncrease onClickFunction={increaseMainOpening} />
+        <input
+          inputMode="numeric"
+          key="desiredOpeningInput"
+          type="text"
+          id="desiredOpening"
+          className="max-w-[40px] min-w-[10px] text-center bg-gray-200 h-10"
+          value={
+            isPercentSelected
+              ? desiredOpening
+              : decimalToPercentage(desiredOpening)
+          }
+          onBlur={handleDesiredOpeningBlur}
+          onChange={handleDesiredOpeningChange}
+          onClick={InputSelect}
+        />
+        <InputButtonDecrease onClickFunction={decreaseMainOpening} />
+      </div>
+    </>
   );
 };
 

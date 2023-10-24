@@ -6,7 +6,7 @@ import CalcNewQV2 from "../functions/CalcNewQV2";
 function GF2MotionDot() {
   const { GF2Data } = useContext(GF2Context);
 
-  const tunnelCss = "w-4 h-fit row-start-2 row-end-3";
+  const tunnelCss = "w-4 h-fit row-start-1 row-end-3";
   const dot = "bg-black rounded-full h-2 w-2 m-auto relative justify-self-end";
 
   const values = Array.from({ length: GF2Data.length - 1 }, (_, index) =>
@@ -43,11 +43,12 @@ function GF2MotionDot() {
   return (
     <>
       {values.map((_, index) => (
+        /* console.log(CalcNewQV(index)),
+          console.log(CalcNewQV2(index)), */
         <div
           key={"dot" + index}
-          className={
-            tunnelCss + " col-start-" + (index + 1) + " col-end-" + (index + 2)
-          }
+          className={tunnelCss}
+          style={{ gridColumnStart: index + 1 }}
         >
           <motion.div
             key={index}
