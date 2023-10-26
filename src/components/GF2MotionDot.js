@@ -1,7 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import GF2Context from "../context/GF2Context";
-import CalcNewQV2 from "../functions/CalcNewQV2";
+import { calcAirspeed2 } from "../functions/GF2Calculations";
+import {
+  Chart as ChartJS,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Scatter } from "react-chartjs-2";
+
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 function GF2MotionDot() {
   const { GF2Data } = useContext(GF2Context);
@@ -9,15 +20,16 @@ function GF2MotionDot() {
   const tunnelCss = "w-4 h-fit row-start-1 row-end-3";
   const dot = "bg-black rounded-full h-2 w-2 m-auto relative justify-self-end";
 
-  const values = Array.from({ length: GF2Data.length - 1 }, (_, index) =>
-    CalcNewQV2(index)
-  );
+  const values = Array.from({ length: GF2Data.length - 1 }, (_, index) => ({
+    x: index + 1,
+    y: Number(calcAirspeed2(index, GF2Data)),
+  }));
 
   const minY = 0; // minimum vertical value
   const maxY = 16; // maximum vertical value
   const minYAdjust = 0; // Minimum Y position
-  const maxYAdjust = 140; // Maximum Y position
-  const containerHeight = 150; // Set the desired height of the container div
+  const maxYAdjust = 280; // Maximum Y position
+  const containerHeight = 350; // Set the desired height of the container div
 
   const [position, setPosition] = useState([]);
   useEffect(() => {
@@ -40,29 +52,40 @@ function GF2MotionDot() {
     // eslint-disable-next-line
   }, [GF2Data, minY, maxY, minYAdjust, maxYAdjust, containerHeight]);
 
+  const dataset = {
+    datasets: [
+      {
+        label: "test",
+        data: values,
+        backgroundColor: "#000000",
+      },
+    ],
+  };
+
+  const chartOptions = {
+    plugins: {
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        enabled: false,
+      },
+      customCanvasBackgroundColor: {
+        color: "#00000000",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 80,
+      },
+    },
+  };
+
+  console.log(dataset);
   return (
     <>
-      {values.map((_, index) => (
-        /* console.log(CalcNewQV(index)),
-          console.log(CalcNewQV2(index)), */
-        <div
-          key={"dot" + index}
-          className={tunnelCss}
-          style={{ gridColumnStart: index + 1 }}
-        >
-          <motion.div
-            key={index}
-            className={"numeric-div " + dot}
-            initial={{ translateY: 0 }}
-            animate={{ translateY: position[index] }}
-            transition={{
-              duration: 1,
-              translateY: 10,
-              delay: index * 0.1,
-            }}
-          ></motion.div>
-        </div>
-      ))}
+      <Scatter data={dataset} options={chartOptions} />
     </>
   );
 }

@@ -30,13 +30,13 @@ const GF2StudentKV = ({ index }) => {
 
   const increaseValue = () => {
     // Increase the value by 0.1, or set it to 10 if it's already greater than or equal to 10
-    setValue(value < 10 ? parseFloat((value + 0.1).toFixed(2)) : 10);
+    setValue(value < 10 ? parseFloat(Number(value + 0.1).toFixed(2)) : 10);
     console.log("increased");
   };
 
   const decreaseValue = () => {
     // Decrease the value by 0.1, or set it to 1 if it's already less than or equal to 1
-    setValue(value > 1 ? parseFloat((value - 0.1).toFixed(2)) : 1);
+    setValue(value > 1 ? parseFloat(Number(value - 0.1).toFixed(2)) : 1);
     console.log("decreased");
   };
 

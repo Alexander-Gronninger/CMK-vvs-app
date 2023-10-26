@@ -35,6 +35,7 @@ const GF2Version = () => {
             return (
               <div
                 className={"row-start-1 row-end-2 h-fit w-fit flex flex-col"}
+                key={index}
               >
                 <GF2StudentKV tableCss={tableCss} index={index} />
               </div>
@@ -46,7 +47,11 @@ const GF2Version = () => {
             Beregnet lufthastighed [m/s]
           </p>
           {[...Array(GF2Data.length - 1)].map((_, index) => {
-            return <p key={index}>{calcAirspeed2(index, GF2Data)}</p>;
+            return (
+              <p className="text-center" key={index}>
+                {calcAirspeed2(index, GF2Data)}
+              </p>
+            );
           })}
 
           {/* Graphical section showing how close the student is to getting all valves airspeed(NewQV2) to be equal */}
@@ -72,7 +77,7 @@ const GF2Version = () => {
         {/* MainOpening, is a value between 0-1 */}
         <div className="flex">
           <GF2MainOpening />
-          <p className="w-fit m-2 ">
+          <p className="w-fit mx-2 my-auto h-fit">
             Juster ventilatorydelse (5-100%) til lufthastigheden ligger så tæt
             på {GF2Data[0].DesiredAirspeed} som muligt
           </p>
