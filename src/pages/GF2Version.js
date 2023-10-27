@@ -4,12 +4,13 @@ import { useContext } from "react";
 import GF2Context from "../context/GF2Context"; /* 
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2"; */
-import GF2MotionDot from "../components/GF2MotionDot"; /* 
-import { Link } from "react-router-dom"; */
+/* import { Link } from "react-router-dom"; */
 import GF2MainOpening from "../components/GF2MainOpening";
 import GF2StudentKV from "../templates/GF2StudentKV"; /* 
 import CalcNewQV from "../functions/CalcNewQV"; */
 import { calcAirspeed2 } from "../functions/GF2Calculations";
+import GF2ScatterChartAlt from "../components/GF2ScatterChartAlt";
+import GF2ScatterChart from "../components/GF2ScatterChart";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -64,7 +65,7 @@ const GF2Version = () => {
             />
             <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-[95%] gap-4 grid-cols-5 grid-rows-[13fr,3fr] m-2">
               {/* The component handling the dots, their positioning and animation */}
-              <GF2MotionDot />
+              <GF2ScatterChart />
               {/* The range students are meant to get the dots within */}
               <div className="row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end">
                 <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
@@ -82,6 +83,9 @@ const GF2Version = () => {
             på {GF2Data[0].DesiredAirspeed} som muligt
           </p>
         </div>
+
+        <p className="text-xl">ALTERNATIVET CHART</p>
+        <GF2ScatterChartAlt />
 
         {/* Table showing the calculated airspeed based on student KV input and other data */}
         {/*         <table className="my-4">

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import InputSelect from "../functions/InputSelect";
 import useEnterBlur from "../hooks/useEnterBlur";
 import GF2Context from "../context/GF2Context";
@@ -7,140 +7,84 @@ import InputButtonDecrease from "./InputButtonDecrease";
 
 const GF2MainOpening = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
-
   useEnterBlur();
 
-  // ------------------------------------- //
-  // Handling various inputs
-
   /* Opening input stuff */
-  const [desiredOpening, setDesiredOpening] =
-    useState(GF2Data[0] && GF2Data[0].MainOpening) || "";
+  const initialDesiredOpening = (GF2Data[0] && GF2Data[0].MainOpening) || 0.05; // Initialize as 5% (0.05)
+  const [desiredOpening, setDesiredOpening] = useState(initialDesiredOpening);
+  const [isInputActive, setIsInputActive] = useState(false);
 
-  /* the input needs to display different when it is blurred */
-  const [isPercentSelected, setIsPercentSelected] = useState(false);
+  const updateGF2Data = (newDesiredOpening) => {
+    setGF2Data((prevData) => {
+      let newData = [...prevData];
+      if (newData[0]) {
+        newData[0].MainOpening = newDesiredOpening.toFixed(2);
+      }
+      return newData;
+    });
+  };
 
   const handleDesiredOpeningChange = (e) => {
-    /* allows numbers and % for the input */
-    const isValidInput = /^[\d.%,]*$/.test(e.target.value);
-    if (
-      !isValidInput ||
-      Number(e.target.value) > 100 ||
-      Number(e.target.value) < 0
-    ) {
-      return console.log("only numbers between 0 and 100 are allowed");
+    const input = e.target.value;
+
+    // Validate and set the input
+    if (/^[\d.%,]*$/.test(input)) {
+      setIsInputActive(true);
+      // Remove any non-numeric characters and convert to a decimal value
+      const newDesiredOpening = parseFloat(input.replace(/[^0-9.]/g, "")) / 100;
+      setDesiredOpening(newDesiredOpening);
+      updateGF2Data(newDesiredOpening);
     }
-    if (e.target.value.length === 0) {
-      setDesiredOpening(0);
-      return;
-    }
-    setIsPercentSelected(true);
-    setDesiredOpening(e.target.value);
   };
 
-  const handleDesiredOpeningBlur = (e) => {
-    setIsPercentSelected(false);
-    /* Getting the new input, limiting it to between 0-100 and converting to decimal value */
-    const inputPercentage = e.target.value;
-    /* allows numbers and % for the input */
-    const isValidInput = /^[\d]*%?$/.test(inputPercentage);
-    if (!isValidInput) {
-      return console.log("only numbers are allowed");
-    }
+  const handleDesiredOpeningBlur = () => {
+    setIsInputActive(false);
 
-    /* prevents value being empty and resulting in displaying NaN */
-    if (inputPercentage.length < 2) {
-      setDesiredOpening(0);
-      return;
-    }
-
-    const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
-    const decimalValue = parseFloat(percentage) / 100;
-
-    /* Updating the inputs state, and updating the context to reflect the new value */
-    setDesiredOpening(decimalValue);
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      if (newData[0]) {
-        newData[0].MainOpening = Number(decimalValue);
-      }
-      return newData;
-    });
+    // Ensure the value is between 0.05 (5%) and 1 (100%)
+    const percentage = Math.min(Math.max(desiredOpening, 0.05), 1);
+    setDesiredOpening(percentage);
+    updateGF2Data(percentage);
   };
 
-  /* Converting the decimal value to displayed percentage */
   const decimalToPercentage = (decimalValue) => {
-    const percentage = (decimalValue * 100).toString();
-    return percentage.endsWith(".00")
-      ? percentage.slice(0, -3) + "%"
-      : percentage + "%";
+    const percentage = (decimalValue * 100).toFixed();
+    return percentage + "%";
   };
 
-  /* Functions passed to InputButtonIncrease & InputButtonDecrease */
-  /* Handles incremental increase & decrease respectively of mainOpening */
-
+  // Functions passed to InputButtonIncrease & InputButtonDecrease
   const increaseMainOpening = () => {
-    setDesiredOpening(
-      desiredOpening < 1 ? parseFloat((desiredOpening + 0.05).toFixed(2)) : 1
-    );
-
-    const inputPercentage = desiredOpening;
-
-    const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
-    const decimalValue = parseFloat(percentage) / 100;
-
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      if (newData[0]) {
-        newData[0].MainOpening = Number(decimalValue);
-      }
-      return newData;
-    });
+    const newDesiredOpening = Math.min(desiredOpening + 0.05, 1);
+    setDesiredOpening(newDesiredOpening);
+    updateGF2Data(newDesiredOpening);
   };
 
   const decreaseMainOpening = () => {
-    setDesiredOpening(
-      desiredOpening > 0.05
-        ? parseFloat((desiredOpening - 0.05).toFixed(2))
-        : 0.05
-    );
-
-    const inputPercentage = desiredOpening;
-
-    const percentage = Math.min(Math.max(parseFloat(inputPercentage), 0), 100);
-    const decimalValue = parseFloat(percentage) / 100;
-
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      if (newData[0]) {
-        newData[0].MainOpening = Number(decimalValue);
-      }
-      return newData;
-    });
+    const newDesiredOpening = Math.max(desiredOpening - 0.05, 0.05);
+    setDesiredOpening(newDesiredOpening);
+    updateGF2Data(newDesiredOpening);
   };
+  console.log(GF2Data[0].MainOpening);
 
   return (
-    <>
-      <div className="flex flex-col">
-        <InputButtonIncrease onClickFunction={increaseMainOpening} />
-        <input
-          inputMode="numeric"
-          key="desiredOpeningInput"
-          type="text"
-          id="desiredOpening"
-          className="max-w-[40px] min-w-[10px] text-center bg-gray-200 h-10"
-          value={
-            isPercentSelected
-              ? desiredOpening
-              : decimalToPercentage(desiredOpening)
-          }
-          onBlur={handleDesiredOpeningBlur}
-          onChange={handleDesiredOpeningChange}
-          onClick={InputSelect}
-        />
-        <InputButtonDecrease onClickFunction={decreaseMainOpening} />
-      </div>
-    </>
+    <div className="flex flex-col">
+      <InputButtonIncrease onClickFunction={increaseMainOpening} />
+      <input
+        inputMode="numeric"
+        key="desiredOpeningInput"
+        type="text"
+        id="desiredOpening"
+        className="max-w-[40px] min-w-[10px] text-center bg-gray-200 h-10"
+        value={
+          isInputActive
+            ? (desiredOpening * 100).toFixed() + "%"
+            : decimalToPercentage(desiredOpening)
+        }
+        onBlur={handleDesiredOpeningBlur}
+        onChange={handleDesiredOpeningChange}
+        onClick={InputSelect}
+      />
+      <InputButtonDecrease onClickFunction={decreaseMainOpening} />
+    </div>
   );
 };
 
