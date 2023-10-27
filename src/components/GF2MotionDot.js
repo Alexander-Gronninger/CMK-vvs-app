@@ -55,7 +55,7 @@ function GF2MotionDot() {
   const dataset = {
     datasets: [
       {
-        label: "test",
+        label: "",
         data: values,
         backgroundColor: "#000000",
       },
@@ -63,21 +63,32 @@ function GF2MotionDot() {
   };
 
   const chartOptions = {
+    aspectRatio: 1,
     plugins: {
       tooltip: {
         enabled: false,
       },
       legend: {
         enabled: false,
+        labels: { boxWidth: 0 },
       },
       customCanvasBackgroundColor: {
         color: "#00000000",
+      },
+      title: {
+        display: false,
       },
     },
     scales: {
       y: {
         beginAtZero: true,
         max: 80,
+        display: false,
+        grid: false,
+      },
+      x: {
+        display: false,
+        grid: false,
       },
     },
   };
@@ -85,7 +96,11 @@ function GF2MotionDot() {
   console.log(dataset);
   return (
     <>
-      <Scatter data={dataset} options={chartOptions} />
+      <Scatter
+        data={dataset}
+        options={chartOptions}
+        className="row-start-1 row-end-2 col-start-1 col-end-6"
+      />
     </>
   );
 }
