@@ -59,13 +59,16 @@ const GF2StudentKV = ({ index }) => {
         /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */
         /* onMouseUpFunction={handleMouseUpOnBtns} */
       />
-      <GF2StudentKVValueInput
-        key={"KVInput" + index}
-        id={"KVInput" + index}
-        index={index + " p-0 m-0"}
-        value={value}
-        setValue={setValue}
-      />
+      {/* <p className="w-10 h-8 m-0 text-center bg-gray-200">{value}</p> */}
+      <div className="py-4 border-black border-solid border-[1px] w-[40px]">
+        <GF2StudentKVValueInput
+          key={"KVInput" + index}
+          id={"KVInput" + index}
+          index={index + " p-0 m-0"}
+          value={value}
+          setValue={setValue}
+        />
+      </div>
       <InputButtonDecrease
         onClickFunction={decreaseValue}
         /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */

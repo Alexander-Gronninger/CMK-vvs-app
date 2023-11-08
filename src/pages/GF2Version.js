@@ -9,7 +9,6 @@ import GF2MainOpening from "../components/GF2MainOpening";
 import GF2StudentKV from "../templates/GF2StudentKV"; /* 
 import CalcNewQV from "../functions/CalcNewQV"; */
 import { calcAirspeed2 } from "../functions/GF2Calculations";
-import GF2ScatterChartAlt from "../components/GF2ScatterChartAlt";
 import GF2ScatterChart from "../components/GF2ScatterChart";
 
 const GF2Version = () => {
@@ -27,7 +26,7 @@ const GF2Version = () => {
         {/* H1 with some CSS rules applied */}
         <H1>
           Indstil kontrolventiler herunder (1-10 mm) indtil boldene ligger ud
-          for hindanden.
+          for hinanden.
         </H1>
 
         <div className="grid">
@@ -56,7 +55,7 @@ const GF2Version = () => {
           })}
 
           {/* Graphical section showing how close the student is to getting all valves airspeed(NewQV2) to be equal */}
-          <div className="grid gap-x-[20px] justify-around p-2 row-start-4 row-end-5 col-start-1 col-end-6">
+          <div className="grid gap-x-[20px] justify-around p-2 row-start-4 row-end-5 col-start-1 col-end-6 h-fit">
             {/* image which the dots are rendered on top of */}
             <img
               className="row-start-1 row-end-1 col-start-1 col-end-1 flex"
@@ -67,7 +66,7 @@ const GF2Version = () => {
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
               {/* The range students are meant to get the dots within */}
-              <div className="row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end">
+              <div className="row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end mb-14">
                 <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
                 <div className="border-b-[2px] w-full border-dotted border-black mt-8 h-0"></div>
               </div>
@@ -83,9 +82,6 @@ const GF2Version = () => {
             på {GF2Data[0].DesiredAirspeed} som muligt
           </p>
         </div>
-
-        <p className="text-xl">ALTERNATIVET CHART</p>
-        <GF2ScatterChartAlt />
 
         {/* Table showing the calculated airspeed based on student KV input and other data */}
         {/*         <table className="my-4">

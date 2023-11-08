@@ -16,10 +16,57 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 function GF2ScatterChart() {
   const { GF2Data } = useContext(GF2Context);
 
+  function findHighestYValue(data) {
+    if (!data || data.length === 0) {
+      return null; // Return null for an empty array or invalid data.
+    }
+
+    let highestY = data[0].y; // Initialize with the first value.
+
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].y > highestY) {
+        highestY = data[i].y; // Update highestY if a higher value is found.
+      }
+    }
+
+    return highestY;
+  }
+
+  /* Function for setting padding between screen widths of 320-375, based on roughly looking at what padding is needed to center the dots */
+  function calculatePadding(screenWidth) {
+    const minWidth = 320;
+    const maxWidth = 375;
+    const minValue = 18;
+    const maxValue = 23;
+
+    if (screenWidth <= minWidth) {
+      return minValue;
+    }
+
+    if (screenWidth >= maxWidth) {
+      return maxValue;
+    }
+
+    // Calculate the interpolation factor
+    const factor = (screenWidth - minWidth) / (maxWidth - minWidth);
+
+    // Interpolate between minValue and maxValue
+    const interpolatedValue = minValue + factor * (maxValue - minValue);
+
+    return interpolatedValue;
+  }
+
+  let screenWidth = window.innerWidth;
+  let padding = calculatePadding(screenWidth);
+
+  /* Chart specific  */
+
   const values = Array.from({ length: GF2Data.length - 1 }, (_, index) => ({
     x: index + 1,
     y: Number(calcAirspeed2(index, GF2Data)),
   }));
+
+  const highestY = findHighestYValue(values);
 
   const dataset = {
     datasets: [
@@ -32,7 +79,8 @@ function GF2ScatterChart() {
   };
 
   const chartOptions = {
-    aspectRatio: 1,
+    maintainAspectRatio: false,
+    layout: { padding: padding },
     plugins: {
       tooltip: {
         enabled: false,

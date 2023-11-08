@@ -63,7 +63,6 @@ const GF2MainOpening = () => {
     setDesiredOpening(newDesiredOpening);
     updateGF2Data(newDesiredOpening);
   };
-  console.log(GF2Data[0].MainOpening);
 
   return (
     <div className="flex flex-col">
