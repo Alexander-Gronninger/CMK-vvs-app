@@ -5,7 +5,7 @@ import GF2Context from "../context/GF2Context";
 import InputButtonIncrease from "./InputButtonIncrease";
 import InputButtonDecrease from "./InputButtonDecrease";
 
-const GF2MainOpening = () => {
+const GF2MainOpeningInput = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
   useEnterBlur();
 
@@ -87,4 +87,4 @@ const GF2MainOpening = () => {
   );
 };
 
-export default GF2MainOpening;
+export default GF2MainOpeningInput;

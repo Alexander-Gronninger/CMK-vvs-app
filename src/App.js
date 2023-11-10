@@ -9,6 +9,7 @@ import Ref from "./pages/Ref";
 import Version3Nav from "./templates/Version3Nav";
 import GF2Version from "./pages/GF2Version";
 import GF2Nav from "./templates/GF2Nav";
+import GF2Teacher from "./pages/GF2Teacher";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="export" element={<ExportSettings />} key="Export" />
           <Route path="ref" element={<Ref />} key="Ref" />
           <Route path="" element={<GF2Version />} key="GF2Version" />
+          <Route path="teacher" element={<GF2Teacher />} key="GF2Teacher" />
         </Route>
         <Route path="v3/*" element={<Version3Nav />} key="Version3">
           <Route

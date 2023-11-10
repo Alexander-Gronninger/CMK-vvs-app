@@ -5,11 +5,12 @@ import GF2Context from "../context/GF2Context"; /*
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2"; */
 /* import { Link } from "react-router-dom"; */
-import GF2MainOpening from "../components/GF2MainOpening";
+import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
 import GF2StudentKV from "../templates/GF2StudentKV"; /* 
 import CalcNewQV from "../functions/CalcNewQV"; */
 import { calcAirspeed2 } from "../functions/GF2Calculations";
 import GF2ScatterChart from "../components/GF2ScatterChart";
+import { Link } from "react-router-dom";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -76,12 +77,18 @@ const GF2Version = () => {
 
         {/* MainOpening, is a value between 0-1 */}
         <div className="flex">
-          <GF2MainOpening />
+          <GF2MainOpeningInput />
           <p className="w-fit mx-2 my-auto h-fit">
             Juster ventilatorydelse (5-100%) til lufthastigheden ligger så tæt
             på {GF2Data[0].DesiredAirspeed} som muligt
           </p>
         </div>
+        <Link
+          className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center my-8"
+          to="/GF2/Teacher"
+        >
+          Lærer side
+        </Link>
 
         {/* Table showing the calculated airspeed based on student KV input and other data */}
         {/*         <table className="my-4">
