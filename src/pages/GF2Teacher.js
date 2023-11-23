@@ -27,7 +27,7 @@ const GF2Teacher = () => {
           efterfølgende scanner Qr-koden eller følge linket forneden, åbner de
           opgaven med dine indstillinger.
         </H1>
-        <div className="m-4 grid gap-4">
+        <div className="grid gap-4">
           <div className="flex">
             <p className="max-w-[65%]">
               1. Indstil kontrolventilerne (KV), så de alle har samme værdi
@@ -51,14 +51,14 @@ const GF2Teacher = () => {
               );
             })}
           </div>
-          <div className="flex gap-4">
-            <p className="max-w-70% m-auto">
+          <div className="flex gap-4 w-full">
+            <p className="max-w-70% my-auto">
               3. Indstil ventilatorydelse (5-100%)
             </p>
             <GF2MainOpeningInput />
           </div>
-          <div className="flex gap-4">
-            <p className="max-w-70% m-auto">
+          <div className="flex gap-4 w-full">
+            <p className="max-w-70% my-auto">
               4. Indstil den ønskede lufthastighed (5-25 m/s)
               <GF2DesiredAirspeedInput />
             </p>

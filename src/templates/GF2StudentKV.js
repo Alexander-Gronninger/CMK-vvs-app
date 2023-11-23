@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput";
+/* import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput"; */
 import GF2Context from "../context/GF2Context";
 import InputButtonIncrease from "../components/InputButtonIncrease";
 import InputButtonDecrease from "../components/InputButtonDecrease";
@@ -26,53 +26,65 @@ const GF2StudentKV = ({ index }) => {
     });
   }
 
-  /*   let updateInterval; */
+  /* Amount of increase / decrease for buttons */
+  const updateAmount = 0.1;
 
   const increaseValue = () => {
-    // Increase the value by 0.1, or set it to 10 if it's already greater than or equal to 10
-    setValue(value < 10 ? parseFloat(Number(value + 0.1).toFixed(2)) : 10);
-    console.log("increased");
+    setValue((prevValue) => {
+      // Increase the value by updateAmount, or sets it to 10 if it's already greater than or equal to 10
+      const newValue =
+        prevValue < 10
+          ? parseFloat(Number(prevValue + updateAmount).toFixed(2))
+          : 10;
+      console.log("increased");
+      return newValue;
+    });
   };
 
   const decreaseValue = () => {
-    // Decrease the value by 0.1, or set it to 1 if it's already less than or equal to 1
-    setValue(value > 1 ? parseFloat(Number(value - 0.1).toFixed(2)) : 1);
-    console.log("decreased");
+    setValue((prevValue) => {
+      // Decrease the value by updateAmount, or sets it to 1 if it's already less than or equal to 1
+      const newValue =
+        prevValue > 1
+          ? parseFloat(Number(prevValue - updateAmount).toFixed(2))
+          : 1;
+      console.log("decreased");
+      return newValue;
+    });
   };
 
-  /*   const handleMouseDownOnIncreaseBtn = () => {
-    updateInterval = setInterval(increaseValue, 100);
-  };
-
-  const handleMouseDownOnDecreaseBtn = () => {
-    updateInterval = setInterval(decreaseValue, 100);
-  };
-
-  const handleMouseUpOnBtns = () => {
-    clearInterval(updateInterval);
-  }; */
+  /* Update interval for buttons when held, in milliseconds */
+  const interval = 100;
 
   return (
     <>
       <InputButtonIncrease
         onClickFunction={increaseValue}
-        /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */
-        /* onMouseUpFunction={handleMouseUpOnBtns} */
+        interval={interval}
+        updateAmount={updateAmount}
       />
       {/* <p className="w-10 h-8 m-0 text-center bg-gray-200">{value}</p> */}
-      <div className="py-4 border-black border-solid border-[1px] w-[40px]">
-        <GF2StudentKVValueInput
+      <div className="border-black border-t-[0px] border-b-[0px] border-solid border-[1px] w-[38px]">
+        <p
+          className="text-center"
+          key={"KVInput" + index}
+          id={"KVInput" + index}
+        >
+          {value}
+        </p>
+        {/* Uncomment to get an input field */}
+        {/* <GF2StudentKVValueInput
           key={"KVInput" + index}
           id={"KVInput" + index}
           index={index + " p-0 m-0"}
           value={value}
           setValue={setValue}
-        />
+        /> */}
       </div>
       <InputButtonDecrease
         onClickFunction={decreaseValue}
-        /* onMouseDownFunction={handleMouseDownOnIncreaseBtn} */
-        /* onMouseUpFunction={handleMouseUpOnBtns} */
+        interval={interval}
+        updateAmount={updateAmount}
       />
     </>
   );

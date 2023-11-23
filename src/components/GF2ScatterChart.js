@@ -110,6 +110,12 @@ function GF2ScatterChart() {
         grid: false,
       },
     },
+    elements: {
+      point: {
+        radius: 15,
+        backgroundColor: "#fff",
+      },
+    },
   };
 
   return (

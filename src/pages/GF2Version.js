@@ -80,7 +80,7 @@ const GF2Version = () => {
           <GF2MainOpeningInput />
           <p className="w-fit mx-2 my-auto h-fit">
             Juster ventilatorydelse (5-100%) til lufthastigheden ligger så tæt
-            på {GF2Data[0].DesiredAirspeed} som muligt
+            på {GF2Data[0].DesiredAirspeed} [m/s] som muligt
           </p>
         </div>
         <Link

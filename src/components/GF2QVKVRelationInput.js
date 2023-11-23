@@ -10,6 +10,8 @@ This component handles changing the GF2 versions KVValue from GF2Context
 const GF2QVKVRelationInput = ({ index, id }) => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
+  const maxInput = 5;
+  const minInput = 1;
   /* Blurs the input when user presses enter or done on iphone */
   useEnterBlur();
 
@@ -27,6 +29,16 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     /* Guard clause making sure input is a number */
     if (!isValidInput(e.target.value)) {
       return console.log("only numbers are allowed");
+    }
+
+    /* Guard clauses for keeping input between the allowed range */
+    if (e.target.value < minInput) {
+      setInput(minInput);
+      return;
+    }
+    if (e.target.value > maxInput) {
+      setInput(maxInput);
+      return;
     }
 
     /* Guard clause making sure if user accidentally leaves input empty, it does not remain so */
