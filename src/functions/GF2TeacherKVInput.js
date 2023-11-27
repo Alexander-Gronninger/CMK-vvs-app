@@ -47,6 +47,13 @@ const GF2TeacherKVInput = () => {
       if (newData[0]) {
         newData[0].AllKV = input;
       }
+
+      newData.forEach((data) => {
+        if (data.StudentKVOpening) {
+          data.StudentKVOpening = Number(input);
+        }
+      });
+
       return newData;
     });
   };

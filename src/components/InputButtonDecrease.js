@@ -35,6 +35,7 @@ const InputButtonDecrease = ({ onClickFunction, interval }) => {
       className="bg-decreaseKV h-10 w-10 [clip-path:polygon(50%_50%,0%_0%,100%_0%)] p-0 m-0"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
     ></button>
   );
 };

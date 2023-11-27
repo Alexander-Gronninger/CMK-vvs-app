@@ -75,7 +75,8 @@ function GF2ScatterChart() {
       {
         label: "",
         data: values,
-        backgroundColor: "#000000",
+        pointBackgroundColor: "#fff",
+        pointBorderColor: "#00000050",
       },
     ],
   };
@@ -113,7 +114,7 @@ function GF2ScatterChart() {
     elements: {
       point: {
         radius: 15,
-        backgroundColor: "#fff",
+        borderWidth: 4,
       },
     },
   };

@@ -24,7 +24,7 @@ const GF2Teacher = () => {
         {/* H1 with some CSS rules applied */}
         <H1>
           Her indstiller du forudsætningerne for opgaven. Når eleverne
-          efterfølgende scanner Qr-koden eller følge linket forneden, åbner de
+          efterfølgende scanner QR-koden eller følger linket forneden, åbner de
           opgaven med dine indstillinger.
         </H1>
         <div className="grid gap-4">
