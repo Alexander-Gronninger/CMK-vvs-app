@@ -36,6 +36,9 @@ const InputButtonDecrease = ({ onClickFunction, interval }) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleMouseDown}
+      onTouchEnd={handleMouseUp}
+      onTouchMove={handleMouseUp}
     ></button>
   );
 };

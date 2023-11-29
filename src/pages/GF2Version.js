@@ -50,7 +50,9 @@ const GF2Version = () => {
           {[...Array(GF2Data.length - 1)].map((_, index) => {
             return (
               <p className="text-center" key={index}>
-                {calcAirspeed2(index, GF2Data)}
+                {(
+                  calcAirspeed2(index, GF2Data) * GF2Data[0].MainOpening
+                ).toFixed(2)}
               </p>
             );
           })}

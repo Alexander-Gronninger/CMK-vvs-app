@@ -8,6 +8,10 @@ import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
 import GF2DesiredAirspeedInput from "../components/GF2DesiredAirspeedInput";
 import QRLink from "../components/GF2TeacherQRLink";
 import { Link } from "react-router-dom";
+import {
+  calcCalculatedAdjustedKV,
+  calcCalculatedFanPerformance,
+} from "../functions/GF2Calculations";
 
 const GF2Teacher = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -58,12 +62,29 @@ const GF2Teacher = () => {
             <GF2MainOpeningInput />
           </div>
           <div className="flex gap-4 w-full">
-            <p className="max-w-70% my-auto">
+            <p className="my-auto">
               4. Indstil den ønskede lufthastighed (5-25 m/s)
               <GF2DesiredAirspeedInput />
             </p>
           </div>
           <QRLink />
+          <div className="w-full">
+            <p>Facit</p>
+            <p>{(calcCalculatedFanPerformance(GF2Data) * 100).toFixed(2)}%</p>
+            <div className="flex justify-around">
+              {[...Array(GF2Data.length - 1)].map((_, index) => {
+                return (
+                  <p
+                    className=""
+                    id={"CalculatedAdjustedKV" + index}
+                    key={"CalculatedAdjustedKV" + index}
+                  >
+                    {calcCalculatedAdjustedKV(index, GF2Data).toFixed(1)}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
           <Link
             className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center my-8"
             to="/GF2"

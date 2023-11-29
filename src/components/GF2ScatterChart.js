@@ -17,7 +17,7 @@ function GF2ScatterChart() {
   const { GF2Data } = useContext(GF2Context);
 
   /* Code for implementing dynamic max to the chart, if desired - simply uncomment and set a variable to the result of this function as the maxy in the chart options */
-  /*  function findHighestYValue(data) {
+  function findHighestYValue(data) {
     if (!data || data.length === 0) {
       return null; // Return null for an empty array or invalid data.
     }
@@ -31,7 +31,7 @@ function GF2ScatterChart() {
     }
 
     return highestY;
-  } */
+  }
 
   /* Function for setting padding between screen widths of 320-375, based on roughly looking at what padding is needed to center the dots */
   function calculatePadding(screenWidth) {
@@ -64,7 +64,7 @@ function GF2ScatterChart() {
 
   const values = Array.from({ length: GF2Data.length - 1 }, (_, index) => ({
     x: index + 1,
-    y: Number(calcAirspeed2(index, GF2Data)),
+    y: Number(calcAirspeed2(index, GF2Data) * GF2Data[0].MainOpening),
   }));
 
   /* Variable for dynamic max y of chart, uncomment and put highestY as the max in chart options.scales.y.max */
@@ -102,7 +102,7 @@ function GF2ScatterChart() {
     scales: {
       y: {
         beginAtZero: true,
-        max: 80,
+        max: findHighestYValue(values) + 20,
         display: false,
         grid: false,
       },
