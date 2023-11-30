@@ -51,7 +51,7 @@ const GF2Version = () => {
             return (
               <p className="text-center" key={index}>
                 {(
-                  calcAirspeed2(index, GF2Data) * GF2Data[0].MainOpening
+                  calcAirspeed2(GF2Data, index) * GF2Data[0].MainOpening
                 ).toFixed(2)}
               </p>
             );
@@ -68,11 +68,6 @@ const GF2Version = () => {
             <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-[95%] gap-4 grid-cols-5 grid-rows-[13fr,3fr] m-2">
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
-              {/* The range students are meant to get the dots within */}
-              <div className="row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end mb-14">
-                <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
-                <div className="border-b-[2px] w-full border-dotted border-black mt-8 h-0"></div>
-              </div>
             </div>
           </div>
         </div>

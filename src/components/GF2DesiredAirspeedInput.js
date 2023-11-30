@@ -49,28 +49,30 @@ const GF2DesiredAirspeedInput = () => {
   let inputElement = useRef(null);
 
   return (
-    <div className="grid w-fit">
-      <input
-        inputMode="numeric"
-        key="desiredOpeningInput"
-        type="text"
-        id="desiredOpening"
-        ref={inputElement}
-        className="max-w-[70px] min-w-[10px] text-center bg-gray-200 h-10 pr-10 pl-2 col-start-1 col-end-2 row-start-1 row-end-2"
-        value={input}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        onClick={InputSelect}
-      />
-      <p
-        className="col-start-1 col-end-2 row-start-1 row-end-2 ml-auto leading-10 mr-2"
-        onClick={() => {
-          inputElement.current.focus();
-        }}
-      >
-        m/s
-      </p>
-    </div>
+    <>
+      <div className="grid w-fit">
+        <input
+          inputMode="numeric"
+          key="desiredOpeningInput"
+          type="text"
+          id="desiredOpening"
+          ref={inputElement}
+          className="max-w-[70px] min-w-[10px] text-center bg-gray-200 h-10 pr-10 pl-2 col-start-1 col-end-2 row-start-1 row-end-2"
+          value={input}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onClick={InputSelect}
+        />
+        <p
+          className="col-start-1 col-end-2 row-start-1 row-end-2 ml-auto leading-10 mr-2"
+          onClick={() => {
+            inputElement.current.focus();
+          }}
+        >
+          m/s
+        </p>
+      </div>
+    </>
   );
 };
 

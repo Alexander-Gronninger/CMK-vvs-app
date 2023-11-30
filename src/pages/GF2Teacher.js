@@ -61,11 +61,11 @@ const GF2Teacher = () => {
             </p>
             <GF2MainOpeningInput />
           </div>
-          <div className="flex gap-4 w-full">
+          <div className="flex gap-2 w-full">
             <p className="my-auto">
               4. Indstil den ønskede lufthastighed (5-25 m/s)
-              <GF2DesiredAirspeedInput />
             </p>
+            <GF2DesiredAirspeedInput />
           </div>
           <QRLink />
           <div className="w-full">
@@ -79,7 +79,7 @@ const GF2Teacher = () => {
                     id={"CalculatedAdjustedKV" + index}
                     key={"CalculatedAdjustedKV" + index}
                   >
-                    {calcCalculatedAdjustedKV(index, GF2Data).toFixed(1)}
+                    {calcCalculatedAdjustedKV(GF2Data, index).toFixed(1)}
                   </p>
                 );
               })}
