@@ -67,7 +67,12 @@ function GF2ScatterChart() {
 
   const chartOptions = {
     maintainAspectRatio: false,
-    layout: { padding: padding },
+    layout: {
+      padding: {
+        left: padding,
+        right: padding,
+      },
+    },
     plugins: {
       tooltip: {
         enabled: false,
@@ -103,6 +108,8 @@ function GF2ScatterChart() {
     },
   };
 
+  const AssumedChartTopMargin = 20;
+
   return (
     <>
       <Scatter
@@ -111,8 +118,11 @@ function GF2ScatterChart() {
         options={chartOptions}
         className="row-start-1 row-end-2 col-start-1 col-end-6"
       />
-      {/* The range students are meant to get the dots within */}
-      <GF2ChartLines chartHeight={chartRef?.current?.height} />
+      {/* The range students are meant to get the dots within, minus the seeming padding the chart has at the top */}
+      {/* This padding was eyeballed by removing CalcMaxYValues additionalValue so the balls were at the top, and guessing how much height was between them and the element height */}
+      <GF2ChartLines
+        chartHeight={chartRef?.current?.height - AssumedChartTopMargin}
+      />
     </>
   );
 }

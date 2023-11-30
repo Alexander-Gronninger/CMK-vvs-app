@@ -32,15 +32,13 @@ const GF2ChartLines = ({ chartHeight }) => {
 
   const margin = percentage * chartHeight;
 
-  console.log((percentage * 100).toFixed(2) + "%");
-
   return (
     <div
       className={`row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end`}
       style={{ marginBottom: `${margin - 15}px` }}
     >
       <div className="border-b-[2px] w-full border-dotted border-black h-0"></div>
-      <div className="border-b-[2px] w-full border-dotted border-black mt-10 h-0"></div>
+      <div className="border-b-[2px] w-full border-dotted border-black mt-12     h-0"></div>
     </div>
   );
 };
