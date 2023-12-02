@@ -66,7 +66,7 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     <>
       <input
         className="max-w-[30px] m-0 p-0 text-center bg-gray-200"
-        key={"KVInput" + index}
+        key={"QVKVInput" + index}
         /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
         id={id + (index + 1)}
         type="numeric"

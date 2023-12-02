@@ -61,8 +61,8 @@ const GF2Teacher = () => {
             </p>
             <GF2MainOpeningInput />
           </div>
-          <div className="flex gap-2 w-full">
-            <p className="my-auto">
+          <div className="flex gap-4 w-full">
+            <p className="my-auto w-[70%]">
               4. Indstil den ønskede lufthastighed (5-25 m/s)
             </p>
             <GF2DesiredAirspeedInput />

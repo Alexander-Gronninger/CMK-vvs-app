@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 /* import InputSelect from "../functions/InputSelect"; */
 import useEnterBlur from "../hooks/useEnterBlur";
 import GF2Context from "../context/GF2Context";
@@ -14,15 +14,18 @@ const GF2MainOpeningInput = () => {
   const [desiredOpening, setDesiredOpening] = useState(initialDesiredOpening);
   /*   const [isInputActive, setIsInputActive] = useState(false); */
 
-  const updateGF2Data = (newDesiredOpening) => {
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      if (newData[0]) {
-        newData[0].MainOpening = newDesiredOpening.toFixed(2);
-      }
-      return newData;
-    });
-  };
+  const updateGF2Data = useCallback(
+    (newDesiredOpening) => {
+      setGF2Data((prevData) => {
+        let newData = [...prevData];
+        if (newData[0]) {
+          newData[0].MainOpening = newDesiredOpening;
+        }
+        return newData;
+      });
+    },
+    [setGF2Data]
+  );
 
   /*   const handleDesiredOpeningChange = (e) => {
     const input = e.target.value;
@@ -58,7 +61,7 @@ const GF2MainOpeningInput = () => {
   const increaseMainOpening = () => {
     setDesiredOpening((prevDesiredOpening) => {
       const newDesiredOpening = Math.min(prevDesiredOpening + updateAmount, 1);
-      updateGF2Data(newDesiredOpening);
+      /* updateGF2Data(newDesiredOpening); */
       return newDesiredOpening;
     });
   };
@@ -69,10 +72,14 @@ const GF2MainOpeningInput = () => {
         prevDesiredOpening - updateAmount,
         0.05
       );
-      updateGF2Data(newDesiredOpening);
+      /* updateGF2Data(newDesiredOpening); */
       return newDesiredOpening;
     });
   };
+
+  useEffect(() => {
+    updateGF2Data(desiredOpening);
+  }, [desiredOpening, updateGF2Data]);
 
   return (
     <div className="flex flex-col">

@@ -64,7 +64,7 @@ const GF2StudentKV = ({ index }) => {
         updateAmount={updateAmount}
       />
       {/* <p className="w-10 h-8 m-0 text-center bg-gray-200">{value}</p> */}
-      <div className="border-black border-t-[0px] border-b-[0px] border-solid border-[1px] w-[38px]">
+      <div className="w-full h-[50px] flex place-content-center place-items-center">
         <p
           className="text-center"
           key={"KVInput" + index}

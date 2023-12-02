@@ -24,7 +24,7 @@ function GF2ScatterChart() {
   function calculatePadding(screenWidth) {
     const minWidth = 320;
     const maxWidth = 375;
-    const minValue = 18;
+    const minValue = 15;
     const maxValue = 23;
 
     if (screenWidth <= minWidth) {
@@ -104,6 +104,7 @@ function GF2ScatterChart() {
       point: {
         radius: 15,
         borderWidth: 4,
+        hoverRadius: 15,
       },
     },
   };
