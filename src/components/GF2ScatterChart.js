@@ -24,7 +24,7 @@ function GF2ScatterChart() {
   function calculatePadding(screenWidth) {
     const minWidth = 320;
     const maxWidth = 375;
-    const minValue = 15;
+    const minValue = 10;
     const maxValue = 23;
 
     if (screenWidth <= minWidth) {

@@ -84,7 +84,9 @@ const GF2MainOpeningInput = () => {
   return (
     <div className="flex flex-col">
       <InputButtonIncrease onClickFunction={increaseMainOpening} />
-      <p className="text-center">{decimalToPercentage(desiredOpening)}</p>
+      <div className="h-[50px] flex place-content-center place-items-center">
+        <p className="text-center ">{decimalToPercentage(desiredOpening)}</p>
+      </div>
 
       {/* Uncomment this and associated functions to restore input functionality */}
       {/* <input
