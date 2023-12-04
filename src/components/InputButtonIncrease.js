@@ -5,7 +5,7 @@ const InputButtonIncrease = ({ onClickFunction, interval }) => {
 
   const handleMouseDown = () => {
     // Trigger the click function immediately
-
+    onClickFunction();
     // Set up the interval to repeat the click function every 200 milliseconds
     const id = setInterval(() => {
       onClickFunction();
