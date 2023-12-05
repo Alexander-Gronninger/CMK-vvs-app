@@ -1,6 +1,6 @@
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import GF2Context from "../context/GF2Context";
 import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
 import GF2StudentKV from "../templates/GF2StudentKV";
@@ -11,9 +11,6 @@ import GF2ChartLines from "../components/GF2ChartLines";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
-
-  /* Referencing the container div for chart & chart lines */
-  const chartContainerRef = useRef(null);
 
   return (
     <>
@@ -62,19 +59,10 @@ const GF2Version = () => {
               src="../images/glasrør.png"
               alt=""
             />
-            <div
-              ref={chartContainerRef}
-              className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]"
-            >
+            <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]">
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
-              <GF2ChartLines
-                /* chartHeight is used to determine positioning of the lines, its parent container height - assumed top margin on GF2ScatterChart */
-                chartHeight={
-                  chartContainerRef.current &&
-                  chartContainerRef.current?.offsetHeight
-                }
-              />
+              <GF2ChartLines />
             </div>
           </div>
         </div>

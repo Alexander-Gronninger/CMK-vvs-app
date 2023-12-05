@@ -1,16 +1,14 @@
 import CalcMaxYValue from "../functions/CalcMaxYValue";
 import CalcChartData from "../functions/CalcChartData";
 import GF2Context from "../context/GF2Context";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 /* import {
   calcAirspeed2,
   calcCalculatedAdjustedKV,
 } from "../functions/GF2Calculations"; */
 
-const GF2ChartLines = ({ chartHeight }) => {
+const GF2ChartLines = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
-
-  console.log(chartHeight);
 
   /* the charts max Y value, CalcMaxYValue accepts data structure presented by CalcChartData */
   const maxYValue = CalcMaxYValue(CalcChartData());
@@ -33,19 +31,34 @@ const GF2ChartLines = ({ chartHeight }) => {
   /* const percentage = CheatAirspeeds[0] / maxYValue; */
 
   /* Uncomment above and comment below to have dotted lines be dynamic, currently it's set to always indicated DesiredAirspeed */
-  console.log(GF2Data[0].DesiredAirspeed);
-  console.log(maxYValue);
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
+  const containerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState();
+
+  /*  console.log(containerHeight); */
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(containerRef);
+      console.log(containerRef.current.clientHeight);
+      console.log(containerRef.current.scrollHeight);
+      console.log(containerRef.current.offsetHeight);
+
+      setContainerHeight(containerRef.current.clientHeight);
+    }, 100);
+  }, []);
+
   /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
-  const margin = percentage * (chartHeight - 20);
+  const margin = percentage * (containerHeight - 20);
 
   /*  */
   setGF2Data(GF2Data);
 
   return (
     <div
-      className={`row-start-1 row-end-2 h-100% w-full col-start-1 col-end-6 flex flex-col justify-end`}
+      ref={containerRef}
+      className={`row-start-1 row-end-2 h-full w-full col-start-1 col-end-6 flex flex-col justify-end`}
       style={{ marginBottom: `${margin - 22}px` }}
     >
       <div className="border-b-[2px] w-full border-dotted border-black h-0"></div>
