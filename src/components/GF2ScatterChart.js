@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import GF2Context from "../context/GF2Context";
 import {
   Chart as ChartJS,
@@ -112,6 +112,20 @@ function GF2ScatterChart() {
 
   const AssumedChartTopMargin = 20;
 
+  const [chartHeight, setChartHeight] = useState(null);
+
+  useEffect(() => {
+    const updateChartHeight = () => {
+      // Assuming chartRef.currentChart.height is the correct property to get the height
+      setChartHeight(chartRef?.current?.height - AssumedChartTopMargin);
+    };
+
+    // Call the update function immediately
+    updateChartHeight();
+  }, [chartRef]);
+
+  /* console.log(chartHeight); */
+
   return (
     <>
       <Scatter
@@ -122,9 +136,7 @@ function GF2ScatterChart() {
       />
       {/* The range students are meant to get the dots within, minus the seeming padding the chart has at the top */}
       {/* This padding was eyeballed by removing CalcMaxYValues additionalValue so the balls were at the top, and guessing how much height was between them and the element height */}
-      <GF2ChartLines
-        chartHeight={chartRef?.current?.height - AssumedChartTopMargin}
-      />
+      {chartRef?.current && <GF2ChartLines chartHeight={chartHeight} />}
     </>
   );
 }
