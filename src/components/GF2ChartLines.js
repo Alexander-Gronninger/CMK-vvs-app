@@ -33,10 +33,8 @@ const GF2ChartLines = ({ chartHeight }) => {
   /* Uncomment above and comment below to have dotted lines be dynamic, currently it's set to always indicated DesiredAirspeed */
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
-  const margin = percentage * chartHeight;
-  console.log(chartHeight);
-  console.log(percentage);
-  console.log(margin);
+  /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
+  const margin = percentage * (chartHeight - 20);
 
   return (
     <div

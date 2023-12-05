@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import GF2Context from "../context/GF2Context";
 import {
   Chart as ChartJS,
@@ -21,7 +21,7 @@ function GF2ScatterChart() {
   function calculatePadding(screenWidth) {
     const minWidth = 320;
     const maxWidth = 375;
-    const minValue = 10;
+    const minValue = 0;
     const maxValue = 23;
 
     if (screenWidth <= minWidth) {
@@ -47,6 +47,8 @@ function GF2ScatterChart() {
   /* Chart specific  */
 
   const chartData = CalcChartData(GF2Data);
+
+  const refTest = useRef(null);
 
   /* Variable for dynamic max y of chart, uncomment and put highestY as the max in chart options.scales.y.max */
   /* const highestY = findHighestYValue(values); */
@@ -107,10 +109,12 @@ function GF2ScatterChart() {
     },
   };
 
+  /* console.log(refTest?.current); */
   return (
     <>
       <p>{screenWidth}</p>
       <Scatter
+        ref={refTest}
         data={dataset}
         options={chartOptions}
         className="row-start-1 row-end-2 col-start-1 col-end-6"

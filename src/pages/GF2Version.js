@@ -1,13 +1,9 @@
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { useContext, useRef } from "react";
-import GF2Context from "../context/GF2Context"; /* 
-import GF2TeacherTable from "../templates/GF2TeacherTable";
-import CalcNewQV2 from "../functions/CalcNewQV2"; */
-/* import { Link } from "react-router-dom"; */
+import GF2Context from "../context/GF2Context";
 import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
-import GF2StudentKV from "../templates/GF2StudentKV"; /* 
-import CalcNewQV from "../functions/CalcNewQV"; */
+import GF2StudentKV from "../templates/GF2StudentKV";
 import { calcAirspeed2 } from "../functions/GF2Calculations";
 import GF2ScatterChart from "../components/GF2ScatterChart";
 import { Link } from "react-router-dom";
@@ -16,14 +12,8 @@ import GF2ChartLines from "../components/GF2ChartLines";
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
 
-  /* Css rules used by this components <th> elements, GF2KVValueInput(child component) and GF2TeacherTable(child component) <th> and <td> elements */
-  const tableCss = "text-center";
-
   /* Referencing the container div for chart & chart lines */
   const chartContainerRef = useRef(null);
-
-  /* The chart has a margin at the top, this is roughly how much that margin is */
-  const AssumedChartTopMargin = 20;
 
   return (
     <>
@@ -45,7 +35,7 @@ const GF2Version = () => {
                 className={"row-start-1 row-end-2 h-fit w-fit flex flex-col"}
                 key={index}
               >
-                <GF2StudentKV tableCss={tableCss} index={index} />
+                <GF2StudentKV index={index} />
               </div>
             );
           })}
@@ -81,8 +71,8 @@ const GF2Version = () => {
               <GF2ChartLines
                 /* chartHeight is used to determine positioning of the lines, its parent container height - assumed top margin on GF2ScatterChart */
                 chartHeight={
-                  chartContainerRef?.current?.offsetHeight -
-                  AssumedChartTopMargin
+                  chartContainerRef.current &&
+                  chartContainerRef.current?.offsetHeight
                 }
               />
             </div>
