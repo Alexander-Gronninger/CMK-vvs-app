@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import SaveElementAsImage from "./SaveElementAsImage";
 import GF2Context from "../context/GF2Context";
@@ -58,6 +57,9 @@ const GF2TeacherQRLink = () => {
     };
   }
 
+  /* check if device is phone, and then disable print function */
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
   return (
     <>
       <div className="grid gap-2">
@@ -85,18 +87,15 @@ const GF2TeacherQRLink = () => {
         >
           Download QR billede
         </button>
-        <button
-          className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2"
-          onClick={handlePrint}
-        >
-          Print QR kode
-        </button>
-        <Link
-          className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center"
-          to={linkCreation}
-        >
-          Klik for at teste linket
-        </Link>
+        {/* If mobile then dont show print button, as phone browsers dont support it */}
+        {!isMobile && (
+          <button
+            className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2"
+            onClick={handlePrint}
+          >
+            Print QR kode
+          </button>
+        )}
       </div>
     </>
   );

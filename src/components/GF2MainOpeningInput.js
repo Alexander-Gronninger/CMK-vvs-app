@@ -82,9 +82,9 @@ const GF2MainOpeningInput = () => {
   }, [desiredOpening, updateGF2Data]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col select-none">
       <InputButtonIncrease onClickFunction={increaseMainOpening} />
-      <div className="h-[50px] flex place-content-center place-items-center">
+      <div className="h-[50px] flex place-content-center place-items-center ">
         <p className="text-center ">{decimalToPercentage(desiredOpening)}</p>
       </div>
 

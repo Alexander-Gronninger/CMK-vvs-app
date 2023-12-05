@@ -19,7 +19,7 @@ const CalcMaxYValue = (data) => {
   let maxYValue = highestY + additionalValue;
 
   /* Comment below to have this be dynamically changed based on highest y */
-  maxYValue = 25;
+  maxYValue = 27;
 
   return maxYValue;
 };

@@ -27,7 +27,7 @@ const GF2StudentKV = ({ index }) => {
   }
 
   /* Amount of increase / decrease for buttons */
-  const updateAmount = 0.1;
+  const updateAmount = 1;
 
   const increaseValue = () => {
     setValue((prevValue) => {
@@ -64,7 +64,7 @@ const GF2StudentKV = ({ index }) => {
         updateAmount={updateAmount}
       />
       {/* <p className="w-10 h-8 m-0 text-center bg-gray-200">{value}</p> */}
-      <div className="w-full h-[50px] flex place-content-center place-items-center">
+      <div className="w-full h-[50px] flex place-content-center place-items-center select-none">
         <p
           className="text-center"
           key={"KVInput" + index}

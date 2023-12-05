@@ -92,6 +92,7 @@ function GF2ScatterChart() {
       y: {
         beginAtZero: true,
         max: CalcMaxYValue(chartData),
+        min: 0,
         display: false,
         grid: false,
       },

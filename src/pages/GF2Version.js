@@ -65,7 +65,7 @@ const GF2Version = () => {
               src="../images/glasrør.png"
               alt=""
             />
-            <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-[95%] gap-4 grid-cols-5 grid-rows-[13fr,3fr] m-2">
+            <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]">
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
             </div>

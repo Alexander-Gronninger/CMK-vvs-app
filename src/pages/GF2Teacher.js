@@ -70,7 +70,10 @@ const GF2Teacher = () => {
           <QRLink />
           <div className="w-full">
             <p>Facit</p>
-            <p>{(calcCalculatedFanPerformance(GF2Data) * 100).toFixed(2)}%</p>
+            <p>
+              Ventilatorydelse:{" "}
+              {(calcCalculatedFanPerformance(GF2Data) * 100).toFixed(2)}%
+            </p>
             <div className="flex justify-around">
               {[...Array(GF2Data.length - 1)].map((_, index) => {
                 return (
