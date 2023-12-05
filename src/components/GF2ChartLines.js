@@ -34,6 +34,9 @@ const GF2ChartLines = ({ chartHeight }) => {
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
   const margin = percentage * chartHeight;
+  console.log(chartHeight);
+  console.log(percentage);
+  console.log(margin);
 
   return (
     <div
