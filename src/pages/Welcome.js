@@ -16,12 +16,6 @@ const Welcome = () => {
         >
           GF2 Version
         </Link>
-        <Link
-          className="border-2 border-black rounded-lg p-2 text-center"
-          to="/v3/measurement"
-        >
-          Version 3
-        </Link>
       </div>
     </main>
   );

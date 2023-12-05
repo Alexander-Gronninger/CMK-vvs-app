@@ -90,7 +90,7 @@ const GF2Teacher = () => {
           </div>
           <Link
             className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center my-8"
-            to="/GF2"
+            to="/"
           >
             Elev side
           </Link>
