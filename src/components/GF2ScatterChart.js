@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import GF2Context from "../context/GF2Context";
 import {
   Chart as ChartJS,
@@ -11,14 +11,11 @@ import {
 import { Scatter } from "react-chartjs-2";
 import CalcMaxYValue from "../functions/CalcMaxYValue";
 import CalcChartData from "../functions/CalcChartData";
-import GF2ChartLines from "./GF2ChartLines";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 function GF2ScatterChart() {
   const { GF2Data } = useContext(GF2Context);
-
-  const chartRef = useRef(null);
 
   /* Function for setting padding between screen widths of 320-375, based on roughly looking at what padding is needed to center the dots */
   function calculatePadding(screenWidth) {
@@ -110,33 +107,13 @@ function GF2ScatterChart() {
     },
   };
 
-  const AssumedChartTopMargin = 20;
-
-  const [chartHeight, setChartHeight] = useState(null);
-
-  useEffect(() => {
-    const updateChartHeight = () => {
-      // Assuming chartRef.currentChart.height is the correct property to get the height
-      setChartHeight(chartRef?.current?.height - AssumedChartTopMargin);
-    };
-
-    // Call the update function immediately
-    updateChartHeight();
-  }, [chartRef]);
-
-  /* console.log(chartHeight); */
-
   return (
     <>
       <Scatter
-        ref={chartRef}
         data={dataset}
         options={chartOptions}
         className="row-start-1 row-end-2 col-start-1 col-end-6"
       />
-      {/* The range students are meant to get the dots within, minus the seeming padding the chart has at the top */}
-      {/* This padding was eyeballed by removing CalcMaxYValues additionalValue so the balls were at the top, and guessing how much height was between them and the element height */}
-      {chartRef?.current && <GF2ChartLines chartHeight={chartHeight} />}
     </>
   );
 }

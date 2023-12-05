@@ -1,6 +1,6 @@
 import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import GF2Context from "../context/GF2Context"; /* 
 import GF2TeacherTable from "../templates/GF2TeacherTable";
 import CalcNewQV2 from "../functions/CalcNewQV2"; */
@@ -11,12 +11,19 @@ import CalcNewQV from "../functions/CalcNewQV"; */
 import { calcAirspeed2 } from "../functions/GF2Calculations";
 import GF2ScatterChart from "../components/GF2ScatterChart";
 import { Link } from "react-router-dom";
+import GF2ChartLines from "../components/GF2ChartLines";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
 
   /* Css rules used by this components <th> elements, GF2KVValueInput(child component) and GF2TeacherTable(child component) <th> and <td> elements */
   const tableCss = "text-center";
+
+  const chartContainerRef = useRef(null);
+
+  const AssumedChartTopMargin = 20;
+
+  console.log(chartContainerRef?.current?.offsetHeight);
 
   return (
     <>
@@ -65,9 +72,18 @@ const GF2Version = () => {
               src="../images/glasrør.png"
               alt=""
             />
-            <div className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]">
+            <div
+              ref={chartContainerRef}
+              className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]"
+            >
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
+              <GF2ChartLines
+                chartHeight={
+                  chartContainerRef?.current?.offsetHeight -
+                  AssumedChartTopMargin
+                }
+              />
             </div>
           </div>
         </div>
@@ -86,37 +102,6 @@ const GF2Version = () => {
         >
           Lærer side
         </Link>
-
-        {/* Table showing the calculated airspeed based on student KV input and other data */}
-        {/*         <table className="my-4">
-          <thead>
-            <tr>
-              <th className={tableCss + " font-semibold"} colSpan="5">
-                Beregnet Qv
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr> */}
-        {/* NewQV2: (NewQV * CalcQVSumTimesMainOpening) / NewQVSum */}
-        {/*               {[...Array(GF2Data.length - 1)].map((_, index) => {
-                return (
-                  <td className={tableCss} key={"NewQV" + index}>
-                    {CalcNewQV2(index).toFixed(2)}
-                  </td>
-                );
-              })}
-            </tr>
-          </tbody>
-        </table>
-
-        <div className="m-auto my-2 w-fit h-fit p-2 border-secondaryBG border-2 rounded">
-          <Link to="/GF2/export">QR / Link</Link>
-        </div> */}
-
-        {/* This template has all the stuff for teachers to enter */}
-        {/*         <GF2TeacherTable tableCss={tableCss} /> */}
       </>
     </>
   );
