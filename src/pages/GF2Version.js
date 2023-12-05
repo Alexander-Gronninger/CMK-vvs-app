@@ -19,11 +19,11 @@ const GF2Version = () => {
   /* Css rules used by this components <th> elements, GF2KVValueInput(child component) and GF2TeacherTable(child component) <th> and <td> elements */
   const tableCss = "text-center";
 
+  /* Referencing the container div for chart & chart lines */
   const chartContainerRef = useRef(null);
 
+  /* The chart has a margin at the top, this is roughly how much that margin is */
   const AssumedChartTopMargin = 20;
-
-  console.log(chartContainerRef?.current?.offsetHeight);
 
   return (
     <>
@@ -79,6 +79,7 @@ const GF2Version = () => {
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
               <GF2ChartLines
+                /* chartHeight is used to determine positioning of the lines, its parent container height - assumed top margin on GF2ScatterChart */
                 chartHeight={
                   chartContainerRef?.current?.offsetHeight -
                   AssumedChartTopMargin
