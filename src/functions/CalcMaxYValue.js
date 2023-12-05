@@ -1,8 +1,9 @@
 /* accepts data from CalcChartData, passed down where it is called */
 
 const CalcMaxYValue = (data) => {
-  /* CalcMaxYValue is used by GF2ScatterChart to determine what the max value should be on the chart, dynamically by finding highest "YValue" + additionalValue */
-  const additionalValue = 20;
+  /* //CalcMaxYValue is used by GF2ScatterChart to determine what the max value should be on the chart, dynamically by finding highest "YValue" + additionalValue */
+  /* //uncomment to have below, and comment line 23, maxYValue be dynamic */
+  /*   const additionalValue = 20;
 
   if (!data || data.length === 0) {
     return null; // Return null for an empty array or invalid data.
@@ -16,10 +17,10 @@ const CalcMaxYValue = (data) => {
     }
   }
 
-  let maxYValue = highestY + additionalValue;
+  const maxYValue = highestY + additionalValue; */
 
-  /* Comment below to have this be dynamically changed based on highest y */
-  maxYValue = 27;
+  /* Comment below, and uncomment above, to have this be dynamically changed based on highest y */
+  const maxYValue = 27;
 
   return maxYValue;
 };

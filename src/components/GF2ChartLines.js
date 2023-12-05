@@ -8,7 +8,9 @@ import { useContext } from "react";
 } from "../functions/GF2Calculations"; */
 
 const GF2ChartLines = ({ chartHeight }) => {
-  const { GF2Data } = useContext(GF2Context);
+  const { GF2Data, setGF2Data } = useContext(GF2Context);
+
+  console.log(chartHeight);
 
   /* the charts max Y value, CalcMaxYValue accepts data structure presented by CalcChartData */
   const maxYValue = CalcMaxYValue(CalcChartData());
@@ -31,10 +33,15 @@ const GF2ChartLines = ({ chartHeight }) => {
   /* const percentage = CheatAirspeeds[0] / maxYValue; */
 
   /* Uncomment above and comment below to have dotted lines be dynamic, currently it's set to always indicated DesiredAirspeed */
+  console.log(GF2Data[0].DesiredAirspeed);
+  console.log(maxYValue);
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
   /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
   const margin = percentage * (chartHeight - 20);
+
+  /*  */
+  setGF2Data(GF2Data);
 
   return (
     <div
