@@ -109,6 +109,7 @@ function GF2ScatterChart() {
 
   return (
     <>
+      <p>{screenWidth}</p>
       <Scatter
         data={dataset}
         options={chartOptions}
