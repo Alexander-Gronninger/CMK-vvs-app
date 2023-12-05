@@ -40,11 +40,6 @@ const GF2ChartLines = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(containerRef);
-      console.log(containerRef.current.clientHeight);
-      console.log(containerRef.current.scrollHeight);
-      console.log(containerRef.current.offsetHeight);
-
       setContainerHeight(containerRef.current.clientHeight);
     }, 100);
   }, []);

@@ -43,6 +43,22 @@ const calcAirspeed2 = (data, index) => {
   return airspeed2.toFixed(2); // Return the calculated airspeed2 with 2 decimal places
 };
 
+const calcAirspeedDifference = (data) => {
+  if (!data || data.length < 1) {
+    return 0; // or whatever default value you want when there's no data
+  }
+
+  const desiredAirspeed = data[0].DesiredAirspeed;
+
+  const airspeedDifference = data.slice(1).reduce((acc, item, index) => {
+    const calculatedValue = calcAirspeed2(data, index);
+    console.log(calculatedValue);
+    return acc + Math.abs(desiredAirspeed - calculatedValue);
+  }, 0);
+
+  return airspeedDifference;
+};
+
 /* Cheatsheet stuff */
 const calcCalculatedFanPerformance = (data) => {
   const airspeed2Array = data.slice(0, -1).map((_, i) => {
@@ -94,4 +110,5 @@ export {
   calcCalculatedFanPerformance,
   calcRawCalculatedKV,
   calcCalculatedAdjustedKV,
+  calcAirspeedDifference,
 }; // Export the functions for external use

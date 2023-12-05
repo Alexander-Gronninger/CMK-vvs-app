@@ -4,7 +4,10 @@ import { useContext } from "react";
 import GF2Context from "../context/GF2Context";
 import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
 import GF2StudentKV from "../templates/GF2StudentKV";
-import { calcAirspeed2 } from "../functions/GF2Calculations";
+import {
+  calcAirspeed2,
+  calcAirspeedDifference,
+} from "../functions/GF2Calculations";
 import GF2ScatterChart from "../components/GF2ScatterChart";
 import { Link } from "react-router-dom";
 import GF2ChartLines from "../components/GF2ChartLines";
@@ -75,9 +78,14 @@ const GF2Version = () => {
             på {GF2Data[0].DesiredAirspeed} [m/s] som muligt
           </p>
         </div>
+
+        <div className="flex gap-2 ml-[56px]">
+          <p>Afvigelse:</p>
+          <p>{calcAirspeedDifference(GF2Data).toFixed(2)}</p>
+        </div>
         <Link
           className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center my-8"
-          to="/GF2/Teacher"
+          to="/Teacher"
         >
           Lærer side
         </Link>
