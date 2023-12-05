@@ -15,6 +15,8 @@ const GF2Version = () => {
   /* Referencing the container div for chart & chart lines */
   const chartContainerRef = useRef(null);
 
+  console.log(chartContainerRef.current?.offsetHeight);
+
   return (
     <>
       <>
