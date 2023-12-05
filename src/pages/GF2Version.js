@@ -76,18 +76,14 @@ const GF2Version = () => {
             />
             <div
               ref={chartContainerRef}
-              onLoad={setTest(chartContainerRef.current?.offsetHeight)}
+              onLoad={() => setTest(chartContainerRef.current?.offsetHeight)}
               className="row-start-1 row-end-1 col-start-1 col-end-1 grid h-[75%] items-end w-full gap-4 grid-cols-5 grid-rows-[13fr,3fr]"
             >
-              {/*  */}
               {/* The component handling the dots, their positioning and animation */}
               <GF2ScatterChart />
               <GF2ChartLines
                 /* chartHeight is used to determine positioning of the lines, its parent container height - assumed top margin on GF2ScatterChart */
-                chartHeight={
-                  chartContainerRef.current &&
-                  chartContainerRef.current?.offsetHeight
-                }
+                chartHeight={test}
               />
             </div>
           </div>

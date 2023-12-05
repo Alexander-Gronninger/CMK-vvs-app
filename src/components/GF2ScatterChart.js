@@ -112,7 +112,6 @@ function GF2ScatterChart() {
   /* console.log(refTest?.current); */
   return (
     <>
-      <p>{screenWidth}</p>
       <Scatter
         ref={refTest}
         data={dataset}

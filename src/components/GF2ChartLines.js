@@ -10,6 +10,8 @@ import { useContext } from "react";
 const GF2ChartLines = ({ chartHeight }) => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
+  console.log(chartHeight);
+
   /* the charts max Y value, CalcMaxYValue accepts data structure presented by CalcChartData */
   const maxYValue = CalcMaxYValue(CalcChartData());
 
