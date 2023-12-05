@@ -82,7 +82,7 @@ const GF2Version = () => {
               <GF2ScatterChart />
               <GF2ChartLines
                 /* chartHeight is used to determine positioning of the lines, its parent container height - assumed top margin on GF2ScatterChart */
-                chartHeight={test}
+                chartHeight={chartContainerRef}
               />
             </div>
           </div>

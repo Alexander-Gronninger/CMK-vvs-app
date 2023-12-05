@@ -36,7 +36,7 @@ const GF2ChartLines = ({ chartHeight }) => {
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
   /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
-  const margin = percentage * (chartHeight - 20);
+  const margin = percentage * (chartHeight?.current?.offsetHeight - 20);
 
   /*  */
   setGF2Data(GF2Data);
