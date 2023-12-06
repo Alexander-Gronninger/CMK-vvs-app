@@ -37,7 +37,7 @@ const Ref = () => {
       theme: "light",
     });
 
-    setTimeout(() => navigate("/GF2/"), 500);
+    setTimeout(() => navigate("/"), 500);
   }, [encodedData, navigate, setGF2Data]);
 
   return (
