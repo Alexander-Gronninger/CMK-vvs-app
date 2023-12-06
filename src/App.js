@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ContextProvider from "./context/ContextProvider";
 import ExportSettings from "./pages/ExportSettings";
@@ -15,6 +15,7 @@ function App() {
         <Route path="/ref" element={<Ref />} key="Ref" />
         <Route path="teacher" element={<GF2Teacher />} key="GF2Teacher" />
         <Route path="/ref" element={<Ref />} key="Ref" />
+        <Route path="*" element={<Navigate to="/" />} key="NotFound" />
       </Routes>
     </ContextProvider>
   );
