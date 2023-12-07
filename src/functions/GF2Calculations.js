@@ -51,12 +51,26 @@ const calcAirspeedDifference = (data) => {
   const desiredAirspeed = data[0].DesiredAirspeed;
 
   const airspeedDifference = data.slice(1).reduce((acc, item, index) => {
-    const calculatedValue = calcAirspeed2(data, index);
-    console.log(calculatedValue);
-    return acc + Math.abs(desiredAirspeed - calculatedValue);
+    const calculatedValue = calcAirspeed2(data, index) * data[0].MainOpening;
+    let value = Math.abs(desiredAirspeed - calculatedValue);
+    return acc + value;
   }, 0);
 
   return airspeedDifference;
+};
+
+const calcAirspeedDifferencePercentage = (data) => {
+  if (!data || data.length < 1) {
+    return 0; // or whatever default value you want when there's no data
+  }
+
+  const desiredAirspeed = data[0].DesiredAirspeed;
+
+  const airspeedDifferencePercentage = calcAirspeedDifference(data);
+
+  console.log(2.7 / desiredAirspeed);
+  console.log(airspeedDifferencePercentage);
+  return airspeedDifferencePercentage;
 };
 
 /* Cheatsheet stuff */
@@ -111,4 +125,5 @@ export {
   calcRawCalculatedKV,
   calcCalculatedAdjustedKV,
   calcAirspeedDifference,
+  calcAirspeedDifferencePercentage,
 }; // Export the functions for external use

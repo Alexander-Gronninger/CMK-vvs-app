@@ -10,7 +10,7 @@ const GF2StudentKV = ({ index }) => {
   /* Value is the KVs opening */
   /* Sets the start value to the value saved in context, or an empty string */
   const [value, setValue] = useState(
-    GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening
+    GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening.toFixed(0)
   );
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const GF2StudentKV = ({ index }) => {
       // Increase the value by updateAmount, or sets it to 10 if it's already greater than or equal to 10
       const newValue =
         prevValue < 10
-          ? parseFloat(Number(prevValue + updateAmount).toFixed(2))
+          ? parseFloat(Number(prevValue + updateAmount).toFixed(0))
           : 10;
       console.log("increased");
       return newValue;
@@ -46,7 +46,7 @@ const GF2StudentKV = ({ index }) => {
       // Decrease the value by updateAmount, or sets it to 1 if it's already less than or equal to 1
       const newValue =
         prevValue > 1
-          ? parseFloat(Number(prevValue - updateAmount).toFixed(2))
+          ? parseFloat(Number(prevValue - updateAmount).toFixed(0))
           : 1;
       console.log("decreased");
       return newValue;

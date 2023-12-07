@@ -18,7 +18,7 @@ function GF2ScatterChart() {
   const { GF2Data } = useContext(GF2Context);
 
   /* Function for setting padding between screen widths of 320-375, based on roughly looking at what padding is needed to center the dots */
-  function calculatePadding(screenWidth) {
+  /* function calculatePadding(screenWidth) {
     const minWidth = 320;
     const maxWidth = 375;
     const minValue = 0;
@@ -39,10 +39,10 @@ function GF2ScatterChart() {
     const interpolatedValue = minValue + factor * (maxValue - minValue);
 
     return interpolatedValue;
-  }
+  } */
 
-  let screenWidth = window.innerWidth;
-  let padding = calculatePadding(screenWidth);
+  /* let screenWidth = window.innerWidth;
+  let padding = calculatePadding(screenWidth); */
 
   /* Chart specific  */
 
@@ -68,8 +68,8 @@ function GF2ScatterChart() {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        left: padding,
-        right: padding,
+        left: 0,
+        right: 0,
       },
     },
     plugins: {
@@ -112,12 +112,9 @@ function GF2ScatterChart() {
   /* console.log(refTest?.current); */
   return (
     <>
-      <Scatter
-        ref={refTest}
-        data={dataset}
-        options={chartOptions}
-        className="row-start-1 row-end-2 col-start-1 col-end-6"
-      />
+      <div className="chart-container relative w-full h-[75%] row-start-1 row-end-3 col-start-1 col-end-6 px-2">
+        <Scatter ref={refTest} data={dataset} options={chartOptions} />
+      </div>
     </>
   );
 }
