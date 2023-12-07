@@ -66,10 +66,19 @@ const calcAirspeedDifferencePercentage = (data) => {
 
   const desiredAirspeed = data[0].DesiredAirspeed;
 
-  const airspeedDifferencePercentage = calcAirspeedDifference(data);
+  const airspeedDifferencePercentage =
+    (calcAirspeedDifference(data) / desiredAirspeed) * 100;
 
-  console.log(2.7 / desiredAirspeed);
-  console.log(airspeedDifferencePercentage);
+  console.log("Afvigelse ikke procent: " + calcAirspeedDifference(data));
+  console.log("Ønsket lufthastighed: " + desiredAirspeed);
+  console.log(
+    "Afvigelse / ønsket lufthastighed: " +
+      calcAirspeedDifference(data) / desiredAirspeed
+  );
+  console.log(
+    "(Afvigelse / ønsket lufthastighed) * 100: " +
+      (calcAirspeedDifference(data) / desiredAirspeed) * 100
+  );
   return airspeedDifferencePercentage;
 };
 
