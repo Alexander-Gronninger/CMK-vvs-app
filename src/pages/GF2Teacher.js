@@ -2,7 +2,7 @@ import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { useContext } from "react";
 import GF2Context from "../context/GF2Context";
-import GF2TeacherKVInput from "../functions/GF2TeacherKVInput";
+import GF2TeacherKVInput from "../components/GF2TeacherKVInput";
 import GF2QVKVRelationInput from "../components/GF2QVKVRelationInput";
 import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
 import GF2DesiredAirspeedInput from "../components/GF2DesiredAirspeedInput";
@@ -12,6 +12,7 @@ import {
   calcCalculatedAdjustedKV,
   calcCalculatedFanPerformance,
 } from "../functions/GF2Calculations";
+import NumberFormatter from "../functions/NumberFormatter";
 
 const GF2Teacher = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -73,7 +74,12 @@ const GF2Teacher = () => {
 
             <p>
               Beregnet ventilatorydelse:{" "}
-              {(calcCalculatedFanPerformance(GF2Data) * 100).toFixed(2)}%
+              <NumberFormatter
+                number={(calcCalculatedFanPerformance(GF2Data) * 100).toFixed(
+                  2
+                )}
+              />
+              %
             </p>
             <p>Optimale KV indstillinger</p>
             <div className="flex justify-around">
@@ -84,7 +90,11 @@ const GF2Teacher = () => {
                     id={"CalculatedAdjustedKV" + index}
                     key={"CalculatedAdjustedKV" + index}
                   >
-                    {calcCalculatedAdjustedKV(GF2Data, index).toFixed(1)}
+                    <NumberFormatter
+                      number={calcCalculatedAdjustedKV(GF2Data, index).toFixed(
+                        1
+                      )}
+                    />
                   </p>
                 );
               })}

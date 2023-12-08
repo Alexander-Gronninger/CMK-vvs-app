@@ -1,7 +1,8 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import InputSelect from "../functions/InputSelect";
 import useEnterBlur from "../hooks/useEnterBlur";
 import GF2Context from "../context/GF2Context";
+import { createCookie } from "../functions/Cookie";
 
 const GF2DesiredAirspeedInput = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
@@ -15,8 +16,13 @@ const GF2DesiredAirspeedInput = () => {
   };
 
   /* Opening input stuff */
-  const initialDesiredOpening = (GF2Data[0] && GF2Data[0].DesiredAirspeed) || 5;
-  const [input, setInput] = useState(initialDesiredOpening);
+  const initialInput = (GF2Data[0] && GF2Data[0].DesiredAirspeed) || 5;
+  const [input, setInput] = useState(initialInput);
+
+  /* When loading a cookie, this updates the input state */
+  useEffect(() => {
+    setInput(initialInput);
+  }, [GF2Data, initialInput]);
 
   const handleChange = (e) => {
     /* Guard clause making sure input is a number */
@@ -42,6 +48,7 @@ const GF2DesiredAirspeedInput = () => {
     setGF2Data((prevData) => {
       let newData = [...prevData];
       newData[0].DesiredAirspeed = Number(checkedValue);
+      createCookie(newData);
       return newData;
     });
   };

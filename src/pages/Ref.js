@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import LoadingDots from "../components/LoadingDots";
 import GF2Context from "../context/GF2Context";
+import { createCookie } from "../functions/Cookie";
 
 const Ref = () => {
   const { setGF2Data } = useContext(GF2Context);
@@ -24,6 +25,7 @@ const Ref = () => {
       const decodedData = decodeDataArray(encodedData);
 
       setGF2Data(decodedData);
+      createCookie(decodedData);
     }
 
     toast.success("Data importeret", {

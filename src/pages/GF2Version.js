@@ -3,7 +3,7 @@ import H1 from "../components/H1";
 import { useContext } from "react";
 import GF2Context from "../context/GF2Context";
 import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
-import GF2StudentKV from "../templates/GF2StudentKV";
+import GF2StudentKV from "../components/GF2StudentKV";
 import {
   calcAirspeed2,
   calcAirspeedDifferencePercentage,
@@ -11,6 +11,7 @@ import {
 import GF2ScatterChart from "../components/GF2ScatterChart";
 import { Link } from "react-router-dom";
 import GF2ChartLines from "../components/GF2ChartLines";
+import NumberFormatter from "../functions/NumberFormatter";
 
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
@@ -48,9 +49,11 @@ const GF2Version = () => {
             {[...Array(GF2Data.length - 1)].map((_, index) => {
               return (
                 <p className="text-center" key={index}>
-                  {(
-                    calcAirspeed2(GF2Data, index) * GF2Data[0].MainOpening
-                  ).toFixed(2)}
+                  <NumberFormatter
+                    number={(
+                      calcAirspeed2(GF2Data, index) * GF2Data[0].MainOpening
+                    ).toFixed(2)}
+                  />
                 </p>
               );
             })}
@@ -77,8 +80,11 @@ const GF2Version = () => {
 
           <div className="flex gap-2 ml-[56px] max-w-[300px]">
             <p>
-              Du afviger {calcAirspeedDifferencePercentage(GF2Data).toFixed(0)}%
-              fra den optimale indstilling. Kan du gøre det endnu bedre?
+              Du afviger{" "}
+              <NumberFormatter
+                number={calcAirspeedDifferencePercentage(GF2Data).toFixed(1)}
+              />
+              % fra den optimale indstilling. Kan du gøre det endnu bedre?
             </p>
           </div>
           <Link

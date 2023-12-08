@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GF2Context from "./GF2Context";
 import Version3Context from "./Version3Context";
+import { getCookie } from "../functions/Cookie";
 
 const ContextProvider = ({ children }) => {
   /* 
@@ -10,24 +11,33 @@ const ContextProvider = ({ children }) => {
   However the UI may break
    */
 
-  const [GF2Data, setGF2Data] = useState([
-    {
-      MainOpening: 0.75,
-      DesiredAirspeed: 12,
-      AllKV: 5,
-    },
-    /* { QV: 30.4, StudentKVOpening: 1, QVKVRelation: 3 },
+  const initializeGF2Data = () => {
+    const savedGF2DataString = getCookie("GF2Data");
+    if (savedGF2DataString) {
+      return JSON.parse(savedGF2DataString);
+    } else {
+      return [
+        {
+          MainOpening: 0.75,
+          DesiredAirspeed: 12,
+          AllKV: 5,
+        },
+        /* { QV: 30.4, StudentKVOpening: 1, QVKVRelation: 3 },
     { QV: 35.5, StudentKVOpening: 1, QVKVRelation: 2.2 },
     { QV: 39.3, StudentKVOpening: 1, QVKVRelation: 5 },
     { QV: 31.2, StudentKVOpening: 1, QVKVRelation: 2.2 },
     { QV: 41.2, StudentKVOpening: 1, QVKVRelation: 3.6 }, */
-    /* Testing data, this data is preset so that the balls in the pipes should be more or less equal */
-    { QV: 30.4, StudentKVOpening: 6.2, QVKVRelation: 3 },
-    { QV: 35.5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
-    { QV: 39.3, StudentKVOpening: 3.7, QVKVRelation: 5 },
-    { QV: 31.2, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
-    { QV: 41.2, StudentKVOpening: 5.1, QVKVRelation: 3.6 },
-  ]);
+        /* Testing data, this data is preset so that the balls in the pipes should be more or less equal */
+        { QV: 30.4, StudentKVOpening: 6.2, QVKVRelation: 3 },
+        { QV: 35.5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
+        { QV: 39.3, StudentKVOpening: 3.7, QVKVRelation: 5 },
+        { QV: 31.2, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
+        { QV: 41.2, StudentKVOpening: 5.1, QVKVRelation: 3.6 },
+      ];
+    }
+  };
+
+  const [GF2Data, setGF2Data] = useState(() => initializeGF2Data());
 
   const [version3Data, setVersion3Data] = useState([
     {

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import useEnterBlur from "../hooks/useEnterBlur";
 import InputSelect from "../functions/InputSelect";
 import GF2Context from "../context/GF2Context";
+import { createCookie } from "../functions/Cookie";
 
 /* 
 This component handles changing the GF2 versions KVValue from GF2Context
@@ -19,8 +20,13 @@ const GF2TeacherKVValueInput = ({ index, tableCss, id }) => {
   };
 
   /* Sets the start value to the value saved in context, or empty string */
-  const [input, setInput] =
-    useState(GF2Data[index + 1] && GF2Data[index + 1].TeacherKVOpening) || "";
+  const initialInput =
+    GF2Data[index + 1] && GF2Data[index + 1].TeacherKVOpening;
+  const [input, setInput] = useState(initialInput);
+  /* When loading a cookie, this updates the input state */
+  useEffect(() => {
+    setInput(initialInput);
+  }, [GF2Data]);
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
@@ -50,6 +56,8 @@ const GF2TeacherKVValueInput = ({ index, tableCss, id }) => {
     setGF2Data((prevData) => {
       let newData = [...prevData];
       newData[index + 1].TeacherKVOpening = Number(e.target.value);
+
+      createCookie(newData);
       return newData;
     });
   };

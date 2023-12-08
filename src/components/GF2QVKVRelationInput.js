@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useEnterBlur from "../hooks/useEnterBlur";
 import InputSelect from "../functions/InputSelect";
 import GF2Context from "../context/GF2Context";
+import { createCookie } from "../functions/Cookie";
 
 /* 
 This component handles changing the GF2 versions KVValue from GF2Context
@@ -20,9 +21,17 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     return /^[\d.,]*$/.test(string);
   };
 
+  const formatNumber = (value) => {
+    return String(value).replace(".", ",");
+  };
+
   /* Sets the start value to the value saved in context, or empty string */
-  const [input, setInput] =
-    useState(GF2Data[index + 1] && GF2Data[index + 1].QVKVRelation) || "";
+  const initialInput = formatNumber(GF2Data[index + 1]?.QVKVRelation) || "";
+  const [input, setInput] = useState(initialInput);
+  /* When loading a cookie, this updates the input state */
+  useEffect(() => {
+    setInput(initialInput);
+  }, [GF2Data, initialInput]);
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
@@ -50,16 +59,29 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     setInput(e.target.value);
   };
 
+  const parseNumber = (stringValue) => {
+    return parseFloat(stringValue.replace(",", ".")) || 0;
+  };
+
   /* handleBlur updates the input state and the respective context value */
   const handleBlur = (e) => {
-    setInput(e.target.value);
+    const numericValue = parseNumber(e.target.value);
 
-    /* Updates context to reflect user input */
-    setGF2Data((prevData) => {
-      let newData = [...prevData];
-      newData[index + 1].QVKVRelation = Number(e.target.value);
-      return newData;
-    });
+    if (numericValue < minInput) {
+      setInput(formatNumber(minInput));
+    } else if (numericValue > maxInput) {
+      setInput(formatNumber(maxInput));
+    } else {
+      setInput(formatNumber(numericValue));
+
+      setGF2Data((prevData) => {
+        let newData = [...prevData];
+        newData[index + 1].QVKVRelation = numericValue;
+
+        createCookie(newData);
+        return newData;
+      });
+    }
   };
 
   return (
