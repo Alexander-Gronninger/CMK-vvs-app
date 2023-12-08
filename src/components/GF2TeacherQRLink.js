@@ -10,7 +10,7 @@ const GF2TeacherQRLink = () => {
 
   const currentSiteLink = window.location.href.replace(
     window.location.pathname,
-    "/GF2/ref"
+    "/ref"
   );
 
   /* Creating link */

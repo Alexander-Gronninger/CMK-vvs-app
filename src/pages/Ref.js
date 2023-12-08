@@ -21,6 +21,7 @@ const Ref = () => {
   const encodedData = searchParams.get("data");
 
   useEffect(() => {
+    console.log(encodedData);
     if (encodedData) {
       const decodedData = decodeDataArray(encodedData);
 
