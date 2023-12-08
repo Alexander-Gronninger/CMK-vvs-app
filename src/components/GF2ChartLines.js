@@ -40,8 +40,8 @@ const GF2ChartLines = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setContainerHeight(containerRef.current.clientHeight);
-    }, 100);
+      setContainerHeight(containerRef?.current?.clientHeight);
+    }, 300);
   }, []);
 
   /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
@@ -51,14 +51,18 @@ const GF2ChartLines = () => {
   setGF2Data(GF2Data);
 
   return (
-    <div
-      ref={containerRef}
-      className={`row-start-1 row-end-2 h-full w-full col-start-1 col-end-6 flex flex-col justify-end`}
-      style={{ marginBottom: `${margin - 22}px` }}
-    >
-      <div className="border-b-[2px] w-full border-dotted border-black h-0"></div>
-      <div className="border-b-[2px] w-full border-dotted border-black mt-12     h-0"></div>
-    </div>
+    <>
+      <div className="col-start-1 col-end-6 row-start-1 row-end-3 w-full h-[75%]">
+        <div
+          ref={containerRef}
+          className={`h-full w-full flex flex-col justify-end`}
+          style={{ paddingBottom: `${margin - 22}px` }}
+        >
+          <div className="border-b-[2px] w-full border-dotted border-black h-0"></div>
+          <div className="border-b-[2px] w-full border-dotted border-black mt-12 h-0"></div>
+        </div>
+      </div>
+    </>
   );
 };
 

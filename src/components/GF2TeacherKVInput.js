@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useEnterBlur from "../hooks/useEnterBlur";
 import InputSelect from "../functions/InputSelect";
 import GF2Context from "../context/GF2Context";
+import { createCookie } from "../functions/Cookie";
 
 const GF2TeacherKVInput = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
@@ -15,7 +16,12 @@ const GF2TeacherKVInput = () => {
   };
 
   /* Sets the start value to the value saved in context, or empty string */
-  const [input, setInput] = useState(GF2Data[0] && GF2Data[0].AllKV) || "";
+  const initialInput = GF2Data[0] && GF2Data[0].AllKV;
+  const [input, setInput] = useState(initialInput);
+  /* When loading a cookie, this updates the input state */
+  useEffect(() => {
+    setInput(initialInput);
+  }, [GF2Data, initialInput]);
 
   /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
@@ -54,6 +60,7 @@ const GF2TeacherKVInput = () => {
         }
       });
 
+      createCookie(newData);
       return newData;
     });
   };
