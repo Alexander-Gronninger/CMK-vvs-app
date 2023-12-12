@@ -31,7 +31,7 @@ const InputButtonIncrease = ({ onClickFunction, interval }) => {
 
   return (
     <button
-      className="bg-increaseKV h-12 w-12 [clip-path:polygon(50%_50%,0%_100%,100%_100%)] p-0 m-0 select-none "
+      className="bg-increaseKV h-12 w-12 [clip-path:polygon(50%_40%,0%_100%,100%_100%)] p-0 m-0 select-none "
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}

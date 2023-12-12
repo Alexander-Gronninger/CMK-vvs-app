@@ -72,6 +72,27 @@ const calcAirspeedDifferencePercentage = (data) => {
   return airspeedDifferencePercentage;
 };
 
+const calcMaxDesiredAirspeed = (data) => {
+  const combinedQVKVRelation = data.reduce((sum, item) => {
+    // Check if the item has a QVKVRelation property
+    if (item?.QVKVRelation !== undefined) {
+      // Add the QVKVRelation value to the sum
+      return sum + item.QVKVRelation;
+    }
+    // If the item doesn't have a QVKVRelation, return the current sum unchanged
+    return sum;
+  }, 0);
+
+  const averageQVKVRelation = combinedQVKVRelation / (data.length - 1);
+
+  /* Set this value to the same as maxValue in GF2QVKVRelationInput */
+  const maxQVKVRelation = 5;
+
+  const maxDesiredAirspeed = averageQVKVRelation * maxQVKVRelation;
+
+  return maxDesiredAirspeed;
+};
+
 /* Cheatsheet stuff */
 const calcCalculatedFanPerformance = (data) => {
   const airspeed2Array = data.slice(0, -1).map((_, i) => {
@@ -125,4 +146,5 @@ export {
   calcCalculatedAdjustedKV,
   calcAirspeedDifference,
   calcAirspeedDifferencePercentage,
+  calcMaxDesiredAirspeed,
 }; // Export the functions for external use

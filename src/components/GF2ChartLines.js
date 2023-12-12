@@ -56,7 +56,7 @@ const GF2ChartLines = () => {
         <div
           ref={containerRef}
           className={`h-full w-full flex flex-col justify-end`}
-          style={{ paddingBottom: `${margin - 22}px` }}
+          style={{ paddingBottom: `${margin - 8}px` }}
         >
           <div className="border-b-[2px] w-full border-dotted border-black h-0"></div>
           <div className="border-b-[2px] w-full border-dotted border-black mt-12 h-0"></div>

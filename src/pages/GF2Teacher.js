@@ -62,15 +62,10 @@ const GF2Teacher = () => {
             </p>
             <GF2MainOpeningInput />
           </div>
-          <div className="flex gap-4 w-full">
-            <p className="my-auto w-[70%]">
-              4. Indstil den ønskede lufthastighed (5-25 m/s)
-            </p>
-            <GF2DesiredAirspeedInput />
-          </div>
+          <GF2DesiredAirspeedInput />
           <QRLink />
           <div className="w-full">
-            <h2 className="font-semibold">Vejledene løsning</h2>
+            <h2 className="font-semibold">Vejledende løsning</h2>
 
             <p>
               Beregnet ventilatorydelse:{" "}
