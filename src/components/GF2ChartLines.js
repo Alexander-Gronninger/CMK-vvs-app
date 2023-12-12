@@ -44,6 +44,12 @@ const GF2ChartLines = () => {
     }, 300);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setContainerHeight(containerRef?.current?.clientHeight);
+    }, 350);
+  }, []);
+
   /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
   const margin = percentage * (containerHeight - 20);
 
