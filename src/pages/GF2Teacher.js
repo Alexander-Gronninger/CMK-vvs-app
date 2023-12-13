@@ -17,6 +17,8 @@ import NumberFormatter from "../functions/NumberFormatter";
 const GF2Teacher = () => {
   const { GF2Data } = useContext(GF2Context);
 
+  console.log(GF2Data);
+
   return (
     <>
       <>

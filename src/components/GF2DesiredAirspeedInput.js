@@ -74,8 +74,6 @@ const GF2DesiredAirspeedInput = () => {
     setInput(checkedValue);
 
     if (checkedValue < GF2Data[0].DesiredAirspeed) {
-      console.log("updating...");
-
       setGF2Data((prevData) => {
         let newData = [...prevData];
         newData[0].DesiredAirspeed = Number(checkedValue);
@@ -92,7 +90,6 @@ const GF2DesiredAirspeedInput = () => {
     let calculatedFanPerformance = calcCalculatedFanPerformance(GF2Data) * 100;
 
     if (calculatedFanPerformance > 100) {
-      console.log("decreasing.... " + calculatedFanPerformance);
       const newInput = input - 1;
       setInput(newInput);
       setGF2Data((prevData) => {
@@ -102,7 +99,6 @@ const GF2DesiredAirspeedInput = () => {
         return newData;
       });
       setMaxValue(maxValue - 1);
-      console.log(maxValue);
     } else {
       setMaxValue(calcMaxDesiredAirspeed(GF2Data).toFixed(0));
     }
