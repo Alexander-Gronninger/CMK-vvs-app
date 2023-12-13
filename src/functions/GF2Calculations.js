@@ -40,7 +40,7 @@ const calcAirspeed2 = (data, index) => {
   const QVSum = getSumOf(QVValues); // Calculate the sum of QV values using getSumOf function
 
   const airspeed2 = (QVSum / Airspeed1Sum) * airspeed1; // Calculate airspeed2
-  return airspeed2.toFixed(2); // Return the calculated airspeed2 with 2 decimal places
+  return airspeed2; // Return the calculated airspeed2 with 2 decimal places
 };
 
 const calcAirspeedDifference = (data) => {

@@ -105,6 +105,7 @@ function GF2ScatterChart() {
         radius: 15,
         borderWidth: 4,
         hoverRadius: 15,
+        hoverBorderWidth: 4,
       },
     },
   };

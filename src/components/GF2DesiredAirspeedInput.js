@@ -3,13 +3,19 @@ import InputSelect from "../functions/InputSelect";
 import useEnterBlur from "../hooks/useEnterBlur";
 import GF2Context from "../context/GF2Context";
 import { createCookie } from "../functions/Cookie";
-import { calcMaxDesiredAirspeed } from "../functions/GF2Calculations";
+import {
+  calcCalculatedFanPerformance,
+  calcMaxDesiredAirspeed,
+} from "../functions/GF2Calculations";
 
 const GF2DesiredAirspeedInput = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
   const minValue = 5;
-  let maxValue = calcMaxDesiredAirspeed(GF2Data).toFixed(0);
+
+  const [maxValue, setMaxValue] = useState(
+    calcMaxDesiredAirspeed(GF2Data).toFixed(0)
+  );
 
   /* Blurs the input when user presses enter or done on iphone */
   useEnterBlur();
@@ -81,6 +87,28 @@ const GF2DesiredAirspeedInput = () => {
     /* es-lint wants input in the dependency array, but this breaks the intended function of the input, resulting in it not being able to update */
     //eslint-disable-next-line
   }, [GF2Data]);
+
+  useEffect(() => {
+    let calculatedFanPerformance = calcCalculatedFanPerformance(GF2Data) * 100;
+
+    console.log(calculatedFanPerformance);
+
+    if (calculatedFanPerformance > 100) {
+      console.log("decreasing.... " + calculatedFanPerformance);
+      const newInput = input - 1;
+      setInput(newInput);
+      setGF2Data((prevData) => {
+        let newData = [...prevData];
+        newData[0].DesiredAirspeed = Number(newInput);
+        createCookie(newData);
+        return newData;
+      });
+      setMaxValue((prevValue) => {
+        return prevValue - 1;
+      });
+    }
+    //eslint-disable-next-line
+  }, [GF2Data, input]);
 
   return (
     <>

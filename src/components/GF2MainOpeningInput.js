@@ -60,7 +60,7 @@ const GF2MainOpeningInput = () => {
     }; */
 
   const decimalToPercentage = (decimalValue) => {
-    const percentage = (decimalValue * 100).toFixed();
+    const percentage = (decimalValue * 100).toFixed(0);
     return percentage + "%";
   };
 
