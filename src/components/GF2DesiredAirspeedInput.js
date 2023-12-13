@@ -91,8 +91,6 @@ const GF2DesiredAirspeedInput = () => {
   useEffect(() => {
     let calculatedFanPerformance = calcCalculatedFanPerformance(GF2Data) * 100;
 
-    console.log(calculatedFanPerformance);
-
     if (calculatedFanPerformance > 100) {
       console.log("decreasing.... " + calculatedFanPerformance);
       const newInput = input - 1;
@@ -103,9 +101,10 @@ const GF2DesiredAirspeedInput = () => {
         createCookie(newData);
         return newData;
       });
-      setMaxValue((prevValue) => {
-        return prevValue - 1;
-      });
+      setMaxValue(maxValue - 1);
+      console.log(maxValue);
+    } else {
+      setMaxValue(calcMaxDesiredAirspeed(GF2Data).toFixed(0));
     }
     //eslint-disable-next-line
   }, [GF2Data, input]);
