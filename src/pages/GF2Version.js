@@ -9,7 +9,7 @@ import {
   calcAirspeedDifferencePercentage,
 } from "../functions/GF2Calculations";
 import GF2ScatterChart from "../components/GF2ScatterChart";
-import { Link } from "react-router-dom";
+/* import { Link } from "react-router-dom"; */
 import GF2ChartLines from "../components/GF2ChartLines";
 import NumberFormatter from "../functions/NumberFormatter";
 
@@ -87,12 +87,12 @@ const GF2Version = () => {
               % fra den optimale indstilling. Kan du gøre det endnu bedre?
             </p>
           </div>
-          <Link
+          {/* <Link
             className="m-auto block border-2 border-solid border-secondaryBG rounded p-1 col-start-1 col-end-2 text-center my-8 max-w-[300px]"
             to="/Teacher"
           >
             Lærer side
-          </Link>
+          </Link> */}
         </main>
       </>
     </>
