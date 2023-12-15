@@ -19,8 +19,9 @@ const calcAirspeed1 = (data, index) => {
 // Function to calculate QV based on an index and data
 const calcQV = (data, index) => {
   const QVKVRelation = data[index + 1]?.QVKVRelation; // Get QVKVRelation from data
-  const AllKV = data[0]?.AllKV; // Get AllKV from data
-  const QV = AllKV * QVKVRelation; // Calculate QV
+  /* Median allowed KV setting, which currently is 5, min 1 and max 10 */
+  const middleAllowedKV = 5;
+  const QV = middleAllowedKV * QVKVRelation; // Calculate QV
   return QV; // Return the calculated QV
 };
 
