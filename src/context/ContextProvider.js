@@ -1,6 +1,5 @@
 import { useState } from "react";
 import GF2Context from "./GF2Context";
-import Version3Context from "./Version3Context";
 import { getCookie } from "../functions/Cookie";
 
 const ContextProvider = ({ children }) => {
@@ -39,26 +38,10 @@ const ContextProvider = ({ children }) => {
 
   const [GF2Data, setGF2Data] = useState(() => initializeGF2Data());
 
-  const [version3Data, setVersion3Data] = useState([
-    {
-      totalPD: 120,
-      desiredMS: 7,
-      desiredOpeningPercent: 0.5,
-    },
-    { KVvalue: 3, KVsize: 2 },
-    { KVvalue: 6.1, KVsize: 6 },
-    { KVvalue: 2.7, KVsize: 9 },
-    { KVvalue: 3.6, KVsize: 7 },
-    { KVvalue: 2.1, KVsize: 6 },
-    { KVvalue: 4, KVsize: 3 },
-  ]);
-
   return (
     <>
       <GF2Context.Provider value={{ GF2Data, setGF2Data }}>
-        <Version3Context.Provider value={{ version3Data, setVersion3Data }}>
-          {children}
-        </Version3Context.Provider>
+        {children}
       </GF2Context.Provider>
     </>
   );
