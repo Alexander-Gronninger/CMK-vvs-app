@@ -55,7 +55,6 @@ const GF2StudentKV = ({ index }) => {
         prevValue < 10
           ? parseFloat(Number(Number(prevValue) + updateAmount).toFixed(0))
           : 10;
-      console.log("increased");
       return newValue;
     });
   };
@@ -67,7 +66,6 @@ const GF2StudentKV = ({ index }) => {
         prevValue > 1
           ? parseFloat(Number(Number(prevValue) - updateAmount).toFixed(0))
           : 1;
-      console.log("decreased");
       return newValue;
     });
   };

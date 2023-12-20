@@ -49,7 +49,7 @@ const GF2TeacherKVInput = () => {
 
     /* Updates context to reflect users new input */
     setGF2Data((prevData) => {
-      let newData = prevData;
+      let newData = [...prevData];
       if (newData[0]) {
         newData[0].AllKV = input;
       }

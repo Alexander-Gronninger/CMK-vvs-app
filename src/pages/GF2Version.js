@@ -84,7 +84,7 @@ const GF2Version = () => {
               <NumberFormatter
                 number={calcAirspeedDifferencePercentage(GF2Data).toFixed(1)}
               />
-              % fra den optimale indstilling. Kan du gøre det endnu bedre?
+              % fra den ønskede lufthastighed. Kan du gøre det endnu bedre?
             </p>
           </div>
           <Link
