@@ -71,7 +71,7 @@ const GF2StudentKV = ({ index }) => {
   };
 
   /* Update interval for buttons when held, in milliseconds */
-  const interval = 100;
+  const interval = 400;
 
   return (
     <>
