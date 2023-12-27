@@ -8,11 +8,15 @@ import {
   calcMaxDesiredAirspeed,
 } from "../functions/GF2Calculations";
 
+////////////////////////////////////////////////////////////////
+// Input for showing and changing desired airspeed
+//
+
 const GF2DesiredAirspeedInput = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
+  /* min & max values that may be entered */
   const minValue = 5;
-
   const [maxValue, setMaxValue] = useState(
     calcMaxDesiredAirspeed(GF2Data).toFixed(0)
   );
@@ -25,11 +29,11 @@ const GF2DesiredAirspeedInput = () => {
     return /^[\d.,]*$/.test(string);
   };
 
-  /* Opening input stuff */
+  /* inputState */
   const initialInput = (GF2Data[0] && GF2Data[0].DesiredAirspeed) || 5;
   const [input, setInput] = useState(initialInput);
 
-  /* When loading a cookie, this updates the input state */
+  /* When GF2Data is updated, like if there is a cookie to retrieve in contextProvider, updates the input */
   useEffect(() => {
     setInput(initialInput);
   }, [GF2Data, initialInput]);
@@ -40,9 +44,9 @@ const GF2DesiredAirspeedInput = () => {
       return console.log("only numbers are allowed");
     }
 
-    /* Guard clause making sure if user accidentally leaves input empty, it does not remain so */
+    /* if input is empty, set it to minValue */
     if (e.target.value.length === 0) {
-      setInput(5);
+      setInput(minValue);
       return;
     }
 
@@ -63,32 +67,12 @@ const GF2DesiredAirspeedInput = () => {
     });
   };
 
-  let inputElement = useRef(null);
-
-  /* When user(teacher) changes QVKVRelations, max desired airspeed changes, this makes sure everything is updated just as if the user changes it themselves */
-  useEffect(() => {
-    const checkedValue = Math.min(
-      Math.max(inputElement.current.value, minValue),
-      maxValue
-    );
-    setInput(checkedValue);
-
-    if (checkedValue < GF2Data[0].DesiredAirspeed) {
-      setGF2Data((prevData) => {
-        let newData = [...prevData];
-        newData[0].DesiredAirspeed = Number(checkedValue);
-        createCookie(newData);
-        return newData;
-      });
-    }
-
-    /* es-lint wants input in the dependency array, but this breaks the intended function of the input, resulting in it not being able to update */
-    //eslint-disable-next-line
-  }, [GF2Data]);
-
+  /*  */
+  /* When GF2Data is updated, ie by changing QVKVRelation, decreases maxValue & desiredAirspeed if the fanPerformance needs to be over 100% to attain correct settings, or update maxValue */
   useEffect(() => {
     let calculatedFanPerformance = calcCalculatedFanPerformance(GF2Data) * 100;
 
+    /* if over 100, decrease input by 1, update GF2Data, cookie & maxValue to reflect */
     if (calculatedFanPerformance > 100) {
       const newInput = input - 1;
       setInput(newInput);
@@ -98,12 +82,39 @@ const GF2DesiredAirspeedInput = () => {
         createCookie(newData);
         return newData;
       });
-      setMaxValue(maxValue - 1);
-    } else {
+      setMaxValue(newInput);
+    } /* otherwise update maxValue again */ else {
       setMaxValue(calcMaxDesiredAirspeed(GF2Data).toFixed(0));
     }
     //eslint-disable-next-line
   }, [GF2Data, input]);
+
+  /*  */
+  /* need to ref the element for below useEffect, and to focus if user press on text */
+  let inputElement = useRef(null);
+
+  /* maxValue is dependent on QVKVRelation, so when that is updated, this checks to make sure desiredAirspeed does not exceed the new maxValue */
+  useEffect(() => {
+    /* checkedValue to is within min/max value bounds */
+    const checkedValue = Math.min(
+      Math.max(inputElement.current.value, minValue),
+      maxValue
+    );
+    setInput(checkedValue);
+
+    /* if checkedValue is lower than desiredAirspeed, update desiredAirspeed in GF2Data & cookie to be checkedValue */
+    if (checkedValue < GF2Data[0].DesiredAirspeed) {
+      setGF2Data((prevData) => {
+        let newData = [...prevData];
+        newData[0].DesiredAirspeed = Number(checkedValue);
+        createCookie(newData);
+        return newData;
+      });
+    }
+
+    /* es-lint wants input in the dependency array, but this breaks the intended function of the input, resulting in it not being able to update when changed */
+    //eslint-disable-next-line
+  }, [GF2Data]);
 
   return (
     <>
@@ -111,6 +122,7 @@ const GF2DesiredAirspeedInput = () => {
         <p className="my-auto w-[70%]">
           4. Indstil den ønskede lufthastighed (5-{maxValue} m/s)
         </p>
+        {/* p is on top of input, but offset so that input number is followed by p(m/s), to avoid having (m/s) in input which is numeric */}
         <div className="grid w-fit">
           <input
             inputMode="numeric"

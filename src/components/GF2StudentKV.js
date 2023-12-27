@@ -1,23 +1,39 @@
 import { useContext, useEffect, useRef, useState } from "react";
-/* import GF2StudentKVValueInput from "../components/GF2StudentKVValueInput"; */
 import GF2Context from "../context/GF2Context";
 import InputButtonIncrease from "./InputButtonIncrease";
 import InputButtonDecrease from "./InputButtonDecrease";
 import NumberFormatter from "../functions/NumberFormatter";
 import { createCookie } from "../functions/Cookie";
 
+////////////////////////////////////////////////////////////////
+// Student KV input, displays & changes KV opening
+//
+
 const GF2StudentKV = ({ index }) => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
-  /* Value is the KVs opening */
-  /* Sets the start value to the value saved in context, or an empty string */
   const initialValue =
     GF2Data[index + 1] && GF2Data[index + 1].StudentKVOpening.toFixed(0);
   const [value, setValue] = useState(initialValue);
-  /* When loading a cookie, this updates the input state */
+
+  /* When GF2Data is updated, like if there is a cookie to retrieve in contextProvider, updates the input */
   useEffect(() => {
     setValue(initialValue);
   }, [GF2Data, initialValue]);
+
+  /* Updates GF2Data & cookie with new studentKVOpening */
+  function updateStudentKV() {
+    setGF2Data((prevData) => {
+      if (prevData[index + 1]?.StudentKVOpening !== Number(value)) {
+        let newData = [...prevData];
+        newData[index + 1].StudentKVOpening = Number(value);
+
+        createCookie(newData);
+        return newData;
+      }
+      return prevData;
+    });
+  }
 
   /* for tracking if its initial render, in which case dont execute updateGF2Data in the useEffect */
   const isInitialRender = useRef(true);
@@ -31,19 +47,6 @@ const GF2StudentKV = ({ index }) => {
     }
     // eslint-disable-next-line
   }, [value]);
-
-  function updateStudentKV() {
-    setGF2Data((prevData) => {
-      if (prevData[index + 1]?.StudentKVOpening !== Number(value)) {
-        let newData = [...prevData];
-        newData[index + 1].StudentKVOpening = Number(value);
-
-        createCookie(newData);
-        return newData;
-      }
-      return prevData;
-    });
-  }
 
   /* Amount of increase / decrease for buttons */
   const updateAmount = 1;
@@ -89,14 +92,6 @@ const GF2StudentKV = ({ index }) => {
         >
           <NumberFormatter number={value} />
         </p>
-        {/* Uncomment to get an input field */}
-        {/* <GF2StudentKVValueInput
-          key={"KVInput" + index}
-          id={"KVInput" + index}
-          index={index + " p-0 m-0"}
-          value={value}
-          setValue={setValue}
-        /> */}
       </div>
       <InputButtonDecrease
         onClickFunction={decreaseValue}

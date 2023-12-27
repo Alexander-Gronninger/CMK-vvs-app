@@ -4,6 +4,11 @@ import SaveElementAsImage from "./SaveElementAsImage";
 import GF2Context from "../context/GF2Context";
 import { toast } from "react-toastify";
 
+////////////////////////////////////////////////////////////////
+// For sharing the settings, either copying a link, or showing / printing a QR code linking to the link
+// It links to /ref... which is pages/Ref.js
+//
+
 const GF2TeacherQRLink = () => {
   const { GF2Data } = useContext(GF2Context);
   const [linkCreation, setLinkCreation] = useState();

@@ -5,6 +5,10 @@ import LoadingDots from "../components/LoadingDots";
 import GF2Context from "../context/GF2Context";
 import { createCookie } from "../functions/Cookie";
 
+////////////////////////////////////////////////////////////////
+// Decodes url to get shared data, and sets it
+//
+
 const Ref = () => {
   const { setGF2Data } = useContext(GF2Context);
   const location = useLocation();

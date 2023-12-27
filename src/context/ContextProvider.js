@@ -10,6 +10,7 @@ const ContextProvider = ({ children }) => {
   However the UI may break
    */
 
+  /* If theres a cookie, use that, otherwise use default data */
   const initializeGF2Data = () => {
     const savedGF2DataString = getCookie("GF2Data");
     if (savedGF2DataString) {
@@ -21,12 +22,17 @@ const ContextProvider = ({ children }) => {
           DesiredAirspeed: 12,
           AllKV: 5,
         },
+        //
+        // Default data
+        //
         { QV: 30.4, StudentKVOpening: 5, QVKVRelation: 3 },
         { QV: 35.5, StudentKVOpening: 5, QVKVRelation: 2.2 },
         { QV: 39.3, StudentKVOpening: 5, QVKVRelation: 5 },
         { QV: 31.2, StudentKVOpening: 5, QVKVRelation: 2.2 },
         { QV: 41.2, StudentKVOpening: 5, QVKVRelation: 3.6 },
-        /* Testing data, this data is preset so that the balls in the pipes should be more or less equal */
+        //
+        // Testing data, this data is preset so that the balls in the pipes should be more or less equal
+        //
         /* { QV: 30.4, StudentKVOpening: 6.2, QVKVRelation: 3 },
         { QV: 35.5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
         { QV: 39.3, StudentKVOpening: 3.7, QVKVRelation: 5 },

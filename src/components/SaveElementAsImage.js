@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////
+// for downloading the image
+//
+
 function SaveElementAsImage(elementId, filename) {
   console.log("saving...");
   // Get a reference to the element

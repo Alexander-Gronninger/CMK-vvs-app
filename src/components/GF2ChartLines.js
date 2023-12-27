@@ -2,42 +2,25 @@ import CalcMaxYValue from "../functions/CalcMaxYValue";
 import CalcChartData from "../functions/CalcChartData";
 import GF2Context from "../context/GF2Context";
 import { useContext, useEffect, useRef, useState } from "react";
-/* import {
-  calcAirspeed2,
-  calcCalculatedAdjustedKV,
-} from "../functions/GF2Calculations"; */
+
+////////////////////////////////////////////////////////////////
+// Dotted lines layered on top of the chart, to signify the correct range
+//
 
 const GF2ChartLines = () => {
-  const { GF2Data, setGF2Data } = useContext(GF2Context);
+  const { GF2Data } = useContext(GF2Context);
 
-  /* the charts max Y value, CalcMaxYValue accepts data structure presented by CalcChartData */
+  /* the charts max Y value, CalcMaxYValue accepts data structure presented by CalcChartData, currently calcmaxyvalue is a constant value of 27, but it can be based on highest y value */
   const maxYValue = CalcMaxYValue(CalcChartData());
 
-  /*   const cheatData = GF2Data.map((item, index) => {
-    if (item.hasOwnProperty("StudentKVOpening") && index !== 0) {
-      return {
-        ...item, */
-  /* The reason for index - 1 is calcCalculatedAdjustedKV function slices the first object from the data array it works with */
-  /*         StudentKVOpening: calcCalculatedAdjustedKV(GF2Data, index - 1),
-      };
-    }
-    return item;
-  }); */
-
-  /*   const CheatAirspeeds = [...Array(GF2Data.length - 1)].map((_, index) => {
-    return calcAirspeed2(cheatData, index) * GF2Data[0].MainOpening;
-  }); */
-
-  /* const percentage = CheatAirspeeds[0] / maxYValue; */
-
-  /* Uncomment above and comment below to have dotted lines be dynamic, currently it's set to always indicated DesiredAirspeed */
+  /* Calculating percentage of desired airspeed vs max y value on chart, to be used for determining the position of chart lines */
   const percentage = GF2Data[0].DesiredAirspeed / maxYValue;
 
+  /* Ref the chart line container, and state for tracking its height, so we know what to use percentage on for the correct margin to be applied */
   const containerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState();
 
-  /*  console.log(containerHeight); */
-
+  /* 2 separate useEffects to update containerHeight, otherwise it ends up with incorrect value, probably rendering cycle */
   useEffect(() => {
     setTimeout(() => {
       setContainerHeight(containerRef?.current?.clientHeight);
@@ -50,12 +33,10 @@ const GF2ChartLines = () => {
     }, 350);
   }, []);
 
-  /* chartHeight - number, number being roughly how much margin the chart has at the top(GF2ScatterChart > <Scatter />) */
+  /* chart container height, the percentage of that, minus some assumed chart margin, to determine how much margin should be below the lines, so they appear at correct height */
   const margin = percentage * (containerHeight - 20);
 
-  /*  */
-  setGF2Data(GF2Data);
-
+  /* div that is positioned in same grid rows/cols as the charts container, has containerRef and dotted lines inside */
   return (
     <>
       <div className="col-start-1 col-end-6 row-start-1 row-end-3 w-full h-[75%]">

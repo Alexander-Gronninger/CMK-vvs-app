@@ -14,45 +14,18 @@ import CalcChartData from "../functions/CalcChartData";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
+////////////////////////////////////////////////////////////////
+// ScatterChart for visually displaying airspeed2
+//
+
 function GF2ScatterChart() {
   const { GF2Data } = useContext(GF2Context);
 
-  /* Function for setting padding between screen widths of 320-375, based on roughly looking at what padding is needed to center the dots */
-  /* function calculatePadding(screenWidth) {
-    const minWidth = 320;
-    const maxWidth = 375;
-    const minValue = 0;
-    const maxValue = 23;
-
-    if (screenWidth <= minWidth) {
-      return minValue;
-    }
-
-    if (screenWidth >= maxWidth) {
-      return maxValue;
-    }
-
-    // Calculate the interpolation factor
-    const factor = (screenWidth - minWidth) / (maxWidth - minWidth);
-
-    // Interpolate between minValue and maxValue
-    const interpolatedValue = minValue + factor * (maxValue - minValue);
-
-    return interpolatedValue;
-  } */
-
-  /* let screenWidth = window.innerWidth;
-  let padding = calculatePadding(screenWidth); */
-
-  /* Chart specific  */
-
+  /* CalcChartData takes GF2Data and returns an array of x and y positions used by the chart */
   const chartData = CalcChartData(GF2Data);
+  const chartRef = useRef(null);
 
-  const refTest = useRef(null);
-
-  /* Variable for dynamic max y of chart, uncomment and put highestY as the max in chart options.scales.y.max */
-  /* const highestY = findHighestYValue(values); */
-
+  /* Chart data / settings */
   const dataset = {
     datasets: [
       {
@@ -64,6 +37,7 @@ function GF2ScatterChart() {
     ],
   };
 
+  /* https://www.chartjs.org/docs/latest/ - documentation */
   const chartOptions = {
     maintainAspectRatio: false,
     layout: {
@@ -110,11 +84,10 @@ function GF2ScatterChart() {
     },
   };
 
-  /* console.log(refTest?.current); */
   return (
     <>
       <div className="chart-container relative w-full h-[75%] row-start-1 row-end-3 col-start-1 col-end-6 px-2">
-        <Scatter ref={refTest} data={dataset} options={chartOptions} />
+        <Scatter ref={chartRef} data={dataset} options={chartOptions} />
       </div>
     </>
   );

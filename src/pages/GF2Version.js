@@ -1,8 +1,7 @@
-import SiteDescription from "../components/SiteDescription";
 import H1 from "../components/H1";
 import { useContext } from "react";
 import GF2Context from "../context/GF2Context";
-import GF2MainOpeningInput from "../components/GF2MainOpeningInput";
+import GF2MainOpeningSetting from "../components/GF2MainOpeningSetting";
 import GF2StudentKV from "../components/GF2StudentKV";
 import {
   calcAirspeed2,
@@ -13,6 +12,10 @@ import { Link } from "react-router-dom";
 import GF2ChartLines from "../components/GF2ChartLines";
 import NumberFormatter from "../functions/NumberFormatter";
 
+////////////////////////////////////////////////////////////////
+// Student page / normal version
+//
+
 const GF2Version = () => {
   const { GF2Data } = useContext(GF2Context);
 
@@ -20,10 +23,6 @@ const GF2Version = () => {
     <>
       <>
         <main className="">
-          {/* Multiple versions development, same description on every page */}
-          <SiteDescription />
-
-          {/* H1 with some CSS rules applied */}
           <H1>
             Indstil kontrolventiler herunder (1-10 mm) indtil boldene ligger ud
             for hinanden.
@@ -71,7 +70,7 @@ const GF2Version = () => {
 
           {/* MainOpening, is a value between 0-1 */}
           <div className="flex max-w-[300px]">
-            <GF2MainOpeningInput />
+            <GF2MainOpeningSetting />
             <p className="w-fit mx-2 my-auto h-fit">
               Juster ventilatorydelse (5-100%) til lufthastigheden ligger så tæt
               på {GF2Data[0].DesiredAirspeed} [m/s] som muligt

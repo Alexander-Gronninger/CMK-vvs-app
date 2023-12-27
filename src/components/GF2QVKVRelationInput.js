@@ -4,13 +4,14 @@ import InputSelect from "../functions/InputSelect";
 import GF2Context from "../context/GF2Context";
 import { createCookie } from "../functions/Cookie";
 
-/* 
-This component handles changing the GF2 versions KVValue from GF2Context
-*/
+////////////////////////////////////////////////////////////////
+// Input for setting the relation between QV and KV
+//
 
 const GF2QVKVRelationInput = ({ index, id }) => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
 
+  /* min & max values */
   const maxInput = 5;
   const minInput = 1;
   /* Blurs the input when user presses enter or done on iphone */
@@ -21,19 +22,20 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     return /^[\d.,]*$/.test(string);
   };
 
+  /* In Denmark, decimals are marked with "," - this converts "." to a "," */
   const formatNumber = (value) => {
     return String(value).replace(".", ",");
   };
 
-  /* Sets the start value to the value saved in context, or empty string */
-  const initialInput = formatNumber(GF2Data[index + 1]?.QVKVRelation) || "";
+  /* Sets the start value to the value saved in context, or 1 */
+  const initialInput = formatNumber(GF2Data[index + 1]?.QVKVRelation) || 1;
   const [input, setInput] = useState(initialInput);
-  /* When loading a cookie, this updates the input state */
+
+  /* When GF2Data is updated, like if there is a cookie to retrieve in contextProvider, updates the input */
   useEffect(() => {
     setInput(initialInput);
   }, [GF2Data, initialInput]);
 
-  /* handleChange updates the input state, but not the context */
   const handleChange = (e) => {
     /* Guard clause making sure input is a number */
     if (!isValidInput(e.target.value)) {
@@ -59,6 +61,7 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     setInput(e.target.value);
   };
 
+  /* reverts the decimal marker change, so calculations can be done */
   const parseNumber = (stringValue) => {
     return parseFloat(stringValue.replace(",", ".")) || 0;
   };
@@ -88,8 +91,8 @@ const GF2QVKVRelationInput = ({ index, id }) => {
     <>
       <input
         className="max-w-[30px] m-0 p-0 text-center bg-gray-200"
-        key={"QVKVInput" + index}
         /* Index starts at 0, but the KVs are labeled 1-5, so its index + 1 to make parent components labels work */
+        key={"QVKVInput" + index + 1}
         id={id + (index + 1)}
         type="numeric"
         value={input}
