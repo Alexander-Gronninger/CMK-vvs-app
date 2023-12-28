@@ -1,6 +1,5 @@
 import { useState } from "react";
 import GF2Context from "./GF2Context";
-import Version3Context from "./Version3Context";
 import { getCookie } from "../functions/Cookie";
 
 const ContextProvider = ({ children }) => {
@@ -11,6 +10,7 @@ const ContextProvider = ({ children }) => {
   However the UI may break
    */
 
+  /* If theres a cookie, use that, otherwise use default data */
   const initializeGF2Data = () => {
     const savedGF2DataString = getCookie("GF2Data");
     if (savedGF2DataString) {
@@ -22,12 +22,17 @@ const ContextProvider = ({ children }) => {
           DesiredAirspeed: 12,
           AllKV: 5,
         },
+        //
+        // Default data
+        //
         { QV: 30.4, StudentKVOpening: 5, QVKVRelation: 3 },
         { QV: 35.5, StudentKVOpening: 5, QVKVRelation: 2.2 },
         { QV: 39.3, StudentKVOpening: 5, QVKVRelation: 5 },
         { QV: 31.2, StudentKVOpening: 5, QVKVRelation: 2.2 },
         { QV: 41.2, StudentKVOpening: 5, QVKVRelation: 3.6 },
-        /* Testing data, this data is preset so that the balls in the pipes should be more or less equal */
+        //
+        // Testing data, this data is preset so that the balls in the pipes should be more or less equal
+        //
         /* { QV: 30.4, StudentKVOpening: 6.2, QVKVRelation: 3 },
         { QV: 35.5, StudentKVOpening: 8.4, QVKVRelation: 2.2 },
         { QV: 39.3, StudentKVOpening: 3.7, QVKVRelation: 5 },
@@ -39,26 +44,10 @@ const ContextProvider = ({ children }) => {
 
   const [GF2Data, setGF2Data] = useState(() => initializeGF2Data());
 
-  const [version3Data, setVersion3Data] = useState([
-    {
-      totalPD: 120,
-      desiredMS: 7,
-      desiredOpeningPercent: 0.5,
-    },
-    { KVvalue: 3, KVsize: 2 },
-    { KVvalue: 6.1, KVsize: 6 },
-    { KVvalue: 2.7, KVsize: 9 },
-    { KVvalue: 3.6, KVsize: 7 },
-    { KVvalue: 2.1, KVsize: 6 },
-    { KVvalue: 4, KVsize: 3 },
-  ]);
-
   return (
     <>
       <GF2Context.Provider value={{ GF2Data, setGF2Data }}>
-        <Version3Context.Provider value={{ version3Data, setVersion3Data }}>
-          {children}
-        </Version3Context.Provider>
+        {children}
       </GF2Context.Provider>
     </>
   );

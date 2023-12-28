@@ -2,6 +2,10 @@ import { useContext } from "react";
 import { calcAirspeed2 } from "./GF2Calculations";
 import GF2Context from "../context/GF2Context";
 
+////////////////////////////////////////////////////////////////
+// used by scatterChart to get an array of x and y positions for each valve
+//
+
 const CalcChartData = () => {
   const { GF2Data } = useContext(GF2Context);
   const maxValue = 25; // Set your desired maximum value

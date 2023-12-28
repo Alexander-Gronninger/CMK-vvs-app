@@ -6,20 +6,22 @@ import InputButtonIncrease from "./InputButtonIncrease";
 import InputButtonDecrease from "./InputButtonDecrease";
 import { createCookie } from "../functions/Cookie";
 
-const GF2MainOpeningInput = () => {
+const GF2MainOpeningSetting = () => {
   const { GF2Data, setGF2Data } = useContext(GF2Context);
+
+  /* Blurs the input when user presses enter or done on iphone */
   useEnterBlur();
 
-  /* Opening input stuff */
+  /*  */
   const initialDesiredOpening = (GF2Data[0] && GF2Data[0].MainOpening) || 0.05; // Initialize as 5% (0.05)
   const [desiredOpening, setDesiredOpening] = useState(initialDesiredOpening);
-  /* When loading a cookie, this updates the input state */
+
+  /* When GF2Data is updated, like if there is a cookie to retrieve in contextProvider, updates the input */
   useEffect(() => {
     setDesiredOpening(initialDesiredOpening);
   }, [GF2Data, initialDesiredOpening]);
 
-  /*   const [isInputActive, setIsInputActive] = useState(false); */
-
+  /* updating GF2Data & cookie to reflect changes in desiredOpening */
   const updateGF2Data = useCallback(
     (newDesiredOpening) => {
       setGF2Data((prevData) => {
@@ -37,28 +39,7 @@ const GF2MainOpeningInput = () => {
     [setGF2Data]
   );
 
-  /*   const handleDesiredOpeningChange = (e) => {
-      const input = e.target.value;
-      
-      // Validate and set the input
-      if (/^[\d.%,]*$/.test(input)) {
-        setIsInputActive(true);
-        // Remove any non-numeric characters and convert to a decimal value
-        const newDesiredOpening = parseFloat(input.replace(/[^0-9.]/g, "")) / 100;
-        setDesiredOpening(newDesiredOpening);
-        updateGF2Data(newDesiredOpening);
-      }
-    }; */
-
-  /*   const handleDesiredOpeningBlur = () => {
-      setIsInputActive(false);
-      
-      // Ensure the value is between 0.05 (5%) and 1 (100%)
-      const percentage = Math.min(Math.max(desiredOpening, 0.05), 1);
-      setDesiredOpening(percentage);
-      updateGF2Data(percentage);
-    }; */
-
+  /* converting 0-1 to 0-100% */
   const decimalToPercentage = (decimalValue) => {
     const percentage = (decimalValue * 100).toFixed(0);
     return percentage + "%";
@@ -68,10 +49,10 @@ const GF2MainOpeningInput = () => {
   const updateAmount = 0.05;
 
   // Functions passed to InputButtonIncrease & InputButtonDecrease
+  /* Math.min & Math.max returns the smallest and highest of the numbers, ie prevDesiredOpening + updateAmount, or 1, depending on which is smallest, just reversed for Math.max */
   const increaseMainOpening = () => {
     setDesiredOpening((prevDesiredOpening) => {
       const newDesiredOpening = Math.min(prevDesiredOpening + updateAmount, 1);
-      /* updateGF2Data(newDesiredOpening); */
       return newDesiredOpening;
     });
   };
@@ -82,13 +63,14 @@ const GF2MainOpeningInput = () => {
         prevDesiredOpening - updateAmount,
         0.05
       );
-      /* updateGF2Data(newDesiredOpening); */
       return newDesiredOpening;
     });
   };
 
   /* for tracking if its initial render, in which case dont execute updateGF2Data in the useEffect */
   const isInitialRender = useRef(true);
+
+  /* updateGF2Data when desiredOpening changes, except on initial render */
   useEffect(() => {
     // Check if it's not the initial render
     if (!isInitialRender.current) {
@@ -105,26 +87,9 @@ const GF2MainOpeningInput = () => {
       <div className="h-[50px] flex place-content-center place-items-center ">
         <p className="text-center ">{decimalToPercentage(desiredOpening)}</p>
       </div>
-
-      {/* Uncomment this and associated functions to restore input functionality */}
-      {/* <input
-        inputMode="numeric"
-        key="desiredOpeningInput"
-        type="text"
-        id="desiredOpening"
-        className="max-w-[40px] min-w-[10px] text-center bg-gray-200 h-10"
-        value={
-          isInputActive
-            ? (desiredOpening * 100).toFixed() + "%"
-            : decimalToPercentage(desiredOpening)
-        }
-        onBlur={handleDesiredOpeningBlur}
-        onChange={handleDesiredOpeningChange}
-        onClick={InputSelect}
-      /> */}
       <InputButtonDecrease onClickFunction={decreaseMainOpening} />
     </div>
   );
 };
 
-export default GF2MainOpeningInput;
+export default GF2MainOpeningSetting;
