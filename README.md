@@ -1,3 +1,40 @@
+# Web app for proportional method of configuration of ventilation system.
+
+Site is hosted on netlify.
+For students: https://rts-vvs-app-elev.netlify.app/ - this uses the student-production branch.
+For teachers: https://rts-vvs-app.netlify.app/ - This uses the main branch.
+
+The student-production branch simply omits GF2Teacher.js from reactRouter in app.js.
+
+Data is transferred via a link, which can be copied as text or shared via a QR code.
+The link links to the student site.
+
+## Math
+
+The site uses a couple of base numbers to simulate a ventilation system.
+This is all based on a google sheet / excel sheet.
+The sheet is located in the project_files/ folder, in danish, contains all the math which is written in the code.
+
+### Data
+
+Data is stored in context, and a cookie which has an expiration of 1 hour.
+See src/context/ContextProvider.js for what the data looks like.
+
+### Pages
+
+Main part is src/pages/GF2Version.js - this is the main page for students.
+src/pages/GF2Teacher.js - this is where the user can change the values of the assignment.
+
+### Other folders & files
+
+Deprecated for unused files that may be included in the future.
+
+Otherwise everything should be implicit.
+
+All general math calculations are located in src/functions/GF2Calculations.js
+
+# React readme
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
