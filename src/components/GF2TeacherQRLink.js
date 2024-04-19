@@ -26,7 +26,7 @@ const GF2TeacherQRLink = () => {
 
   useEffect(() => {
     setLinkCreation(
-      `https://rts-vvs-app-elev.netlify.app/ref${encodeDataArray(GF2Data)}`
+      `https://evu-vvs-app-elev.netlify.app/ref${encodeDataArray(GF2Data)}`
     );
   }, [currentSiteLink, GF2Data]);
 
