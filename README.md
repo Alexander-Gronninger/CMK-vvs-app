@@ -1,8 +1,8 @@
 # Web app for proportional method of configuration of ventilation system.
 
 Site is hosted on netlify.
-For students: https://rts-vvs-app-elev.netlify.app/ - this uses the student-production branch.
-For teachers: https://rts-vvs-app.netlify.app/ - This uses the main branch.
+For students: https://evu-vvs-app-elev.netlify.app/ - this uses the student-production branch.
+For teachers: https://evu-vvs-app.netlify.app/ - This uses the main branch.
 
 The student-production branch simply omits GF2Teacher.js from reactRouter in app.js.
 
